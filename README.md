@@ -1,6 +1,8 @@
 # Code and data for "Post-Training Quantization of a Depthwise Separable Seismic Phase Picker for TinyML Deployment: Accuracy, Latency and Energy"
 
-Code, trained models, device logs and result files for the Data and Code Availability statements of the manuscripts on TinyPhaseNet (a depthwise separable seismic phase picker compressed for microcontrollers). **Status: public; the archive with a DOI is still to be deposited** (see "Open items").
+Code, trained models, device logs and result files for the Data and Code Availability statements of the manuscripts on TinyPhaseNet (a depthwise separable seismic phase picker compressed for microcontrollers). **Status: public.** Archived on Zenodo: [10.5281/zenodo.24610715](https://doi.org/10.5281/zenodo.24610715) (concept DOI, always resolves to the latest version; the release v1.0.1 is 10.5281/zenodo.24610777).
+
+How to cite: see `CITATION.cff` (GitHub shows a "Cite this repository" button) and cite the DOI above together with the associated manuscripts when published.
 
 ## What is here
 
@@ -92,6 +94,5 @@ The PhaseNet counterparts (standard convolutions) were also measured in 16x8 and
 
 ## Open items
 
-- Deposit a snapshot (for example on Zenodo) and cite its DOI in the manuscripts.
 - No license for the data of TXED and ETHZ was found; none of their waveforms is redistributed here.
 - Citation metadata: `CITATION.cff` and `.zenodo.json` (the Zenodo archive takes its metadata from the latter).
