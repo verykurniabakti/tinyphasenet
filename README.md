@@ -21,6 +21,10 @@ How to cite: see `CITATION.cff` (GitHub shows a "Cite this repository" button) a
 
 Names: the model of the manuscript is called TinyPhaseNet throughout; internal working names of the authors' repository were replaced by `tinyphasenet` in file names (for example `include/tinyphasenet_16x8_model.h`, `models/tinyphasenet_16x8.tflite`) and in the text of the scripts. Code comments, docstrings and console messages are in English; the serial output of the firmware (for example the end-of-session markers `Profiling selesai` and `Benchmark selesai`, which the measurement scripts wait for) and the Indonesian-language labels written by the `*_id` outputs of the table scripts are kept as they are, because the device logs and the Indonesian manuscript depend on them. The raw device logs in `firmware/results_hw/` are kept as recorded and still show the firmware project name `phasenet_z_profiling_v2` in the boot line.
 
+## What is, and is not, in this archive
+
+Only what is needed to replicate the two manuscripts is included: the scripts, the result files they read, the trained and quantized models of the reported configurations (seeds 42, 43 and 44), the firmware sources, and the raw device logs that the table scripts read. Not included: experiments that are not reported in the manuscripts (architecture-variation cost model, three-channel E,N,Z ablation, seeds 45-51, 4-bit variants other than the ones reported), earlier operator-profile logs, firmware model headers (generated from the models), and every waveform.
+
 ## Reproducing the tables and figures
 
 ```
@@ -82,8 +86,8 @@ The PhaseNet counterparts (standard convolutions) were also measured in 16x8 and
 ## Known gaps
 
 - `hw_eval_3ch_100.h` (the 100 three-channel STEAD windows, 5.3 MB) has no generating script anywhere in the working repository or its git history; it is not included (it contains STEAD data). The environments `3ch_16x8` and `3ch_int8` need it, so they cannot be rebuilt from scratch from this folder. `165_make_fw_3ch_int8.py` also reads it for a consistency check, which prints a deviation of 0.82 against the old stored scores; the same value is printed when the script runs from the original folder (the old header predates the final model).
-- The model headers in `firmware/include/` are copies of the working state (they are regenerated per seed by the `make_fw` scripts) and may correspond to the last seed run, not necessarily seed 42.
-- 186 of the 272 files (device logs, trained models, two headers and `sdkconfig.3ch_16x8`) are not tracked by git in the working repository; their history starts in this folder.
+- The model headers (`include/*_model.h`) are not included: they are generated from the models in `models/` by the `make_fw` scripts, one seed at a time (see "Rebuilding the firmware").
+- Most of the device logs and trained models are not tracked by git in the working repository; their history starts in this folder.
 - Training and quantization were checked for presence and imports only; they were not re-run to confirm bit-identical weights.
 
 ## License
