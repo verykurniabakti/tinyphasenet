@@ -1,8 +1,8 @@
 """
-Step 232 (companion and device summaries): Pareto analysis of TWELVE configurations measured on the ESP32-S3: TinyPhaseNet (separable) and PhaseNet (standard), one channel and three channels, each in Float32, 16x8, INT8.
-Extends 193_ (eight configurations; standard only in Float32) with the quantized standard models (231_). F1 = mean of four datasets (STEAD, INSTANCE, ETHZ, TXED), mean of three seeds; latency and energy per window from hw_tiga_seed.json, hw_padrao_tiga_seed.json, hw_padrao_kuant_tiga_seed.json.
-Dominance: A dominates B if A is better or equal in F1 (high), latency (low), and energy (low), and better in at least one. Output: results/final/pareto_dua_belas.json (the same schema as pareto_delapan.json for 206_) and a summary on screen.
-Usage (from this folder): python 232_pareto_dua_belas.py
+Langkah 232 (ringkasan hasil pendamping dan perangkat): analisis Pareto atas DUA BELAS konfigurasi yang terukur di ESP32-S3: TinyPhaseNet (separable) dan PhaseNet (standar), satu kanal dan tiga kanal, masing-masing Float32, 16x8, INT8.
+Memperluas 193_ (delapan konfigurasi; standar hanya Float32) dengan model standar terkuantisasi (231_). F1 = rerata empat dataset (STEAD, INSTANCE, ETHZ, TXED), rerata tiga seed; latensi dan energi per jendela dari hw_tiga_seed.json, hw_padrao_tiga_seed.json, hw_padrao_kuant_tiga_seed.json.
+Dominasi: A mendominasi B bila A lebih baik atau sama pada F1 (tinggi), latensi (rendah), dan energi (rendah), dan lebih baik pada setidaknya satu. Keluaran: results/final/pareto_dua_belas.json (skema sama dengan pareto_delapan.json untuk 206_) dan ringkasan di layar.
+Pemakaian (dari folder ini): python 232_pareto_dua_belas.py
 """
 import json, itertools
 import numpy as np
@@ -67,18 +67,3 @@ for v in V12: m = mean[v]; print(f"  {v:13s} {m['f1']:6.2f} {m['f1_stead']:6.2f}
 print('front (12) on the mean:', out['batas_12_rerata']); print('front (8, without quantized standard) on the mean:', out['batas_8_dari_12_rerata'])
 print('non-dominated on same-seed (of 3):', cnt); print(f'proportion of {n} kombinasi (%):', {v: round(100 * cnt_all[v] / n, 1) for v in V12})
 
-# ---- Pareto table for the summary (Indonesian format): ../ringkasan_hasil_pendamping_perangkat/tabel/tab_pareto.tex; ordered by latency like Figure 12; the dominance column = the dominating configuration with the highest F1 (then lowest latency), the same as 206_
-idn = lambda x, nd: f'{x:,.{nd}f}'.replace(',', '§').replace('.', ',').replace('§', '.')
-LAB = {'1ch_fp32': 'TinyPhaseNet satu kanal Float32', '1ch_16x8': 'TinyPhaseNet satu kanal 16x8', '1ch_int8': 'TinyPhaseNet satu kanal INT8', '3ch_fp32': 'TinyPhaseNet tiga kanal Float32', '3ch_16x8': 'TinyPhaseNet tiga kanal 16x8',
-       '3ch_int8': 'TinyPhaseNet tiga kanal INT8', '1ch_std_fp32': 'PhaseNet satu kanal Float32', '1ch_std_16x8': 'PhaseNet satu kanal 16x8', '1ch_std_int8': 'PhaseNet satu kanal INT8',
-       '3ch_std_fp32': 'PhaseNet tiga kanal Float32', '3ch_std_16x8': 'PhaseNet tiga kanal 16x8', '3ch_std_int8': 'PhaseNet tiga kanal INT8'}
-dom = lambda a, b: (a['f1'] >= b['f1'] and a['lat'] <= b['lat'] and a['en'] <= b['en']) and (a['f1'] > b['f1'] or a['lat'] < b['lat'] or a['en'] < b['en'])
-rows = []
-for v in sorted(V12, key=lambda v: mean[v]['lat']):
-    ds = sorted((o for o in V12 if o != v and dom(mean[o], mean[v])), key=lambda o: (-mean[o]['f1'], mean[o]['lat']))
-    m = mean[v]; status = '\\textbf{tidak didominasi}' if not ds else LAB[ds[0]]
-    pp = v.split('_'); hh = (PD[pp[0]] if pp[2:] == ['fp32'] else PQ[f'{pp[0]}_{pp[2]}']) if 'std' in pp else H[v]
-    rows.append(f"{LAB[v]} & {idn(m['f1'], 1)} & {idn(m['lat'], 1)} & {idn(m['en'], 1)} & {idn(hh['rerata']['arena_kb'], 1)} ({'SRAM' if v.startswith('1ch') else 'PSRAM'}) & {status} \\\\")
-import os
-open(os.path.join('..', 'ringkasan_hasil_pendamping_perangkat', 'tabel', 'tab_pareto.tex'), 'w').write('\n'.join(rows) + '\n\\bottomrule\n')
-print('\n'.join(rows))

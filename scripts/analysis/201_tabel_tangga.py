@@ -1,12 +1,12 @@
 """
-Step 201 (companion compression manuscript, stage 2): ladder of weight and activation bits for the depthwise separable AND standard-convolution models, one channel and three channels (seeds 42-44), from stored results (no new experiment).
-Formats (named by weight/activation bits): Float32 (32/32), 8/16 (called 16x8 by TFLite), 4/16 (4-bit pcmse weights, 16-bit activations; accuracy emulation), 8/8 (called INT8 by TFLite), 4/8 (4-bit pcmse weights, 8-bit activations; accuracy emulation).
-Sources: depthwise: results/final/{quant16x8_per_seed,quant16x8_pndw_per_seed,spektrum_kuantisasi_3seed,w4a8_perkanal_3seed}.json; standard: results/ablation_final/eval_{standard,pn}.json (Float32) and results/final/ptq_padrao_3seed.json (199_).
-All differences are PAIRED per seed against the Float32 of the SAME model, mean of four datasets (STEAD, INSTANCE, ETHZ, TXED test), then mean +- sample standard deviation over three seeds.
-File size: bytes of the TFLite file; 4-bit formats = file bytes minus half the number of kernel weights (convolution, depthwise, transposed convolution; two weights per byte), the same for all models (matches the real 4-bit files of 173_ within 1 byte).
-Activation memory: arena lower bound (arena_lower_bound, 159_); 4/8 uses the INT8 value, 4/16 uses the 16x8 value. Dominance: configuration A dominates B if the F1 averaged over four datasets of A >= B, file of A <= B, activation memory of A <= B, and at least one is better.
-Output: ../draft_publikasi_1/tabel_pend/{tab_ladder,tab_steps_full}{,_id}.tex, numbers_ladder{,_id}.tex, fig_pend_tradeoff{,_id}.pdf, results/final/pendamping_tangga.json
-Usage (from this folder): python 201_tabel_tangga.py
+Langkah 201 (draf pendamping kompresi, tahap 2): tangga bit bobot dan aktivasi untuk model depthwise separable DAN konvolusi standar, satu kanal dan tiga kanal (seed 42-44), dari hasil tersimpan (tanpa percobaan baru).
+Format (nama menurut bit bobot/aktivasi): Float32 (32/32), 8/16 (disebut 16x8 oleh TFLite), 4/16 (bobot 4-bit pcmse, aktivasi 16-bit; emulasi akurasi), 8/8 (disebut INT8 oleh TFLite), 4/8 (bobot 4-bit pcmse, aktivasi 8-bit; emulasi akurasi).
+Sumber: depthwise: results/final/{quant16x8_per_seed,quant16x8_pndw_per_seed,spektrum_kuantisasi_3seed,w4a8_perkanal_3seed}.json; standar: results/ablation_final/eval_{standard,pn}.json (Float32) dan results/final/ptq_padrao_3seed.json (199_).
+Semua selisih BERPASANGAN per seed terhadap Float32 model yang SAMA, rerata empat dataset (STEAD, INSTANCE, ETHZ, TXED uji), lalu rerata +- simpangan baku sampel atas tiga seed.
+Ukuran berkas: byte berkas TFLite; format 4-bit = byte berkas dikurangi separuh jumlah bobot kernel (konvolusi, depthwise, konvolusi transpos; dua bobot per byte), sama untuk semua model (cocok dengan berkas 4-bit nyata dari 173_ dalam 1 byte).
+Memori aktivasi: batas bawah arena (arena_lower_bound, 159_); 4/8 memakai nilai INT8, 4/16 memakai nilai 16x8. Dominasi: konfigurasi A mendominasi B bila F1 rerata empat dataset A >= B, berkas A <= B, memori aktivasi A <= B, dan sedikitnya satu lebih baik.
+Keluaran: ../draft_publikasi_1/tabel_pend/{tab_ladder,tab_steps_full}{,_id}.tex, numbers_ladder{,_id}.tex, fig_pend_tradeoff{,_id}.pdf, results/final/pendamping_tangga.json
+Pemakaian (dari folder ini): python 201_tabel_tangga.py
 """
 import os, json, statistics as st
 os.environ.setdefault('TF_CPP_MIN_LOG_LEVEL', '3')
@@ -23,7 +23,7 @@ S = json.load(open('results/final/spektrum_kuantisasi_3seed.json')); W = json.lo
 Q = {'1ch': {int(k): v for k, v in json.load(open('results/final/quant16x8_per_seed.json')).items()}, '3ch': {int(k): v for k, v in json.load(open('results/final/quant16x8_pndw_per_seed.json')).items()}}
 STD = {'1ch': {int(e['model'].split('seed')[1].split('.')[0]): e for e in json.load(open('results/ablation_final/eval_standard.json'))}, '3ch': {int(e['model'].split('seed')[1].split('.')[0]): e for e in json.load(open('results/ablation_final/eval_pn.json'))}}
 PARAMS = json.load(open('results/final/parametros_modelos.json'))   # 187_
-MAC = json.load(open('results/final/mac_flops.json'))   # 202_: MACs and FLOPs (Float32 TFLite graph, three identical ways); independent of the quantization format
+MAC = json.load(open('results/final/mac_flops.json'))   # 202_: MAC dan FLOPs (graf TFLite Float32, tiga cara identik); tidak bergantung pada format kuantisasi
 FMTS = ['fp32', 'q16x8', 'w4a16', 'int8', 'w4a8']; QF = FMTS[1:]
 BITS = {'fp32': '32 / 32', 'q16x8': '8 / 16', 'w4a16': '4 / 16', 'int8': '8 / 8', 'w4a8': '4 / 8'}
 SEPKEY = {'fp32': 'fp32', 'q16x8': 'q16x8', 'int8': 'int8', 'w4a8': 'pcmse', 'w4a16': 'pcmse_a16'}
@@ -43,12 +43,12 @@ def tflite_path(fam, conv, fmt, s):
             'q16x8': f"models/final_16x8{'' if fam == '1ch' else '_pndw'}/seed{s}.tflite"}[fmt]
 
 
-def n_kernel(path):   # number of filter weights in CONV_2D, DEPTHWISE_CONV_2D, TRANSPOSE_CONV (filter = 2nd input)
+def n_kernel(path):   # jumlah bobot filter pada CONV_2D, DEPTHWISE_CONV_2D, TRANSPOSE_CONV (filter = masukan ke-2)
     it = tf.lite.Interpreter(model_path=path); it.allocate_tensors(); td = {d['index']: d for d in it.get_tensor_details()}
     return int(sum(np.prod(td[o['inputs'][1]]['shape']) for o in it._get_ops_details() if o['op_name'] in ('CONV_2D', 'DEPTHWISE_CONV_2D', 'TRANSPOSE_CONV')))
 
 
-def size_arena(fam, conv, fmt):   # (file KB, activation memory KB), mean of three seeds
+def size_arena(fam, conv, fmt):   # (berkas KB, memori aktivasi KB), rerata tiga seed
     fk = 'standard' if fam == '1ch' else 'pn'; fl, ar = [], []
     for s in SEEDS:
         if fmt == 'fp32':
@@ -56,7 +56,7 @@ def size_arena(fam, conv, fmt):   # (file KB, activation memory KB), mean of thr
         else:
             src = (P[fam][fmt][str(s)] if conv == 'standar' else (S[fam][str(s)][fmt] if fmt in ('q16x8', 'int8') else None))
             if src is not None: b, a = src['bytes'], src['arena_lb']
-            else:   # depthwise 4/8 / 4/16: file and arena from the TFLite file produced by 161_
+            else:   # depthwise 4/8 / 4/16: berkas dan arena dari berkas TFLite hasil 161_
                 blob = open(tflite_path(fam, conv, fmt, s), 'rb').read(); b = len(blob); a = S[fam][str(s)]['int8' if fmt == 'w4a8' else 'q16x8']['arena_lb']
         if fmt in ('w4a8', 'w4a16'): b -= n_kernel(tflite_path(fam, conv, fmt, s)) // 2
         if conv == 'standar' and fmt in ('w4a8', 'w4a16'): a = P[fam][fmt][str(s)]['arena_lb']
@@ -71,18 +71,18 @@ for fam in ('1ch', '3ch'):
         for fmt in FMTS:
             fd = {d: [f1(fam, conv, fmt, s, d) for s in SEEDS] for d in DS}; m4 = [st.mean(fd[d][i] for d in DS) for i in range(3)]
             fl, ar = size_arena(fam, conv, fmt); R[fam][conv][fmt] = dict(f1_ds={d: st.mean(v) for d, v in fd.items()}, f1_seeds=m4, f1_mean4=st.mean(m4), file_kb=fl, act_kb=ar)
-        for fmt in QF:   # paired difference against Float32 of the same model
+        for fmt in QF:   # selisih berpasangan terhadap Float32 model yang sama
             R[fam][conv][fmt]['delta_seeds'] = [R[fam][conv][fmt]['f1_seeds'][i] - R[fam][conv]['fp32']['f1_seeds'][i] for i in range(3)]
             R[fam][conv][fmt]['delta_ds'] = {d: [f1(fam, conv, fmt, s, d) - f1(fam, conv, 'fp32', s, d) for s in SEEDS] for d in DS}
 
-# ---------- Pareto of 20 configurations (F1 averaged over four datasets, file, activation memory)
+# ---------- Pareto 20 konfigurasi (F1 rerata empat dataset, berkas, memori aktivasi)
 CFG = {(fam, conv, fmt): (R[fam][conv][fmt]['f1_mean4'], R[fam][conv][fmt]['file_kb'], R[fam][conv][fmt]['act_kb']) for fam in R for conv in R[fam] for fmt in FMTS}
 dom = lambda a, b: a[0] >= b[0] and a[1] <= b[1] and a[2] <= b[2] and (a[0] > b[0] or a[1] < b[1] or a[2] < b[2])
 ND = {k: not any(dom(w, v) for j, w in CFG.items() if j != k) for k, v in CFG.items()}
 json.dump(dict(R={f: {c: {m: {k: v for k, v in x.items()} for m, x in d.items()} for c, d in cc.items()} for f, cc in R.items()}, nondominated={'|'.join(k): v for k, v in ND.items()}), open('results/final/pendamping_tangga.json', 'w'), indent=1)
 for k, v in CFG.items(): print(k, 'F1 %.2f berkas %.1f KB memori %.1f KB' % v, 'TAK TERDOMINASI' if ND[k] else '')
 
-# ---------- table text
+# ---------- teks tabel
 LG = {'en': dict(dec='.', fam={'1ch': 'Single-channel', '3ch': 'Three-channel'}, conv={'separable': 'separable', 'standar': 'standard'}, fmt={'fp32': 'Float32', 'q16x8': '8/16', 'w4a16': '4/16', 'int8': '8/8', 'w4a8': '4/8'}),
       'id': dict(dec=',', fam={'1ch': 'Kanal tunggal', '3ch': 'Tiga kanal'}, conv={'separable': '\\textit{separable}', 'standar': 'standar'}, fmt={'fp32': 'Float32', 'q16x8': '8/16', 'w4a16': '4/16', 'int8': '8/8', 'w4a8': '4/8'})}
 
@@ -98,11 +98,11 @@ def pm(xs, dec): return f"{n(st.mean(xs), 1, dec, True)} $\\pm$ {n(st.stdev(xs),
 
 for lg, L in LG.items():
     sfx = '' if lg == 'en' else '_id'; dec = L['dec']
-    # ladder: F1 difference against Float32 of the same model; rows = format, columns = family x convolution type
+    # tangga: selisih F1 terhadap Float32 model sama; baris = format, kolom = keluarga x jenis konvolusi
     rows = ''
     for fmt in QF: rows += f"{L['fmt'][fmt].replace('/', ' & ')} & " + ' & '.join(pm(R[fam][conv][fmt]['delta_seeds'], dec) for fam in ('1ch', '3ch') for conv in ('separable', 'standar')) + ' \\\\\n'
     open(OUT + f'tab_ladder{sfx}.tex', 'w').write(rows + '\\bottomrule\n')
-    # full table
+    # tabel lengkap
     rows = ''
     for fi, fam in enumerate(('1ch', '3ch')):
         for conv in ('standar', 'separable'):
@@ -110,44 +110,44 @@ for lg, L in LG.items():
             par = PARAMS[f"{fam}_{key}"]
             for fmt in FMTS:
                 r = R[fam][conv][fmt]; nm = f"{L['fam'][fam]} {L['conv'][conv]}{' (PhaseNet)' if (fam == '3ch' and conv == 'standar') else ''}"
-                mc = MAC[f'{fam}_{conv}']['macs_tflite']; c3 = (n(par, 0, dec), n(mc / 1e6, 2, dec), n(2 * mc / 1e6, 2, dec)) if fmt == 'fp32' else ('', '', '')   # parameters, MACs, FLOPs only on the Float32 row of each model (the same for the other formats)
+                mc = MAC[f'{fam}_{conv}']['macs_tflite']; c3 = (n(par, 0, dec), n(mc / 1e6, 2, dec), n(2 * mc / 1e6, 2, dec)) if fmt == 'fp32' else ('', '', '')   # parameter, MAC, FLOPs hanya pada baris Float32 tiap model (sama pada format lain)
                 rows += f"{nm} & {c3[0]} & {c3[1]} & {c3[2]} & {BITS[fmt]} & {n(r['file_kb'], 1, dec)} & {n(r['act_kb'], 0, dec)} & " + ' & '.join(n(r['f1_ds'][d], 1, dec) for d in DS) + f" & {n(r['f1_mean4'], 1, dec)} \\\\\n"
         if fi == 0: rows += '\\midrule\n'
     open(OUT + f'tab_steps_full{sfx}.tex', 'w').write(rows + '\\bottomrule\n')
 
-# ---------- number macros (loss = Float32 minus format, points; mean of three seeds)
+# ---------- makro angka (kehilangan = Float32 dikurangi format, poin; rerata tiga seed)
 M = {}
 for fam, t in (('1ch', 'One'), ('3ch', 'Thr')):
     for conv, c in (('separable', 'Dw'), ('standar', 'Sd')):
         for fmt, f in (('q16x8', 'Qq'), ('w4a16', 'WaS'), ('int8', 'Int'), ('w4a8', 'Four')):
             M[f'Ld{c}{f}{t}'] = -st.mean(R[fam][conv][fmt]['delta_seeds'])
         M[f'LdMax{c}{t}'] = max(-st.mean(R[fam][conv][f]['delta_seeds']) for f in QF)
-        M[f'LdAbs{c}{t}'] = max(abs(st.mean(R[fam][conv][f]['delta_seeds'])) for f in QF)   # largest absolute difference over the four quantized formats
-        # activation effect (16 -> 8 bits, 8-bit weights) and weight effect (8 -> 4 bits, 16-bit activations)
+        M[f'LdAbs{c}{t}'] = max(abs(st.mean(R[fam][conv][f]['delta_seeds'])) for f in QF)   # selisih mutlak terbesar atas empat format terkuantisasi
+        # efek aktivasi (16 -> 8 bit, bobot 8 bit) dan efek bobot (8 -> 4 bit, aktivasi 16 bit)
         M[f'LdAct{c}{t}'] = R[fam][conv]['q16x8']['f1_mean4'] - R[fam][conv]['int8']['f1_mean4']; M[f'LdWgt{c}{t}'] = R[fam][conv]['q16x8']['f1_mean4'] - R[fam][conv]['w4a16']['f1_mean4']
         M[f'FmFp{c}{t}'] = R[fam][conv]['fp32']['f1_mean4']; M[f'FileFp{c}{t}'] = R[fam][conv]['fp32']['file_kb']
         for fmt, f in (('q16x8', 'Qq'), ('int8', 'Int'), ('w4a8', 'Four'), ('w4a16', 'WaS')): M[f'File{f}{c}{t}'] = R[fam][conv][fmt]['file_kb']; M[f'Act{f}{c}{t}'] = R[fam][conv][fmt]['act_kb']; M[f'Fm{f}{c}{t}'] = R[fam][conv][fmt]['f1_mean4']
     M[f'FileRatQq{t}'] = R[fam]['standar']['q16x8']['file_kb'] / R[fam]['separable']['q16x8']['file_kb']; M[f'FileRatInt{t}'] = R[fam]['standar']['int8']['file_kb'] / R[fam]['separable']['int8']['file_kb']
     M[f'FileRatFp{t}'] = R[fam]['standar']['fp32']['file_kb'] / R[fam]['separable']['fp32']['file_kb']
     M[f'GapQq{t}'] = R[fam]['standar']['q16x8']['f1_mean4'] - R[fam]['separable']['q16x8']['f1_mean4']; M[f'GapInt{t}'] = R[fam]['standar']['int8']['f1_mean4'] - R[fam]['separable']['int8']['f1_mean4']
-for fam, t in (('1ch', 'One'), ('3ch', 'Thr')):   # MACs (millions), standard/separable ratio, share of the transposed convolution in the separable model
+for fam, t in (('1ch', 'One'), ('3ch', 'Thr')):   # MAC (juta), rasio standar/separable, porsi konvolusi transpos pada model separable
     a, b = MAC[f'{fam}_standar'], MAC[f'{fam}_separable']; M[f'MacStd{t}'] = a['macs_tflite'] / 1e6; M[f'MacSep{t}'] = b['macs_tflite'] / 1e6; M[f'MacRat{t}'] = a['macs_tflite'] / b['macs_tflite']; M[f'MacTrSh{t}'] = 100 * b['por_operator']['TRANSPOSE_CONV'] / b['macs_tflite']
-M['LdQqDsMax'] = max(abs(st.mean(R[f][c]['q16x8']['delta_ds'][d])) for f in R for c in R[f] for d in DS)   # 16x8: maximum absolute difference per dataset, two families and two convolution types
+M['LdQqDsMax'] = max(abs(st.mean(R[f][c]['q16x8']['delta_ds'][d])) for f in R for c in R[f] for d in DS)   # 16x8: maks selisih mutlak per dataset, dua keluarga dan dua jenis konvolusi
 M['ParetoN'] = float(len(CFG)); M['ParetoND'] = float(sum(ND.values()))
-CFGR = {k: v for k, v in CFG.items() if k[2] in ('fp32', 'q16x8', 'int8')}   # only formats that can be run (without W4, which is only an accuracy emulation)
+CFGR = {k: v for k, v in CFG.items() if k[2] in ('fp32', 'q16x8', 'int8')}   # hanya format yang dapat dijalankan (tanpa W4, yang hanya emulasi akurasi)
 NDR = {k: not any(dom(w, v) for j, w in CFGR.items() if j != k) for k, v in CFGR.items()}; M['ParetoRunN'] = float(len(CFGR)); M['ParetoRunND'] = float(sum(NDR.values()))
 for lg, dec in (('en', '.'), ('id', ',')):
     sfx = '' if lg == 'en' else '_id'
     open(OUT + f'numbers_ladder{sfx}.tex', 'w').write(''.join(f"\\newcommand{{\\dv{k}}}{{{(f'{v:.0f}' if k.startswith('Pareto') else f'{v:.1f}').replace('.', dec)}}}\n" for k, v in M.items()))
 
-# ---------- figure: one panel, 20 configurations. x = file size (log), y = F1 averaged over four datasets, marker area = activation memory; filled = non-dominated (joint dominance over all 20 configurations on the three sizes)
+# ---------- gambar: satu panel, 20 konfigurasi. x = ukuran berkas (log), y = F1 rerata empat dataset, luas penanda = memori aktivasi; terisi = tidak terdominasi (dominasi gabungan semua 20 konfigurasi atas ketiga ukuran)
 COL = {'separable': '#1d4ed8', 'standar': '#b45309'}; INK = '#0f172a'; MK = {'fp32': 'o', 'q16x8': 's', 'w4a16': 'P', 'int8': '^', 'w4a8': 'v'}
 TXT = {'en': dict(x='File size (KB, log scale)', y='Mean F1-score, four datasets (%)', conv={'separable': 'Depthwise separable', 'standar': 'Standard convolution'}, ct='convolution (colour)', ft='bits, weights/activations (marker)', at='activation memory (area)', better='better', ch='-ch',
                   nd='filled: not dominated in F1-score, file size and activation memory (%d configurations); open: dominated'),
        'id': dict(x='Ukuran berkas (KB, skala log)', y='F1-score rerata, empat dataset (%)', conv={'separable': 'Depthwise separable', 'standar': 'Konvolusi standar'}, ct='konvolusi (warna)', ft='bit bobot/aktivasi (penanda)', at='memori aktivasi (luas)', better='lebih baik', ch=' kanal',
                   nd='terisi: tidak terdominasi dalam F1-score, ukuran berkas, dan memori aktivasi (%d konfigurasi); kosong: terdominasi')}
 OFFS = {('1ch', 'separable', 'w4a16'): (-7, 0, 'right'), ('1ch', 'separable', 'w4a8'): (8, 0, 'left'), ('1ch', 'standar', 'q16x8'): (6, 9, 'left'), ('1ch', 'standar', 'w4a16'): (-3, 11, 'right'),
-        ('1ch', 'standar', 'int8'): (2, -12, 'center'), ('1ch', 'standar', 'w4a8'): (-8, -9, 'right'), ('3ch', 'standar', 'w4a8'): (0, 11, 'center')}   # labels only on non-dominated points; offset within the point
+        ('1ch', 'standar', 'int8'): (2, -12, 'center'), ('1ch', 'standar', 'w4a8'): (-8, -9, 'right'), ('3ch', 'standar', 'w4a8'): (0, 11, 'center')}   # label hanya pada titik tak terdominasi; geseran dalam titik
 LAB = {'fp32': 'Float32', 'q16x8': '8/16', 'w4a16': '4/16', 'int8': '8/8', 'w4a8': '4/8'}; AREA = lambda a: 14 + a * 0.55
 for lg in ('en', 'id'):
     T = TXT[lg]; sfx = '' if lg == 'en' else '_id'; fig, ax = plt.subplots(figsize=(7.4, 4.5), dpi=300)
@@ -167,7 +167,7 @@ for lg in ('en', 'id'):
     ax.legend(handles=h3, loc='lower right', fontsize=6.6, frameon=False, title=T['at'], title_fontsize=6.6, bbox_to_anchor=(0.56, 0.02))
     fig.text(0.5, 0.005, T['nd'] % len(CFG), ha='center', fontsize=6.8, color=INK); plt.tight_layout(rect=[0, 0.03, 1, 1]); fig.savefig(OUT + f'fig_pend_tradeoff{sfx}.pdf', bbox_inches='tight'); plt.close(fig)
 
-# ---------- main figure: Cleveland dot plot, three panels (F1, file, activation memory), rows sorted by file size; non-dominated rows shaded; every other row names one configuration that dominates it (highest F1)
+# ---------- gambar utama: diagram titik Cleveland, tiga panel (F1, berkas, memori aktivasi), baris diurutkan menurut berkas; baris tak terdominasi diarsir; baris lain menyebut satu konfigurasi yang mendominasinya (F1 tertinggi)
 DT = {'en': dict(f1='Mean F1-score (%)', fl='File size (KB, log)', ac='Activation memory (KB, log)', by='dominated by', conv=('standard', 'separable'), ch='-ch ', c1='Depthwise separable', c2='Standard convolution', nd='filled, shaded row: not dominated', dd='open: dominated'),
       'id': dict(f1='F1-score rerata (%)', fl='Ukuran berkas (KB, log)', ac='Memori aktivasi (KB, log)', by='terdominasi oleh', conv=('standar', 'separable'), ch=' kanal ', c1='Depthwise separable', c2='Konvolusi standar', nd='terisi, baris diarsir: tak terdominasi', dd='kosong: terdominasi')}
 for lg in ('en', 'id'):
@@ -197,7 +197,7 @@ for lg in ('en', 'id'):
                loc='upper center', ncol=4, fontsize=6.3, frameon=False, bbox_to_anchor=(0.45, 0.995))
     fig.subplots_adjust(left=0.2, right=0.80, top=0.925, bottom=0.05); fig.savefig(OUT + f'fig_pend_dotplot{sfx}.pdf'); plt.close(fig)
 
-# ---------- compact Table 1 (four models: parameters, MACs, FLOPs, file and Float32 activation memory) and F1 heatmap per dataset (20 configurations)
+# ---------- Tabel 1 ringkas (empat model: parameter, MAC, FLOPs, berkas dan memori aktivasi Float32) dan heatmap F1 per dataset (20 konfigurasi)
 from matplotlib.colors import LinearSegmentedColormap
 for lg, L in LG.items():
     sfx = '' if lg == 'en' else '_id'; dec = L['dec']; rows = ''
@@ -228,7 +228,7 @@ for lg in ('en', 'id'):
     cb = fig.colorbar(plt.cm.ScalarMappable(norm=plt.Normalize(vmin, vmax), cmap=CM), ax=ax, orientation='horizontal', fraction=0.025, pad=0.02, aspect=40); cb.ax.tick_params(labelsize=6); cb.set_label(T['cb'], fontsize=6.6)
     fig.subplots_adjust(left=0.36, right=0.98, top=0.93, bottom=0.07); fig.savefig(OUT + f'fig_pend_heatmap{sfx}.pdf'); plt.close(fig)
 
-# ---------- protocol figure (data and processing flow of one window), EN and ID
+# ---------- gambar protokol (Gambar data dan alur pemrosesan satu jendela), EN dan ID
 import textwrap
 from matplotlib.patches import FancyBboxPatch, Rectangle
 PT = {'en': dict(a='(a) Data', b='(b) Processing of one window', tr='Training: %s', va='%s', te='%s', stead='100,000 earthquake + 100,000 noise', n19='19,995 windows after excluding constant vertical components', only='Test only: 10,000 earthquake + 10,000 noise  (%s windows)',

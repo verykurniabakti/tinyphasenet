@@ -1,12 +1,12 @@
 """
-Step 202 (companion compression manuscript): MACs and FLOPs of the four main models with ONE method that explicitly counts the transposed convolution, cross-checked in two other ways.
-Models: one-channel standard (models/ablation_final/standard_seed42.keras) and separable (models/svariants/s10_w1_seed42.keras); three-channel standard (pn_seed42.keras, retrained PhaseNet) and separable (pndw_seed42.keras).
-Main method (Float32 TFLite graph): MACs per operator, from the tensor shapes in the converted graph:
-  CONV_2D: output elements x kh x kw x C_in; DEPTHWISE_CONV_2D: output elements x kh x kw; TRANSPOSE_CONV: input elements x C_out x kh x kw (every input element is multiplied by the whole kernel).
-  FLOPs = 2 x MAC (convention: one multiplication and one addition). Only convolution operators are counted; elementwise operations (BatchNorm MUL and ADD, ReLU, softmax) are not counted as MACs.
-Cross-checks: (a) analytic formula from the Keras layer configuration (Conv1D: output length x k x C_in x C_out; SeparableConv1D: depthwise + pointwise; Conv1DTranspose: input length x k x C_in x C_out);
-(b) the earlier numbers of the TensorFlow profiler (results/final/jawaban_arief_tiga_tahap.json and jawaban_arief_phasenet.json; scripts 150_ and 153_), which only count Conv2D and DepthwiseConv2dNative.
-Output: results/final/mac_flops.json and a compact table on screen. Usage (from this folder): python 202_mac_flops.py
+Langkah 202 (draf pendamping kompresi): MAC dan FLOPs empat model utama dengan SATU metode yang eksplisit menghitung konvolusi transpos, diperiksa silang dengan dua cara lain.
+Model: satu kanal standar (models/ablation_final/standard_seed42.keras) dan separable (models/svariants/s10_w1_seed42.keras); tiga kanal standar (pn_seed42.keras, PhaseNet dilatih ulang) dan separable (pndw_seed42.keras).
+Metode utama (graf TFLite Float32): MAC per operator, dari bentuk tensor di graf yang dikonversi:
+  CONV_2D: elemen keluaran x kh x kw x C_masuk; DEPTHWISE_CONV_2D: elemen keluaran x kh x kw; TRANSPOSE_CONV: elemen masukan x C_keluaran x kh x kw (tiap elemen masukan dikalikan seluruh kernel).
+  FLOPs = 2 x MAC (konvensi: satu perkalian dan satu penjumlahan). Hanya operator konvolusi dihitung; operasi elementwise (MUL dan ADD BatchNorm, ReLU, softmax) tidak dihitung sebagai MAC.
+Pemeriksaan silang: (a) rumus analitik dari konfigurasi lapis Keras (Conv1D: panjang keluaran x k x C_masuk x C_keluaran; SeparableConv1D: depthwise + pointwise; Conv1DTranspose: panjang masukan x k x C_masuk x C_keluaran);
+(b) angka lama dari profiler TensorFlow (results/final/jawaban_arief_tiga_tahap.json dan jawaban_arief_phasenet.json; skrip 150_ dan 153_), yang hanya menghitung Conv2D dan DepthwiseConv2dNative.
+Keluaran: results/final/mac_flops.json dan tabel ringkas di layar. Pemakaian (dari folder ini): python 202_mac_flops.py
 """
 import os, json
 os.environ.setdefault('TF_CPP_MIN_LOG_LEVEL', '3')
@@ -36,7 +36,7 @@ def mac_tflite(m, K):
     return sum(by.values()), by, n_other
 
 
-def mac_keras(m):   # analytic formula from the layer configuration
+def mac_keras(m):   # rumus analitik dari konfigurasi lapis
     tot = {'conv': 0, 'depthwise': 0, 'pointwise': 0, 'transpose': 0}
     for l in m.layers:
         t = type(l).__name__

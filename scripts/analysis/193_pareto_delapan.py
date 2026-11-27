@@ -1,13 +1,13 @@
 """
-Step 193 (device manuscript, Q, stage 4): Pareto analysis of EIGHT configurations measured on the ESP32-S3: six depthwise separable (one channel and three channels; Float32, 16x8, INT8)
-and two standard-convolution models trained here with the same recipe (one-channel standard = the TinyPhaseNet architecture with plain Conv1D; three-channel standard = the original PhaseNet
-architecture retrained), both measured in Float32 only (192_). Objectives: maximize the F1 averaged over four datasets (STEAD, INSTANCE, ETHZ, TXED); minimize the energy per window; minimize the latency.
-(a) Pareto front on the mean of three seeds; (b) robustness to the seed: each configuration takes the value of one of its three seeds over all 3^8 = 6561 combinations, and the proportion of combinations
-in which each configuration is non-dominated is reported; (c) the same selection rules as 164_ (R1 lowest energy with STEAD F1 >= threshold and mean F1 of the other three datasets >= 90; R2 knee point of the front;
-R3 sensitivity of the utility weight), recomputed on the eight configurations. Does not change 164_ (which belongs to the answer manuscript).
-Sources: results/final/{spektrum_kuantisasi_3seed,quant16x8_per_seed,quant16x8_pndw_per_seed,hw_tiga_seed,hw_padrao_tiga_seed,pareto_kandidat}.json, results/ablation_final/eval_{standard,pn}.json.
-Output: results/final/pareto_delapan.json, ../draft_publikasi_1/tabel_dev/numbers_par{,_id}.tex (number macros), and a summary on screen.
-Usage (from this folder): python 193_pareto_delapan.py
+Langkah 193 (draf artikel perangkat Q, tahap 4): analisis Pareto atas DELAPAN konfigurasi yang terukur di ESP32-S3: enam depthwise separable (satu kanal dan tiga kanal; Float32, 16x8, INT8)
+dan dua model konvolusi standar yang dilatih sendiri dengan resep yang sama (satu kanal standar = arsitektur TinyPhaseNet dengan Conv1D biasa; tiga kanal standar = arsitektur PhaseNet
+asli yang dilatih ulang), keduanya diukur hanya dalam Float32 (192_). Sasaran: maksimalkan F1 rerata empat dataset (STEAD, INSTANCE, ETHZ, TXED); minimalkan energi per jendela; minimalkan latensi.
+(a) batas Pareto pada rerata tiga seed; (b) ketahanan terhadap seed: tiap konfigurasi mengambil nilai salah satu dari ketiga seed-nya pada seluruh 3^8 = 6561 kombinasi, dilaporkan proporsi kombinasi
+tempat tiap konfigurasi tak terdominasi; (c) aturan pemilihan yang sama dengan 164_ (R1 energi terendah dengan F1 STEAD >= ambang dan F1 rerata tiga dataset lain >= 90; R2 titik tekuk batas;
+R3 kepekaan bobot utilitas), dihitung ulang pada delapan konfigurasi. Tidak mengubah 164_ (milik naskah jawaban).
+Sumber: results/final/{spektrum_kuantisasi_3seed,quant16x8_per_seed,quant16x8_pndw_per_seed,hw_tiga_seed,hw_padrao_tiga_seed,pareto_kandidat}.json, results/ablation_final/eval_{standard,pn}.json.
+Keluaran: results/final/pareto_delapan.json, ../draft_publikasi_1/tabel_dev/numbers_par{,_id}.tex (makro angka), dan ringkasan di layar.
+Pemakaian (dari folder ini): python 193_pareto_delapan.py
 """
 import json, itertools
 import numpy as np
@@ -62,11 +62,11 @@ cnt_same = {v: 0 for v in V8}
 for s in SEEDS:
     for v in nondominated({v: tup(val[(v, s)]) for v in V8}): cnt_same[v] += 1
 
-# R1: lowest energy that satisfies STEAD F1 >= threshold and the mean F1 of the three cross-domain datasets >= 90
+# R1: energi terendah yang memenuhi F1 STEAD >= ambang dan F1 rerata tiga dataset lintas-domain >= 90
 R1 = {}
 for th in (90, 95, 97, 98):
     feas = [v for v in V8 if mean[v]['f1_stead'] >= th and mean[v]['f1_lintas'] >= 90]; R1[str(th)] = min(feas, key=lambda v: mean[v]['en']) if feas else None
-# R2: knee point on the front (energy, F1), the farthest from the line between the two ends of the front (normalized)
+# R2: titik tekuk pada batas (energi, F1), jarak terjauh dari garis antara dua ujung batas (dinormalisasi)
 fb = sorted(front8, key=lambda v: mean[v]['en']); R2 = None; R2d = []
 if len(fb) >= 3:
     e = np.array([mean[v]['en'] for v in fb]); f = np.array([mean[v]['f1'] for v in fb]); en_ = (e - e.min()) / (e.max() - e.min()); fn_ = (f - f.min()) / (f.max() - f.min())
@@ -83,7 +83,7 @@ for w, nm_ in win:
 out = dict(nama=NAME, rerata=mean, per_seed={f'{v}_{s}': val[(v, s)] for (v, s) in val}, batas_8_rerata=sorted(front8, key=lambda v: V8.index(v)), batas_6_rerata=sorted(front6, key=lambda v: V8.index(v)),
            n_kombinasi=n, proporsi_tak_terdominasi={v: cnt[v] / n for v in V8}, tak_terdominasi_seed_sama={v: cnt_same[v] for v in V8}, R1=R1, R2_titik_tekuk=R2, R2_jarak=R2d, R3_interval=iv)
 json.dump(out, open('results/final/pareto_delapan.json', 'w'), indent=1, ensure_ascii=False)
-# number macros for the manuscript (English: decimal point; Indonesian: decimal comma)
+# makro angka untuk naskah (Inggris: titik desimal; Indonesia: koma desimal)
 M = {'ParNComb': (n, 0), 'FmStdOne': (mean['1ch_std']['f1'], 1), 'FmStdThr': (mean['3ch_std']['f1'], 1)}
 for sfx, dec in (('', '.'), ('_id', ',')):
     open(f'../draft_publikasi_1/tabel_dev/numbers_par{sfx}.tex', 'w').write(''.join(f'\\newcommand{{\\dv{k}}}{{{(f"{v:,.{d}f}").replace(",", "#").replace(".", dec).replace("#", "." if dec == "," else ",")}}}\n' for k, (v, d) in M.items()))

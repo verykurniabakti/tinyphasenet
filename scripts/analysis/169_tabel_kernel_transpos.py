@@ -1,11 +1,11 @@
 """
-Step 169 (answer to the advisor, Appendix E): results of the TRANSPOSE_CONV fast-path kernel on the ESP32-S3, compared with the reference kernel.
-Sources (all in firmware/tinyphasenet_profiling/results_hw/, session of 6 Nov 2026):
-  - per-operator profile: sesi_06nov_kernel_transpos_{ref,cepat}_profil_<model>.log  (OPPROF, microseconds per operator, mean of 20 invocations; OPPROF_HASH = hash of the model output)
-  - full firmware before the new kernel: sesi_06nov_int8_final_stead.log, sesi_06nov_16x8_seed42_stead.log, sesi_06nov_3ch_int8_stead.log, sesi_06nov_3ch_16x8_stead.log
-  - full firmware with the new kernel: sesi_06nov_kernel_baru_<model>_stead.log
-Output: ../jawaban_prof_arief_fase1/tabel_spektrum/tab_kernel_transpos_op.tex, tab_kernel_transpos_hw.tex, numbers_kernel.tex; results/final/kernel_transpos_esp32.json
-Usage (from this folder): python 169_tabel_kernel_transpos.py
+Langkah 169 (jawaban Prof. Arief, Lampiran E): hasil kernel TRANSPOSE_CONV jalur cepat di ESP32-S3, dibandingkan dengan kernel referensi.
+Sumber (semua di firmware/tinyphasenet_profiling/results_hw/, sesi 6 Nov 2026):
+  - profil per operator: sesi_06nov_kernel_transpos_{ref,cepat}_profil_<model>.log  (OPPROF, mikrodetik per operator, rerata 20 pemanggilan; OPPROF_HASH = hash keluaran model)
+  - firmware penuh sebelum kernel baru: sesi_06nov_int8_final_stead.log, sesi_06nov_16x8_seed42_stead.log, sesi_06nov_3ch_int8_stead.log, sesi_06nov_3ch_16x8_stead.log
+  - firmware penuh dengan kernel baru: sesi_06nov_kernel_baru_<model>_stead.log
+Keluaran: ../jawaban_prof_arief_fase1/tabel_spektrum/tab_kernel_transpos_op.tex, tab_kernel_transpos_hw.tex, numbers_kernel.tex; results/final/kernel_transpos_esp32.json
+Pemakaian (dari folder ini): python 169_tabel_kernel_transpos.py
 """
 import re, json
 D = 'firmware/tinyphasenet_profiling/results_hw/'; OUT = '../jawaban_prof_arief_fase1/'
@@ -28,11 +28,11 @@ def prof(path):
 
 def hw(path):
     t = open(path, errors='ignore').read().replace('\r', ''); g = lambda p: re.search(p, t)
-    if g(r'Latensi Invoke \(Median\)'):   # three-channel formats
+    if g(r'Latensi Invoke \(Median\)'):   # format tiga kanal
         lat = float(g(r'Latensi Invoke \(Median\)\s*\|\s*([\d.]+)')[1]); ar = float(g(r'Tensor Arena Digunakan\s*\|\s*([\d.]+)')[1]); en = float(g(r'Energi per Inferensi\s*\|\s*([\d.]+)')[1])
         k = g(r'Kesesuaian Keputusan\s*\|\s*(\d+) / (\d+)'); beda, n = int(k[2]) - int(k[1]), int(k[2])
         f1 = float(g(r'F1-Score:\s*([\d.]+)')[1])
-    else:                                  # one-channel formats
+    else:                                  # format satu kanal
         lat = float(g(r'Latensi Invoke \(ms\)\s*\|\s*([\d.]+)')[1]); ar = float(g(r'Tensor arena terpakai \(KB\)\s*\|\s*([\d.]+)')[1]); en = float(g(r'Energi per inferensi \(mJ\)\s*\|\s*([\d.]+)')[1])
         k = g(r'Keputusan berbeda\s*:\s*(\d+) / (\d+)'); beda, n = int(k[1]), int(k[2])
         f1 = float(g(r'F1\s+([\d.]+)\s+FPR')[1])
@@ -40,8 +40,8 @@ def hw(path):
 
 
 R = {v: dict(ref=prof(D + PREF[v]), cepat=prof(D + PCEP[v]), lama=hw(D + LAMA[v]), baru=hw(D + BARU[v])) for v in V}
-for v in V: assert R[v]['ref']['hash'] == R[v]['cepat']['hash'], f'hash beda pada {v}'   # correctness: identical output (integers and float bit by bit)
-H3S = json.load(open('results/final/hw_tiga_seed.json')); FP = {k: {**R[f'{k}_fp32']['baru'], **{x: H3S[f'{k}_fp32']['rerata'][x] for x in ('latency_ms', 'energy_mj', 'arena_kb')}} for k in ('1ch', '3ch')}   # Float32 after: mean of three seeds (175_; one channel in SRAM, three channels in PSRAM); the before/after kernel pair stays seed 42 and PSRAM   # Float32 with the fast-path kernel (170_ for the firmware; 07 Nov); built-in kernel value: R['<fam>_fp32']['lama']
+for v in V: assert R[v]['ref']['hash'] == R[v]['cepat']['hash'], f'hash beda pada {v}'   # kebenaran: keluaran identik (bilangan bulat dan float bit demi bit)
+H3S = json.load(open('results/final/hw_tiga_seed.json')); FP = {k: {**R[f'{k}_fp32']['baru'], **{x: H3S[f'{k}_fp32']['rerata'][x] for x in ('latency_ms', 'energy_mj', 'arena_kb')}} for k in ('1ch', '3ch')}   # Float32 sesudah: rerata tiga seed (175_; satu kanal di SRAM, tiga kanal di PSRAM); pasangan sebelum/sesudah kernel tetap seed 42 dan PSRAM   # Float32 dengan fast-path kernel (170_ untuk firmware; 07 Nov); nilai kernel bawaan: R['<fam>_fp32']['lama']
 R['float32'] = FP
 json.dump(R, open('results/final/kernel_transpos_esp32.json', 'w'), indent=1)
 

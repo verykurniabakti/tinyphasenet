@@ -2,7 +2,7 @@
   "title": "TinyPhaseNet: code, trained models and device measurements for a depthwise separable seismic phase picker compressed for TinyML",
   "upload_type": "software",
   "description": "<p>Code, trained models (seeds 42, 43 and 44, Keras and TensorFlow Lite), ESP32-S3 firmware with a replacement transposed-convolution kernel, raw device measurement logs, result files, and the scripts that regenerate the tables and figures of two manuscripts on post-training quantization and depthwise separable convolution of a seismic phase picker (TinyPhaseNet) and its standard-convolution counterpart (PhaseNet). No waveform is redistributed: STEAD, INSTANCE, ETHZ and TXED must be obtained from their original sources (see data/README.md).</p><p>Licenses: source code under the Apache License 2.0 (LICENSE); trained models, result files, device logs and documentation under CC BY 4.0 (LICENSE-DATA.md).</p>",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "language": "eng",
   "access_right": "open",
   "license": "Apache-2.0",

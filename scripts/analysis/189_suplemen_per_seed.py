@@ -1,9 +1,9 @@
 """
-Step 189 (supplementary data of the device manuscript, Q): ESP32-S3 measurement results per seed (42, 43, 44) as CSV.
-Source: results/final/hw_tiga_seed.json (175_), no hand-typed numbers. Replaces the per-seed table that used to be an appendix of the manuscript.
-Columns: configuration, seed, latency_ms, arena_kb, energy_mj, f1_device_percent, differing_decisions, decisions_compared; the seed rows 'mean' and 'sd' use the mean and the sample standard deviation of the three seeds.
-Usage (from this folder): python 189_suplemen_per_seed.py [output_folder]   (default: ../supplement/)
-Output: <output_folder>/per_seed_results.csv
+Langkah 189 (data suplemen draf artikel perangkat Q): hasil pengukuran ESP32-S3 per seed (42, 43, 44) dalam CSV.
+Sumber: results/final/hw_tiga_seed.json (175_), tanpa angka ketikan tangan. Menggantikan tabel per seed yang tadinya Lampiran naskah.
+Kolom: configuration, seed, latency_ms, arena_kb, energy_mj, f1_device_percent, differing_decisions, decisions_compared; baris seed 'mean' dan 'sd' memakai rerata dan simpangan baku sampel tiga seed.
+Pemakaian (dari folder ini): python 189_suplemen_per_seed.py [folder_keluaran]   (bawaan: ../supplement/)
+Keluaran: <folder_keluaran>/per_seed_results.csv
 """
 import csv, json, os, sys
 

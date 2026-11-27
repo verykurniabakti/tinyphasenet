@@ -1,14 +1,14 @@
 """
-Step 195 (device manuscript, Q, arena tracing): simulation of the TensorFlow Lite Micro greedy memory planner (GreedyMemoryPlanner) on the Float32 TFLite graphs of the four models
-(one channel and three channels; depthwise separable and standard convolution), to explain why the measured arena of the three-channel standard model (489.8 KB) is larger than that of its depthwise counterpart (399.7 KB)
-although the activation lower bound is the same (384 KB).
-Algorithm imitated (esp-tflite-micro, tensorflow/lite/micro/memory_planner/greedy_memory_planner.cc and micro_allocation_info.cc): buffer = non-constant tensor (model input and operator outputs),
-size rounded to 16 bytes; lifetime [created, last used] in operator indices (model input from 0; an operator output at that operator; last used at the consuming operator; the model output until the end),
-overlap counted inclusively; buffers sorted in descending order of size with a stable sort on an array filled from the tail, so for equal sizes the buffer with the LARGER id is placed first;
-each buffer is placed in the first gap (first-fit) among the buffers alive at the same time. Measured arena = head (planner result) + persistent tail (about 10 KB).
-Verified result: for the three-channel standard model, seed 44, 39 of 39 simulated offsets are identical to the memory plan printed by the board (log results_hw/sesi_10nov_rencana_memori_3ch_standar_seed44.log).
-Output: results/final/simulasi_perencana_tflm.json and a summary on screen.
-Usage (from this folder): python 195_simulasi_perencana_tflm.py
+Langkah 195 (draf artikel perangkat Q, penelusuran arena): simulasi perencana memori greedy TensorFlow Lite Micro (GreedyMemoryPlanner) pada graf TFLite Float32 keempat model
+(satu kanal dan tiga kanal; depthwise separable dan konvolusi standar), untuk menjelaskan mengapa arena terukur model standar tiga kanal (489,8 KB) lebih besar daripada padanan depthwise (399,7 KB)
+padahal batas bawah aktivasi sama (384 KB).
+Algoritma yang ditiru (esp-tflite-micro, tensorflow/lite/micro/memory_planner/greedy_memory_planner.cc dan micro_allocation_info.cc): buffer = tensor non-konstanta (masukan model dan keluaran operator),
+ukuran dibulatkan ke 16 byte; umur [dibuat, terakhir dipakai] dalam indeks operator (masukan model dari 0; keluaran operator pada operator itu; terakhir dipakai pada operator pemakai; keluaran model sampai akhir),
+tumpang tindih dihitung inklusif; buffer diurutkan menurun menurut ukuran dengan pengurut stabil pada larik yang diisi dari ekor, sehingga untuk ukuran sama buffer ber-id LEBIH BESAR ditempatkan lebih dulu;
+tiap buffer ditempatkan pada celah pertama (first-fit) di antara buffer yang bersamaan hidup. Arena terukur = kepala (hasil perencana) + ekor persisten (sekitar 10 KB).
+Hasil yang diverifikasi: untuk model standar tiga kanal seed 44, 39 dari 39 offset simulasi identik dengan rencana memori yang dicetak papan (log results_hw/sesi_10nov_rencana_memori_3ch_standar_seed44.log).
+Keluaran: results/final/simulasi_perencana_tflm.json dan ringkasan di layar.
+Pemakaian (dari folder ini): python 195_simulasi_perencana_tflm.py
 """
 import json, os
 os.environ.setdefault('TF_CPP_MIN_LOG_LEVEL', '3')

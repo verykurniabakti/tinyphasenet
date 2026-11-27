@@ -1,11 +1,11 @@
 """
-Step 164 (answer to the advisor, Pareto optimum): analysis of the Pareto front from stored results, with no typed numbers.
-Candidates (mean of three seeds): one channel: standard Float32, depthwise Float32, 16x8, INT8, 4/8; three channels: retrained PhaseNet (1b), depthwise Float32, 16x8, INT8, 4/8.
-Objective A (all candidates, no device): maximize the F1-score averaged over four datasets; minimize Flash; minimize the minimum activation memory.
-Objective B (candidates measured on the ESP32-S3: one-channel INT8 and 16x8, three-channel INT8 and 16x8): maximize the F1-score averaged over four datasets; minimize the energy per window; minimize the latency.
-Selection rules (fixed before seeing the results): (R1) the lowest energy that satisfies the STEAD F1-score >= threshold (90, 95, 97, 98) and the mean cross-domain F1-score >= 90; (R2) knee point: the front point farthest from the line between the two ends of the front in the normalized (energy, F1) plane;
-(R3) sensitivity: utility U = w * F1_norm - (1 - w) * energy_norm, the winner for w = 0..1. F1 differences smaller than the standard deviation across seeds are marked as indistinguishable.
-Output: results/final/pareto_kandidat.json, ../jawaban_prof_arief_fase1/{tabel_spektrum/tab_pareto.tex, grafik_pareto_titik.pdf, grafik_pareto_titik.png}
+Langkah 164 (jawaban Prof. Arief, titik optimum Pareto): analisis batas Pareto dari hasil tersimpan, tanpa angka yang diketik.
+Kandidat (rerata tiga seed): satu kanal: standar Float32, depthwise Float32, 16x8, INT8, 4/8; tiga kanal: PhaseNet dilatih ulang (1b), depthwise Float32, 16x8, INT8, 4/8.
+Sasaran A (semua kandidat, tanpa perangkat): maksimalkan F1 rerata empat dataset; minimalkan Flash; minimalkan memori aktivasi minimum.
+Sasaran B (kandidat yang diukur di ESP32-S3: satu kanal INT8 dan 16x8, tiga kanal INT8 dan 16x8): maksimalkan F1 rerata empat dataset; minimalkan energi per jendela; minimalkan latensi.
+Aturan pemilihan (ditetapkan sebelum melihat hasil): (R1) energi terkecil yang memenuhi F1 STEAD >= ambang (90, 95, 97, 98) dan F1 rerata lintas-domain >= 90; (R2) titik tekuk: titik batas yang paling jauh dari garis antara dua ujung batas pada bidang (energi, F1) ternormalisasi;
+(R3) kepekaan: utilitas U = w * F1_norm - (1 - w) * energi_norm, pemenang untuk w = 0..1. Selisih F1 yang lebih kecil daripada simpangan baku antar seed ditandai tidak terbedakan.
+Keluaran: results/final/pareto_kandidat.json, ../jawaban_prof_arief_fase1/{tabel_spektrum/tab_pareto.tex, grafik_pareto_titik.pdf, grafik_pareto_titik.png}
 """
 import json, re, statistics as st
 import numpy as np
@@ -35,9 +35,9 @@ def parse(path, pats):
 P1 = {'lat': r'Latensi Invoke \(ms\)\s*\|\s*([\d.]+)', 'e': r'Energi per inferensi \(mJ\)\s*\|\s*([\d.]+)', 'ar': r'Tensor arena terpakai \(KB\)\s*\|\s*([\d.]+)'}
 P3 = {'lat': r'Latensi Invoke \(Mean \+- Std\)\s*\|\s*([\d.]+)', 'e': r'Energi per Inferensi\s*\|\s*([\d.]+)', 'ar': r'Tensor Arena Digunakan\s*\|\s*([\d.]+)'}
 RH = 'firmware/tinyphasenet_profiling/results_hw/'
-H3S = json.load(open('results/final/hw_tiga_seed.json'))   # 175_: mean of three seeds (42, 43, 44) on the ESP32-S3 with the optimized kernel
+H3S = json.load(open('results/final/hw_tiga_seed.json'))   # 175_: rerata tiga seed (42, 43, 44) di ESP32-S3 dengan kernel optimasi
 DEV = {(f, k): dict(lat=H3S[f'{f}_{kk}']['rerata']['latency_ms'], e=H3S[f'{f}_{kk}']['rerata']['energy_mj'], ar=H3S[f'{f}_{kk}']['rerata']['arena_kb']) for f in ('1ch', '3ch') for k, kk in (('int8', 'int8'), ('q16x8', '16x8'), ('fp32', 'fp32'))}
-I4 = json.load(open('results/final/int4_nyata.json'))   # REAL 4-bit file size (173_)
+I4 = json.load(open('results/final/int4_nyata.json'))   # ukuran berkas 4-bit NYATA (173_)
 NAMA = {'standard': 'standar Float32', 'pn': 'PhaseNet (dilatih ulang)', 'fp32': 'Float32', 'q16x8': '16x8', 'int8': 'INT8', 'w4a8': '4/8 (4-bit)'}
 CAND = [('1ch', k) for k in ('standard', 'fp32', 'q16x8', 'int8', 'w4a8')] + [('3ch', k) for k in ('pn', 'fp32', 'q16x8', 'int8', 'w4a8')]
 rows = []
@@ -50,7 +50,7 @@ for fam, key in CAND:
     rows.append(r)
 
 
-def nondom(items, spec):   # spec: list of (key, +1 maximize / -1 minimize); returns the indices that are not dominated
+def nondom(items, spec):   # spec: daftar (kunci, +1 maksimalkan / -1 minimalkan); kembalikan indeks tak didominasi
     keep = []
     for i, a in enumerate(items):
         dom = False
@@ -72,13 +72,13 @@ res['R1'] = {}
 for th in (90, 95, 97, 98):
     feas = [r for r in dev if r['f1_stead'] >= th and r['f1_lintas'] >= 90]
     res['R1'][str(th)] = min(feas, key=lambda r: r['dev_energi_mJ'])['nama'] if feas else None
-# R2 knee point on the front B (energy, F1)
+# R2 titik tekuk pada batas B (energi, F1)
 fb = sorted([dev[i] for i in B], key=lambda r: r['dev_energi_mJ'])
 if len(fb) >= 3:
     e = np.array([r['dev_energi_mJ'] for r in fb]); f = np.array([r['f1_mean4'] for r in fb]); en = (e - e.min()) / (e.max() - e.min()); fn = (f - f.min()) / (f.max() - f.min())
     p0, p1 = np.array([en[0], fn[0]]), np.array([en[-1], fn[-1]]); d = [abs((p1 - p0)[0] * (y - p0[1]) - (p1 - p0)[1] * (x - p0[0])) / np.linalg.norm(p1 - p0) for x, y in zip(en, fn)]
     res['R2_titik_tekuk'] = fb[int(np.argmax(d))]['nama']; res['R2_jarak'] = [round(float(v), 3) for v in d]
-# R3 weight sensitivity
+# R3 kepekaan bobot
 e = np.array([r['dev_energi_mJ'] for r in dev]); f = np.array([r['f1_mean4'] for r in dev]); en = (e - e.min()) / (e.max() - e.min()); fn = (f - f.min()) / (f.max() - f.min()); win = []
 for w in np.linspace(0, 1, 21): win.append((round(float(w), 2), dev[int(np.argmax(w * fn - (1 - w) * en))]['nama']))
 res['R3'] = win
@@ -89,16 +89,16 @@ for w, n in win:
 res['R3_interval'] = iv
 json.dump(res, open('results/final/pareto_kandidat.json', 'w'), indent=1, ensure_ascii=False)
 print('Pareto A (F1, Flash, aktivasi):', res['pareto_A']); print('Pareto B (F1, energi, latensi; di papan):', res['pareto_B']); print('R1:', res['R1']); print('R2:', res.get('R2_titik_tekuk'), res.get('R2_jarak')); print('R3:', iv)
-# table
+# tabel
 tt = ''
 for r in rows:
     tt += f"{r['nama']} & {r['f1_stead']:.2f} & {r['f1_lintas']:.2f} & {r['flash_kb']:,.1f} & {'ya' if r['pareto_A'] else 'tidak'} \\\\\n"
 open(f'{OUT}/tabel_spektrum/tab_pareto.tex', 'w').write(re.sub(r'(?<=\d)\.(?=\d)', ',', tt.replace(',', '_')).replace('_', '.') + '\\bottomrule\n')
-# table of the candidates measured on the device (six), with latency and energy
+# tabel kandidat yang terukur di perangkat (enam), lengkap dengan latensi dan energi
 td = ''
 for r in dev: td += f"{r['nama']} & {r['f1_stead']:.2f} & {r['f1_mean4']:.2f} & {r['dev_lat_ms']:,.1f} & {r['dev_energi_mJ']:,.1f} & {r['dev_arena_kb']:,.1f} & {'ya' if r['pareto_B'] else 'tidak'} \\\\\n"
 open(f'{OUT}/tabel_spektrum/tab_pareto_perangkat.tex', 'w').write(re.sub(r'(?<=\d)\.(?=\d)', ',', td.replace(',', '_')).replace('_', '.') + '\\bottomrule\n')
-# figure
+# gambar
 fig, axs = plt.subplots(2, 2, figsize=(8.4, 7.0), dpi=300); ax = axs.flat; c = {'1ch': '#1d4ed8', '3ch': '#0f766e'}
 ypos = list(range(len(rows)))[::-1]; names = [r['nama'] for r in rows]
 def barpanel(a, vals, flags, fmt, xmax, title, xlabel):
@@ -118,19 +118,19 @@ h = [Patch(facecolor=c['1ch'], edgecolor='#0f172a', label='Satu kanal (Model 1-K
 fig.legend(handles=h, loc='upper center', ncol=2, fontsize=7.8, frameon=False, bbox_to_anchor=(0.5, 1.02)); plt.tight_layout(rect=[0, 0, 1, 0.94], h_pad=1.6, w_pad=1.2)
 fig.savefig(f'{OUT}/grafik_pareto_titik.pdf', bbox_inches='tight'); fig.savefig(f'{OUT}/grafik_pareto_titik.png', bbox_inches='tight'); print('figures and tables done')
 
-# ---- manuscript paragraphs generated from the results ----
+# ---- paragraf naskah dibangkitkan dari hasil ----
 g = lambda n: next(r for r in rows if r['nama'] == n); dec = lambda t: re.sub(r'(?<=\d)\.(?=\d)', ',', t)
 tak = [r['nama'] for r in rows if not r['pareto_A']]; i3, q1c, q3c, i1, f1c = g('Tiga kanal INT8'), g('Satu kanal 16x8'), g('Tiga kanal 16x8'), g('Satu kanal INT8'), g('Satu kanal Float32')
 iv_ = res['R3_interval']; mid = next((x for x in iv_ if x[2] == 'Satu kanal 16x8'), iv_[0])
-th = lambda x: f'{x:,.0f}'.replace(',', '§')   # temporary thousands separator so that the commas of the sentence do not change
-def bandingkan(a, b):   # comparison sentence of the two one-channel formats from the measured numbers
+th = lambda x: f'{x:,.0f}'.replace(',', '§')   # pemisah ribuan sementara agar koma kalimat tidak berubah
+def bandingkan(a, b):   # kalimat perbandingan dua format satu kanal dari angka terukur
     ar = lambda x, y: 'lebih rendah' if x < y else ('lebih tinggi' if x > y else 'sama')
     return (f"Float32 dan 16x8 satu kanal memakai arsitektur yang sama, jadi perbandingannya langsung. {a['nama']} mendapat F1 rerata {a['f1_mean4']:.2f}\\%, energi {th(a['dev_energi_mJ'])}~mJ, dan latensi {th(a['dev_lat_ms'])}~ms. "
             f"{b['nama']} mendapat F1 rerata {b['f1_mean4']:.2f}\\% ({ar(b['f1_mean4'], a['f1_mean4'])}), energi {th(b['dev_energi_mJ'])}~mJ ({ar(b['dev_energi_mJ'], a['dev_energi_mJ'])}), dan latensi {th(b['dev_lat_ms'])}~ms ({ar(b['dev_lat_ms'], a['dev_lat_ms'])}). "
             f"Ukuran berkasnya {a['flash_kb']:.0f}~KB dan {b['flash_kb']:.0f}~KB, sedangkan memori aktivasi minimumnya {a['aktivasi_lb_kb']:.0f}~KB dan {b['aktivasi_lb_kb']:.0f}~KB.")
 
 
-grup = []   # STEAD F1 thresholds that give the same R1 winner
+grup = []   # ambang F1 STEAD yang menghasilkan pemenang R1 sama
 for t in ('90', '95', '97', '98'):
     if grup and grup[-1][0] == res['R1'][t]: grup[-1][1].append(t)
     else: grup.append([res['R1'][t], [t]])

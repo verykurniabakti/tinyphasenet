@@ -1,10 +1,10 @@
 """
-Step 192 (device manuscript, Q, stage 4): summary of the ESP32-S3 measurements for the STANDARD-CONVOLUTION Float32 models (one channel and three channels; seeds 42, 43, 44)
-and their comparison with the depthwise separable counterparts (hw_tiga_seed.json, 175_): replacement TRANSPOSE_CONV kernel, 100 STEAD windows, same protocol.
-Sources: firmware/tinyphasenet_profiling/results_hw/sesi_10nov_padrao_seed<S>_{1ch_fp32_sram,3ch_fp32_psram}_stead.log (one channel: internal SRAM arena; three channels: PSRAM arena);
-counterparts: results/final/hw_tiga_seed.json ('1ch_fp32' = SRAM, '3ch_fp32' = PSRAM).
-Output: results/final/hw_padrao_tiga_seed.json (per seed, mean, sample standard deviation, standard/depthwise ratio) and a summary on screen.
-Usage (from this folder): python 192_ringkas_hw_padrao_tiga_seed.py
+Langkah 192 (draf artikel perangkat Q, tahap 4): ringkasan pengukuran ESP32-S3 untuk model KONVOLUSI STANDAR Float32 (satu kanal dan tiga kanal; seed 42, 43, 44)
+dan perbandingannya dengan padanan depthwise separable (hw_tiga_seed.json, 175_): kernel TRANSPOSE_CONV pengganti, 100 jendela STEAD, protokol sama.
+Sumber: firmware/tinyphasenet_profiling/results_hw/sesi_10nov_padrao_seed<S>_{1ch_fp32_sram,3ch_fp32_psram}_stead.log (satu kanal: arena SRAM internal; tiga kanal: arena PSRAM);
+padanan: results/final/hw_tiga_seed.json ('1ch_fp32' = SRAM, '3ch_fp32' = PSRAM).
+Keluaran: results/final/hw_padrao_tiga_seed.json (per seed, rerata, simpangan baku sampel, rasio standar/depthwise) dan ringkasan di layar.
+Pemakaian (dari folder ini): python 192_ringkas_hw_padrao_tiga_seed.py
 """
 import re, json, statistics as st
 D = 'firmware/tinyphasenet_profiling/results_hw/'

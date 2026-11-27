@@ -1,12 +1,12 @@
 """
-Step 196 (companion compression manuscript): tables and figure comparing the depthwise separable and post-training quantization steps for the one-channel and three-channel models, from stored results (no new experiment).
-All differences are PAIRED per seed (seeds 42, 43, 44) and then averaged (mean +- sample standard deviation):
-  - step 1: depthwise separable Float32 minus standard-convolution Float32 (standard model: eval_standard.json for one channel, eval_pn.json for three channels);
-  - step 2: quantized format (8/16, 8/8, 4/8 emulation with per-channel MSE clipping) minus Float32 of the same depthwise separable model.
-F1 in percent, differences in percentage points. Datasets: STEAD, INSTANCE, ETHZ, TXED (test).
-Sources: results/final/{spektrum_kuantisasi_3seed,w4a8_perkanal_3seed,quant16x8_per_seed,quant16x8_pndw_per_seed}.json, results/ablation_final/eval_{standard,pn}.json.
-Output: ../draft_publikasi_1/tabel_pend/{tab_pend_step1,tab_pend_step2}{,_id}.tex, numbers_pend{,_id}.tex, fig_pend_delta{,_id}.pdf, results/final/pendamping_selisih.json.
-Usage (from this folder): python 196_tabel_pendamping.py
+Langkah 196 (draf pendamping kompresi): tabel dan figur perbandingan proses depthwise separable dan kuantisasi pascapelatihan untuk model satu kanal dan tiga kanal, dari hasil tersimpan (tanpa percobaan baru).
+Semua selisih BERPASANGAN per seed (seed 42, 43, 44) lalu dirata-ratakan (rerata +- simpangan baku sampel):
+  - langkah 1: depthwise separable Float32 dikurangi konvolusi standar Float32 (model standar: eval_standard.json satu kanal, eval_pn.json tiga kanal);
+  - langkah 2: format terkuantisasi (8/16, 8/8, 4/8 emulasi dengan penjepitan MSE per kanal) dikurangi Float32 dari model depthwise separable yang sama.
+F1 dalam persen, selisih dalam poin persentase. Dataset: STEAD, INSTANCE, ETHZ, TXED (uji).
+Sumber: results/final/{spektrum_kuantisasi_3seed,w4a8_perkanal_3seed,quant16x8_per_seed,quant16x8_pndw_per_seed}.json, results/ablation_final/eval_{standard,pn}.json.
+Keluaran: ../draft_publikasi_1/tabel_pend/{tab_pend_step1,tab_pend_step2}{,_id}.tex, numbers_pend{,_id}.tex, fig_pend_delta{,_id}.pdf, results/final/pendamping_selisih.json.
+Pemakaian (dari folder ini): python 196_tabel_pendamping.py
 """
 import json, os, statistics as st
 import numpy as np
@@ -31,13 +31,13 @@ def f1(fam, key, d, s):
     return 100 * W[fam][str(s)]['pcmse']['kualitas'][d]['f1']
 
 
-def delta(fam, a, b, d=None):   # paired difference per seed: F1(a) - F1(b); d=None -> mean of four datasets
+def delta(fam, a, b, d=None):   # selisih berpasangan per seed: F1(a) - F1(b); d=None -> rerata empat dataset
     if d is None: return [st.mean(f1(fam, a, dd, s) - f1(fam, b, dd, s) for dd in DS) for s in SEEDS]
     return [f1(fam, a, d, s) - f1(fam, b, d, s) for s in SEEDS]
 
 
 def pm(xs, nd=1, dec='.'):
-    m = st.mean(xs); txt = '0.0' if abs(m) < 0.05 else f"{m:+.{nd}f}".replace('-', '$-$')   # no sign on a rounded zero
+    m = st.mean(xs); txt = '0.0' if abs(m) < 0.05 else f"{m:+.{nd}f}".replace('-', '$-$')   # tanpa tanda pada nol hasil pembulatan
     return f"{txt} $\\pm$ {st.stdev(xs):.{nd}f}".replace('.', dec)
 
 
@@ -62,19 +62,19 @@ for sfx, dec, NM, FN in (('', '.', {f: n for f, n, _, _ in FAM}, {'q16x8': '8/16
         if fam == '1ch': r2 += '\\midrule\n'
     open(OUT + f'tab_pend_step2{sfx}.tex', 'w').write(r2 + '\\bottomrule\n')
 
-# number macros for the text
+# makro angka untuk teks
 mx = lambda fam, key: [abs(st.mean(res[f'{fam}_{key}'][d])) for d in DS]
 M = {'PdQqMax': max(max(mx(f, 'q16x8')) for f in ('1ch', '3ch'))}
 for f, t in (('1ch', 'One'), ('3ch', 'Thr')):
     for key, kt in (('int8', 'Int'), ('w4a8', 'Four')):
         v = mx(f, key); M[f'Pd{kt}{t}Min'] = min(v); M[f'Pd{kt}{t}Max'] = max(v)
     M[f'PdShift{t}'] = max(st.mean(f1(f, 'fp32', 'stead_test', s) - f1(f, 'fp32', 'instance_test', s) for s in SEEDS), st.mean(f1(f, 'fp32', 'stead_test', s) - f1(f, 'fp32', 'txed_test', s) for s in SEEDS))
-for f, t in (('1ch', 'One'), ('3ch', 'Thr')):   # standard deviation of the difference per dataset (INT8 and 4/8): range
+for f, t in (('1ch', 'One'), ('3ch', 'Thr')):   # simpangan baku selisih per dataset (INT8 dan 4/8): rentang
     sds = [st.stdev(res[f'{f}_{k}'][d]) for k in ('int8', 'w4a8') for d in DS]; M[f'PdSd{t}Min'] = min(sds); M[f'PdSd{t}Max'] = max(sds)
 for sfx, dec in (('', '.'), ('_id', ',')): open(OUT + f'numbers_pend{sfx}.tex', 'w').write(''.join(f'\\newcommand{{\\dv{k}}}{{{v:.1f}}}\n'.replace('.', dec) if dec == ',' and False else f'\\newcommand{{\\dv{k}}}{{{(f"{v:.1f}").replace(".", dec)}}}\n' for k, v in M.items()))
 res['makros'] = M; json.dump(res, open('results/final/pendamping_selisih.json', 'w'), indent=1)
 
-# figure: change in the F1 averaged over four datasets at each step, one channel and three channels, mean +- SD over three seeds (English and Indonesian)
+# figur: perubahan F1 rerata empat dataset pada tiap langkah, satu kanal dan tiga kanal, rerata +- SD atas tiga seed (Inggris dan Indonesia)
 C1, C3, INK = '#0f766e', '#c2410c', '#0f172a'
 LANG = {'': dict(cats=[('Step 1\nstandard $\\rightarrow$ separable', 'passo1'), ('Step 2\n8/16', 'q16x8'), ('Step 2\n8/8', 'int8'), ('Step 2\n4/8 (emulated)', 'w4a8')], y='Change in mean F1-score,\nfour datasets (points)', fam={'1ch': 'Single-channel', '3ch': 'Three-channel'}, dec='.'),
         '_id': dict(cats=[('Langkah 1\nstandar $\\rightarrow$ separable', 'passo1'), ('Langkah 2\n8/16', 'q16x8'), ('Langkah 2\n8/8', 'int8'), ('Langkah 2\n4/8 (emulasi)', 'w4a8')], y='Perubahan F1-score rerata,\nempat dataset (poin)', fam={'1ch': 'Kanal tunggal', '3ch': 'Tiga kanal'}, dec=',')}
@@ -83,7 +83,7 @@ for sfx, L in LANG.items():
     for off, (fam, col) in ((-w / 2, ('1ch', C1)), (w / 2, ('3ch', C3))):
         mu = [st.mean(res[f'{fam}_{k}']['mean4']) for _, k in cats]; sd = [st.stdev(res[f'{fam}_{k}']['mean4']) for _, k in cats]
         ax.bar(x + off, mu, w, yerr=sd, color=col, edgecolor=INK, linewidth=0.5, capsize=2.2, error_kw=dict(lw=0.8, ecolor=INK), label=L['fam'][fam], zorder=3)
-        for xi, m, sdv in zip(x + off, mu, sd): ax.text(xi, 0.5 if m < 0 else m + sdv + 0.3, f"{m:+.1f}".replace('-', '\u2212').replace('.', L['dec']), ha='center', va='bottom', fontsize=6.8, color=INK)   # value above the zero line so that it does not cover the error bar
+        for xi, m, sdv in zip(x + off, mu, sd): ax.text(xi, 0.5 if m < 0 else m + sdv + 0.3, f"{m:+.1f}".replace('-', '\u2212').replace('.', L['dec']), ha='center', va='bottom', fontsize=6.8, color=INK)   # nilai di atas garis nol agar tidak menimpa batang galat
     ax.axhline(0, color=INK, linewidth=0.8); ax.set_xticks(x); ax.set_xticklabels([c for c, _ in cats], fontsize=7)
     ax.set_ylabel(L['y'], fontsize=7.6); ax.tick_params(axis='y', labelsize=7); ax.grid(axis='y', linestyle='--', alpha=0.4, zorder=0)
     for sp in ('top', 'right'): ax.spines[sp].set_visible(False)

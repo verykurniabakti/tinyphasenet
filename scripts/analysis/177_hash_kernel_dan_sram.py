@@ -1,9 +1,9 @@
 """
-Step 177 (answer to the advisor, Appendix E): (a) correctness of the optimized TRANSPOSE_CONV kernel on 100 real STEAD windows (not one random input), (b) Float32 with the arena in internal SRAM.
-Sources: firmware/tinyphasenet_profiling/results_hw/sesi_07nov_hash100_<model>_kernel_{optimasi,referensi,bawaan}.log (lines 'HASH <window> <FNV-1a 32-bit of the whole output tensor>'; seed 42, 100 STEAD test windows, 50 earthquake and 50 noise)
-        and sesi_07nov_float32_{1ch_sram_internal,3ch_sram_internal_gagal}.log.
-The one-channel 16x8 reference kernel runs with the arena in PSRAM (the int64 scratch does not fit in SRAM); the memory location does not affect the output values.
-Output: results/final/hash_kernel_100jendela.json, ../jawaban_prof_arief_fase1/numbers_hash.tex. Usage (from this folder): python 177_hash_kernel_dan_sram.py
+Langkah 177 (jawaban Prof. Arief, Lampiran E): (a) kebenaran kernel TRANSPOSE_CONV optimasi pada 100 jendela STEAD nyata (bukan satu masukan acak), (b) Float32 dengan arena di SRAM internal.
+Sumber: firmware/tinyphasenet_profiling/results_hw/sesi_07nov_hash100_<model>_kernel_{optimasi,referensi,bawaan}.log (baris 'HASH <jendela> <FNV-1a 32-bit seluruh tensor keluaran>'; seed 42, 100 jendela uji STEAD, 50 gempa dan 50 derau)
+        dan sesi_07nov_float32_{1ch_sram_internal,3ch_sram_internal_gagal}.log.
+Kernel referensi satu kanal 16x8 dijalankan dengan arena di PSRAM (scratch int64 tidak muat di SRAM); lokasi memori tidak memengaruhi nilai keluaran.
+Keluaran: results/final/hash_kernel_100jendela.json, ../jawaban_prof_arief_fase1/numbers_hash.tex. Pemakaian (dari folder ini): python 177_hash_kernel_dan_sram.py
 """
 import re, json
 D = 'firmware/tinyphasenet_profiling/results_hw/'
@@ -26,7 +26,7 @@ def sram3(f):
     return dict(lokasi=g(r'Lokasi Tensor Arena\s*\|\s*(.+)')[1].strip(), lat_ms=float(g(r'Latensi Invoke \(Median\)\s*\|\s*([\d.]+)')[1]), energi_mj=float(g(r'Energi per Inferensi\s*\|\s*([\d.]+)')[1]), keputusan=g(r'Kesesuaian Keputusan\s*\|\s*(\d+) / (\d+)')[0])
 S3Q, S3I = sram3('sesi_07nov_3ch_16x8_sram_internal.log'), sram3('sesi_07nov_3ch_int8_sram_internal.log')
 assert S3Q['lokasi'] == 'Internal SRAM' and S3I['lokasi'] == 'Internal SRAM'
-PS = json.load(open('results/final/hw_tiga_seed.json'))['1ch_fp32_psram']['42']   # PSRAM, seed 42 (the main one-channel Float32 number is now SRAM; 175_)
+PS = json.load(open('results/final/hw_tiga_seed.json'))['1ch_fp32_psram']['42']   # PSRAM, seed 42 (angka utama satu kanal Float32 kini SRAM; 175_)
 out = dict(hash=R, sram_1ch=S1, sram_3ch_fp32=S3, sram_3ch_16x8=S3Q, sram_3ch_int8=S3I, psram_1ch_seed42=PS)
 json.dump(out, open('results/final/hash_kernel_100jendela.json', 'w'), indent=1)
 dc = lambda v, nd=1: f'{v:.{nd}f}'.replace('.', ',')

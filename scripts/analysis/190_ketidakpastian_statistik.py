@@ -1,15 +1,15 @@
 """
-Step 190 (device manuscript, Q, methodology improvement stage 2): statistical uncertainty from the existing data, with no new experiment.
-(a) On-device F1 (100 STEAD windows: 50 earthquake + 50 noise) per configuration and seed, with a 95% confidence interval from a stratified bootstrap
-    (TP from the 50 earthquakes, FP from the 50 noise windows, each stratum resampled binomially from its proportion; B = 10000). The interval of the mean of three seeds
-    uses a separate bootstrap per seed and then averages (the same windows are used by the three seeds, so this independence assumption
-    probably does not add width; recorded as an approximation).
-(b) Robustness of the Pareto analysis to the seed: for the six measured configurations (one channel and three channels; Float32, 16x8, INT8) each configuration
-    takes one seed (42, 43, or 44) for the F1 averaged over four datasets, the latency, and the energy; all 3^6 = 729 combinations are computed, and the
-    proportion of combinations in which each configuration is not dominated is reported. Also computed for the three same-seed combinations and for the mean of three seeds.
-Sources: results/final/{spektrum_kuantisasi_3seed,w4a8_perkanal_3seed,quant16x8_per_seed,quant16x8_pndw_per_seed,hw_tiga_seed}.json, results/ablation_final/eval_*.json,
-firmware/tinyphasenet_profiling/results_hw/*.log (TP/TN/FP/FN). Output: results/final/ketidakpastian_statistik.json, ../draft_publikasi_1/tabel_dev/numbers_unc{,_id}.tex (number macros), and a summary on screen.
-Usage (from this folder): python 190_ketidakpastian_statistik.py
+Langkah 190 (draf artikel perangkat Q, perbaikan metodologi tahap 2): ketidakpastian statistik dari data yang sudah ada, tanpa percobaan baru.
+(a) F1 di perangkat (100 jendela STEAD: 50 gempa + 50 derau) per konfigurasi dan seed, dengan selang kepercayaan 95% dari bootstrap berstrata
+    (TP dari 50 gempa, FP dari 50 derau, tiap strata disampel ulang secara binomial dari proporsinya; B = 10000). Selang rerata tiga seed
+    memakai bootstrap terpisah per seed lalu dirata-ratakan (jendela yang sama dipakai ketiga seed, sehingga asumsi bebas ini kira-kira tidak
+    menambah lebar; dicatat sebagai pendekatan).
+(b) Ketahanan analisis Pareto terhadap seed: untuk keenam konfigurasi terukur (satu kanal dan tiga kanal; Float32, 16x8, INT8) tiap konfigurasi
+    mengambil satu seed (42, 43, atau 44) untuk F1 rerata empat dataset, latensi, dan energi; seluruh 3^6 = 729 kombinasi dihitung, dan dilaporkan
+    proporsi kombinasi tempat tiap konfigurasi tidak terdominasi. Juga dihitung untuk tiga kombinasi seed-sama dan untuk rerata tiga seed.
+Sumber: results/final/{spektrum_kuantisasi_3seed,w4a8_perkanal_3seed,quant16x8_per_seed,quant16x8_pndw_per_seed,hw_tiga_seed}.json, results/ablation_final/eval_*.json,
+firmware/tinyphasenet_profiling/results_hw/*.log (TP/TN/FP/FN). Keluaran: results/final/ketidakpastian_statistik.json, ../draft_publikasi_1/tabel_dev/numbers_unc{,_id}.tex (makro angka), dan ringkasan di layar.
+Pemakaian (dari folder ini): python 190_ketidakpastian_statistik.py
 """
 import json, re, itertools
 import numpy as np
@@ -23,7 +23,7 @@ RH = 'firmware/tinyphasenet_profiling/results_hw/'
 V = ['1ch_fp32', '1ch_16x8', '1ch_int8', '3ch_fp32', '3ch_16x8', '3ch_int8']
 
 
-def f1_seed(fam, key, d, s):   # F1 (percent) of one seed, one dataset
+def f1_seed(fam, key, d, s):   # F1 (persen) satu seed, satu dataset
     if key == 'fp32': return 100 * (q3 if fam == '3ch' else q1)[s][d]['fp32']['f1']
     if key == 'q16x8': return 100 * (q3 if fam == '3ch' else q1)[s][d]['q16x8']['f1']
     return 100 * S[fam][str(s)]['int8']['kualitas'][d]['f1']
@@ -41,7 +41,7 @@ def confusion(path):
     return tuple(int(x) for x in m.groups())
 
 
-# ---------------- (a) confidence interval of the on-device F1
+# ---------------- (a) selang kepercayaan F1 di perangkat
 rng = np.random.default_rng(42); B = 10000
 out = {'f1_perangkat': {}, 'pareto_seed': {}}
 print('On-device F1, 100 windows (95% interval, stratified bootstrap):')
@@ -89,7 +89,7 @@ print(f'proportion of {n} seed-per-configuration combinations (one seed chosen f
 for v in V: print(f'  {v:9s} {100 * cnt[v] / n:5.1f}%   same-seed (of 3): {cnt_same[v]}   F1 mean {mean_pts[v][0]:.2f}')
 json.dump(out, open('results/final/ketidakpastian_statistik.json', 'w'), indent=1)
 
-# ---------------- number macros for the manuscript (English: decimal point; Indonesian: decimal comma)
+# ---------------- makro angka untuk naskah (Inggris: titik desimal; Indonesia: koma desimal)
 F = out['f1_perangkat']; ex = F['1ch_fp32']['per_seed'][42]
 M = {'UncNComb': (n, 0), 'UncShareOneQq': (100 * cnt['1ch_16x8'] / n, 0), 'UncShareThrQq': (100 * cnt['3ch_16x8'] / n, 0), 'UncShareThrInt': (100 * cnt['3ch_int8'] / n, 0),
      'CiSeedF': (ex['f1'], 1), 'CiSeedLo': (ex['lo'], 1), 'CiSeedHi': (ex['hi'], 1),
