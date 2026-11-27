@@ -1,6 +1,6 @@
 # Code and data for "Post-Training Quantization of a Depthwise Separable Seismic Phase Picker for TinyML Deployment: Accuracy, Latency and Energy"
 
-Pre-release collection for the Data and Code Availability statement of the manuscript. **Status: staging folder, not yet published** (see "Before publishing").
+Code, trained models, device logs and result files for the Data and Code Availability statements of the manuscripts on TinyPhaseNet (a depthwise separable seismic phase picker compressed for microcontrollers). **Status: public; the archive with a DOI is still to be deposited** (see "Open items").
 
 ## What is here
 
@@ -90,8 +90,7 @@ The PhaseNet counterparts (standard convolutions) were also measured in 16x8 and
 - Trained models, result files, device logs and documentation: CC BY 4.0 (`LICENSE-DATA.md`). The models are trained on STEAD, which is itself distributed under CC BY 4.0 (checked on 10 Nov 2026 in the LICENSE file of its official repository); keep the attribution to Mousavi et al. 2019.
 - The license choice was confirmed by the first author on 10 Nov 2026; confirm it with the co-authors and the institution's policy before the public release.
 
-## Before publishing
+## Open items
 
-- Add an English note at the top of `firmware/src/transpose_conv_act_fix.cc` that states all modifications (the comments there are in Indonesian and describe only the activation fix, not the gather path).
-- The history of this repository still contains earlier versions with internal names and local paths; publish from a fresh history (a single new first commit) rather than from this one.
-- Deposit a snapshot (for example on Zenodo) and cite its DOI in the manuscript.
+- Deposit a snapshot (for example on Zenodo) and cite its DOI in the manuscripts.
+- Confirm the license choice with the co-authors and the institution's policy (see "License"); no license for the data of TXED and ETHZ was found, and no waveform of them is redistributed here.
