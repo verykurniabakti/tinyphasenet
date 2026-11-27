@@ -1,0 +1,282 @@
+{
+ "1ch_fp32": {
+  "42": {
+   "latency_ms": 168.76,
+   "arena_kb": 203.2,
+   "energy_mj": 76.27,
+   "decisions_diff": 0,
+   "decisions_n": 100,
+   "f1_100": 0.9495
+  },
+  "43": {
+   "latency_ms": 168.8,
+   "arena_kb": 203.2,
+   "energy_mj": 76.14,
+   "decisions_diff": 0,
+   "decisions_n": 100,
+   "f1_100": 0.9709
+  },
+  "44": {
+   "latency_ms": 168.79,
+   "arena_kb": 203.2,
+   "energy_mj": 76.11,
+   "decisions_diff": 0,
+   "decisions_n": 100,
+   "f1_100": 0.9697
+  },
+  "rerata": {
+   "latency_ms": 168.78333333333333,
+   "energy_mj": 76.17333333333333,
+   "arena_kb": 203.2,
+   "f1_100": 0.9633666666666667,
+   "decisions_diff": 0
+  },
+  "sd": {
+   "latency_ms": 0.020816659994669702,
+   "energy_mj": 0.08504900548115166,
+   "arena_kb": 0.0,
+   "f1_100": 0.012023865157815648,
+   "decisions_diff": 0.0
+  }
+ },
+ "1ch_16x8": {
+  "42": {
+   "latency_ms": 555.788,
+   "arena_kb": 109.496,
+   "energy_mj": 246.758,
+   "decisions_diff": 0,
+   "decisions_n": 200,
+   "f1_100": 0.9495
+  },
+  "43": {
+   "latency_ms": 555.15,
+   "arena_kb": 109.496,
+   "energy_mj": 242.429,
+   "decisions_diff": 0,
+   "decisions_n": 200,
+   "f1_100": 0.9615
+  },
+  "44": {
+   "latency_ms": 555.124,
+   "arena_kb": 109.496,
+   "energy_mj": 244.126,
+   "decisions_diff": 0,
+   "decisions_n": 200,
+   "f1_100": 0.9697
+  },
+  "rerata": {
+   "latency_ms": 555.354,
+   "energy_mj": 244.43766666666667,
+   "arena_kb": 109.496,
+   "f1_100": 0.9602333333333334,
+   "decisions_diff": 0
+  },
+  "sd": {
+   "latency_ms": 0.37607977877041454,
+   "energy_mj": 2.181263930232504,
+   "arena_kb": 0.0,
+   "f1_100": 0.01015939630752405,
+   "decisions_diff": 0.0
+  }
+ },
+ "1ch_int8": {
+  "42": {
+   "latency_ms": 209.422,
+   "arena_kb": 59.465,
+   "energy_mj": 94.138,
+   "decisions_diff": 2,
+   "decisions_n": 200,
+   "f1_100": 0.8829
+  },
+  "43": {
+   "latency_ms": 209.455,
+   "arena_kb": 59.465,
+   "energy_mj": 92.292,
+   "decisions_diff": 28,
+   "decisions_n": 200,
+   "f1_100": 0.7312
+  },
+  "44": {
+   "latency_ms": 208.22,
+   "arena_kb": 59.465,
+   "energy_mj": 91.545,
+   "decisions_diff": 10,
+   "decisions_n": 200,
+   "f1_100": 0.8411
+  },
+  "rerata": {
+   "latency_ms": 209.03233333333333,
+   "energy_mj": 92.65833333333333,
+   "arena_kb": 59.465,
+   "f1_100": 0.8184,
+   "decisions_diff": 13.333333333333334
+  },
+  "sd": {
+   "latency_ms": 0.7036947728478153,
+   "energy_mj": 1.3347517871624441,
+   "arena_kb": 0.0,
+   "f1_100": 0.07835617397499704,
+   "decisions_diff": 13.316656236958785
+  }
+ },
+ "3ch_fp32": {
+  "42": {
+   "latency_ms": 834.54,
+   "arena_kb": 399.73,
+   "energy_mj": 379.8,
+   "decisions_diff": 0,
+   "decisions_n": 100,
+   "f1_100": 0.9608
+  },
+  "43": {
+   "latency_ms": 834.51,
+   "arena_kb": 399.73,
+   "energy_mj": 375.51,
+   "decisions_diff": 0,
+   "decisions_n": 100,
+   "f1_100": 0.9901
+  },
+  "44": {
+   "latency_ms": 834.48,
+   "arena_kb": 399.73,
+   "energy_mj": 379.63,
+   "decisions_diff": 0,
+   "decisions_n": 100,
+   "f1_100": 0.9901
+  },
+  "rerata": {
+   "latency_ms": 834.51,
+   "energy_mj": 378.31333333333333,
+   "arena_kb": 399.73,
+   "f1_100": 0.9803333333333333,
+   "decisions_diff": 0
+  },
+  "sd": {
+   "latency_ms": 0.029999999999972715,
+   "energy_mj": 2.4292454246809583,
+   "arena_kb": 0.0,
+   "f1_100": 0.01691636288725603,
+   "decisions_diff": 0.0
+  }
+ },
+ "3ch_16x8": {
+  "42": {
+   "latency_ms": 2435.23,
+   "arena_kb": 210.09,
+   "energy_mj": 1084.16,
+   "decisions_diff": 0,
+   "decisions_n": 100,
+   "f1_100": 0.9608
+  },
+  "43": {
+   "latency_ms": 2434.9,
+   "arena_kb": 210.09,
+   "energy_mj": 1068.75,
+   "decisions_diff": 2,
+   "decisions_n": 100,
+   "f1_100": 0.9608
+  },
+  "44": {
+   "latency_ms": 2434.9,
+   "arena_kb": 210.09,
+   "energy_mj": 1070.07,
+   "decisions_diff": 4,
+   "decisions_n": 100,
+   "f1_100": 0.9608
+  },
+  "rerata": {
+   "latency_ms": 2435.01,
+   "energy_mj": 1074.3266666666666,
+   "arena_kb": 210.09,
+   "f1_100": 0.9608,
+   "decisions_diff": 2
+  },
+  "sd": {
+   "latency_ms": 0.19052558883253448,
+   "energy_mj": 8.541453818486312,
+   "arena_kb": 0.0,
+   "f1_100": 0.0,
+   "decisions_diff": 2.0
+  }
+ },
+ "3ch_int8": {
+  "42": {
+   "latency_ms": 441.36,
+   "arena_kb": 208.21,
+   "energy_mj": 198.22,
+   "decisions_diff": 3,
+   "decisions_n": 100,
+   "f1_100": 0.94
+  },
+  "43": {
+   "latency_ms": 440.58,
+   "arena_kb": 208.21,
+   "energy_mj": 194.26,
+   "decisions_diff": 0,
+   "decisions_n": 100,
+   "f1_100": 1.0
+  },
+  "44": {
+   "latency_ms": 441.67,
+   "arena_kb": 208.21,
+   "energy_mj": 196.08,
+   "decisions_diff": 1,
+   "decisions_n": 100,
+   "f1_100": 0.9796
+  },
+  "rerata": {
+   "latency_ms": 441.2033333333333,
+   "energy_mj": 196.18666666666667,
+   "arena_kb": 208.21,
+   "f1_100": 0.9732,
+   "decisions_diff": 1.3333333333333333
+  },
+  "sd": {
+   "latency_ms": 0.5616345193569862,
+   "energy_mj": 1.9821537108239984,
+   "arena_kb": 0.0,
+   "f1_100": 0.03050770394506938,
+   "decisions_diff": 1.5275252316519468
+  }
+ },
+ "1ch_fp32_psram": {
+  "42": {
+   "latency_ms": 193.62,
+   "arena_kb": 203.2,
+   "energy_mj": 88.48,
+   "decisions_diff": 0,
+   "decisions_n": 100,
+   "f1_100": 0.9495
+  },
+  "43": {
+   "latency_ms": 193.66,
+   "arena_kb": 203.2,
+   "energy_mj": 88.22,
+   "decisions_diff": 0,
+   "decisions_n": 100,
+   "f1_100": 0.9709
+  },
+  "44": {
+   "latency_ms": 193.64,
+   "arena_kb": 203.2,
+   "energy_mj": 88.69,
+   "decisions_diff": 0,
+   "decisions_n": 100,
+   "f1_100": 0.9697
+  },
+  "rerata": {
+   "latency_ms": 193.64,
+   "energy_mj": 88.46333333333334,
+   "arena_kb": 203.2,
+   "f1_100": 0.9633666666666667,
+   "decisions_diff": 0
+  },
+  "sd": {
+   "latency_ms": 0.01999999999999602,
+   "energy_mj": 0.235442845152137,
+   "arena_kb": 0.0,
+   "f1_100": 0.012023865157815648,
+   "decisions_diff": 0.0
+  }
+ }
+}

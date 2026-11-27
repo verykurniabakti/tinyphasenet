@@ -1,0 +1,41 @@
+{
+ "platform": "ESP32-S3 (Xtensa LX7), hitungan statis hasil kompilasi",
+ "catatan": "batas bawah siklus; bukan simulator",
+ "hasil": {
+  "fp32": {
+   "instruksi_per_mac": 5,
+   "badan": [
+    "lsi",
+    "lsi",
+    "addi.n",
+    "madd.s",
+    "addi.n"
+   ]
+  },
+  "16x8": {
+   "instruksi_per_mac": 7,
+   "badan": [
+    "l8ui",
+    "l16ui",
+    "sext",
+    "mul16s",
+    "addi.n",
+    "add.n",
+    "addi.n"
+   ]
+  },
+  "int8": {
+   "instruksi_per_mac": 8,
+   "badan": [
+    "l8ui",
+    "l8ui",
+    "sext",
+    "sext",
+    "mul16s",
+    "addi.n",
+    "add.n",
+    "addi.n"
+   ]
+  }
+ }
+}

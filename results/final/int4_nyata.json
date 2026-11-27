@@ -1,0 +1,54 @@
+{
+ "1ch": {
+  "42": {
+   "n_tensor_kernel": 21,
+   "n_bobot_kernel": 29951,
+   "bytes_int8": 75120,
+   "bytes_int4": 60144,
+   "bytes_teoretis": 60145,
+   "maks_galat_relatif": 0.003374578177726887
+  },
+  "43": {
+   "n_tensor_kernel": 21,
+   "n_bobot_kernel": 29951,
+   "bytes_int8": 75120,
+   "bytes_int4": 60144,
+   "bytes_teoretis": 60145,
+   "maks_galat_relatif": 0.0033745781777266416
+  },
+  "44": {
+   "n_tensor_kernel": 21,
+   "n_bobot_kernel": 29951,
+   "bytes_int8": 75120,
+   "bytes_int4": 60144,
+   "bytes_teoretis": 60145,
+   "maks_galat_relatif": 0.003374578177725418
+  }
+ },
+ "3ch": {
+  "42": {
+   "n_tensor_kernel": 33,
+   "n_bobot_kernel": 106909,
+   "bytes_int8": 168752,
+   "bytes_int4": 115296,
+   "bytes_teoretis": 115298,
+   "maks_galat_relatif": 0.003374578177727154
+  },
+  "43": {
+   "n_tensor_kernel": 33,
+   "n_bobot_kernel": 106909,
+   "bytes_int8": 168752,
+   "bytes_int4": 115296,
+   "bytes_teoretis": 115298,
+   "maks_galat_relatif": 0.003374578177727171
+  },
+  "44": {
+   "n_tensor_kernel": 33,
+   "n_bobot_kernel": 106909,
+   "bytes_int8": 168752,
+   "bytes_int4": 115296,
+   "bytes_teoretis": 115298,
+   "maks_galat_relatif": 0.0033745781777271937
+  }
+ }
+}

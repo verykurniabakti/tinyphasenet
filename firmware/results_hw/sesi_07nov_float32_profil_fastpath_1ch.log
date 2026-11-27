@@ -1,0 +1,82 @@
+[0;32mI (728) spiram: SPI SRAM memory test OK[0m
+[0;32mI (737) cpu_start: Pro cpu start user code[0m
+[0;32mI (737) cpu_start: cpu freq: 240000000[0m
+[0;32mI (737) cpu_start: Application information:[0m
+[0;32mI (739) cpu_start: Project name:     phasenet_z_profiling_v2[0m
+[0;32mI (746) cpu_start: App version:      1[0m
+[0;32mI (750) cpu_start: Compile time:     Nov  7 2026 05:05:40[0m
+[0;32mI (756) cpu_start: ELF file SHA256:  6a1cdee292cba751...[0m
+[0;32mI (762) cpu_start: ESP-IDF:          4.4.7[0m
+[0;32mI (767) cpu_start: Min chip rev:     v0.0[0m
+[0;32mI (772) cpu_start: Max chip rev:     v0.99 [0m
+[0;32mI (777) cpu_start: Chip rev:         v0.2[0m
+[0;32mI (781) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (789) heap_init: At 3FC97C78 len 00051A98 (326 KiB): D/IRAM[0m
+[0;32mI (795) heap_init: At 3FCE9710 len 00005724 (21 KiB): STACK/DIRAM[0m
+[0;32mI (802) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (808) heap_init: At 600FE000 len 00002000 (8 KiB): RTCRAM[0m
+[0;32mI (814) spiram: Adding pool of 8192K of external SPI memory to heap allocator[0m
+[0;32mI (822) spi_flash: detected chip: generic[0m
+[0;32mI (827) spi_flash: flash io: qio[0m
+[0;33mW (831) spi_flash: Detected size(16384k) larger than the size in the binary image header(8192k). Using the size in the binary image header.[0m
+[0;32mI (844) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (851) sleep: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (858) cpu_start: Starting scheduler on PRO CPU.[0m
+[0;32mI (0) cpu_start: Starting scheduler on APP CPU.[0m
+[0;32mI (873) spiram: Reserving pool of 32K of internal memory for DMA/intOPPROF_HASH 23267650 bytes=36864
+OPPROF_BEGIN 1ch_fp32 n_ops=54 n_rep=20 invoke_ms_mean=191.735
+OPPROF 0 RESHAPE 544.5
+OPPROF 1 DEPTHWISE_CONV_2D 1078.5
+OPPROF 2 CONV_2D 5553.3
+OPPROF 3 MUL 1749.5
+OPPROF 4 ADD 1482.0
+OPPROF 5 RESHAPE 1101.5
+OPPROF 6 DEPTHWISE_CONV_2D 2335.8
+OPPROF 7 CONV_2D 4106.6
+OPPROF 8 MUL 565.9
+OPPROF 9 ADD 344.2
+OPPROF 10 RESHAPE 416.1
+OPPROF 11 DEPTHWISE_CONV_2D 1072.3
+OPPROF 12 CONV_2D 2871.9
+OPPROF 13 MUL 300.6
+OPPROF 14 ADD 169.9
+OPPROF 15 RESHAPE 190.8
+OPPROF 16 DEPTHWISE_CONV_2D 518.2
+OPPROF 17 CONV_2D 2441.3
+OPPROF 18 MUL 154.8
+OPPROF 19 ADD 91.8
+OPPROF 20 DEPTHWISE_CONV_2D 958.2
+OPPROF 21 CONV_2D 4237.6
+OPPROF 22 MUL 150.1
+OPPROF 23 ADD 109.0
+OPPROF 24 TRANSPOSE_CONV 25996.4
+OPPROF 25 MUL 415.1
+OPPROF 26 ADD 163.4
+OPPROF 27 RESHAPE 104.8
+OPPROF 28 CONCATENATION 169.1
+OPPROF 29 RESHAPE 42.5
+OPPROF 30 DEPTHWISE_CONV_2D 2427.0
+OPPROF 31 CONV_2D 7700.5
+OPPROF 32 TRANSPOSE_CONV 7154.9
+OPPROF 33 MUL 661.0
+OPPROF 34 ADD 359.9
+OPPROF 35 RESHAPE 311.4
+OPPROF 36 CONCATENATION 995.2
+OPPROF 37 RESHAPE 1082.7
+OPPROF 38 DEPTHWISE_CONV_2D 5384.4
+OPPROF 39 CONV_2D 9077.1
+OPPROF 40 TRANSPOSE_CONV 7627.4
+OPPROF 41 MUL 1794.0
+OPPROF 42 ADD 1377.5
+OPPROF 43 RESHAPE 1113.9
+OPPROF 44 CONCATENATION 2278.9
+OPPROF 45 RESHAPE 2211.2
+OPPROF 46 DEPTHWISE_CONV_2D 10657.5
+OPPROF 47 CONV_2D 12017.8
+OPPROF 48 TRANSPOSE_CONV 18376.9
+OPPROF 49 MUL 7097.9
+OPPROF 50 ADD 4890.5
+OPPROF 51 CONV_2D 14194.6
+OPPROF 52 RESHAPE 1563.2
+OPPROF 53 SOFTMAX 11810.9
+OPPROF_END

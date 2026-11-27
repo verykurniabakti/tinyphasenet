@@ -1,0 +1,46 @@
+# Arduino-as-ESP-IDF-component mensyaratkan tick rate FreeRTOS 1000 Hz
+# (default template ESP-IDF sebelumnya 100 Hz).
+CONFIG_FREERTOS_HZ=1000
+
+# IMPORTANT: the board manifest of PlatformIO "esp32-s3-devkitc-1" states f_cpu
+# 240 MHz, but that field ONLY applies to a pure Arduino framework build.
+# In this hybrid "arduino, espidf" mode, ESP-IDF decides the clock
+# through Kconfig -- and the ESP-IDF default for the esp32s3 target is 160 MHz,
+# silently overrides the manifest without any warning (found through a test
+# like-for-like with the original model of Zhi Geng et al.: result 104.07 ms vs
+# claim of 67.5 ms at 160 MHz, becoming 69.29 ms vs 67.5 ms after forcing 240 MHz).
+CONFIG_ESP32S3_DEFAULT_CPU_FREQ_240=y
+CONFIG_ESP32S3_DEFAULT_CPU_FREQ_MHZ=240
+
+# Board ESP32-S3-DevKitC-1 (N8) punya flash 8 MB; default template ESP-IDF
+# assumes 2 MB, causing a flash-size mismatch at build time.
+CONFIG_ESPTOOLPY_FLASHSIZE_8MB=y
+CONFIG_ESPTOOLPY_FLASHSIZE="8MB"
+
+# Custom partition table (copied from the Arduino core's stock huge_app.csv) so that it
+# fits the TFLite model; the ESP-IDF scheme needs a physical .csv file at the root of the
+# project, not a preset name as in the pure Arduino framework.
+CONFIG_PARTITION_TABLE_CUSTOM=y
+CONFIG_PARTITION_TABLE_CUSTOM_FILENAME="huge_app.csv"
+
+# QIO flash: the generated sdkconfig uses DIO mode (2 data lines),
+# although the PlatformIO board manifest esp32-s3-devkitc-1 itself already says qio@80m
+# and the N8 module (GD25Q64) supports it. KDE streams ~264 KB of reference vectors
+# int8 from flash on every repetition (gathered access via g_keep_dims -> many
+# cache misses); QIO has ~2x the flash read bandwidth of DIO. The 80 MHz frequency is already
+# right in the generated file, only its mode needs to change.
+CONFIG_ESPTOOLPY_FLASHMODE_QIO=y
+
+# Global "performance" optimization (-O2). Without it sdkconfig uses -Og (debug), and the global -Og
+# flag appears AFTER the -O3 of the esp-tflite-micro component on the compile line, so
+# seluruh kernel TFLM/ESP-NN sebenarnya dikompilasi -Og (terlihat di compile_commands.json).
+CONFIG_COMPILER_OPTIMIZATION_PERF=y
+
+# Dukungan PSRAM/SPIRAM (ESP32-S3 Octal PSRAM 8MB)
+CONFIG_ESP32S3_SPIRAM_SUPPORT=y
+CONFIG_SPIRAM_MODE_OCT=y
+CONFIG_SPIRAM_TYPE_AUTO=y
+CONFIG_SPIRAM_SPEED_80M=y
+CONFIG_SPIRAM_BOOT_INIT=y
+CONFIG_SPIRAM_USE_MALLOC=y
+CONFIG_SPIRAM_MALLOC_ALWAYSINTERNAL=16384

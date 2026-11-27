@@ -1,0 +1,24 @@
+{
+ "1ch": {
+  "bytes": 326744,
+  "thr": 0.23041586577892303,
+  "scale": 0.0005933109825609965,
+  "max_abs_dequant_score_diff": 0.00033348798751831055,
+  "py_tp": 50,
+  "py_fp": 0,
+  "py_fn": 0,
+  "py_tn": 50,
+  "decisions_changed_by_int16_input": 0
+ },
+ "3ch": {
+  "bytes": 1092224,
+  "thr": 0.2062845230102539,
+  "scale": 0.000669806798202138,
+  "max_abs_dequant_score_diff": 0.00042557716369628906,
+  "py_tp": 50,
+  "py_fp": 0,
+  "py_fn": 0,
+  "py_tn": 50,
+  "decisions_changed_by_int16_input": 0
+ }
+}

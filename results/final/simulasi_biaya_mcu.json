@@ -1,0 +1,447 @@
+{
+ "beban": {
+  "1ch": {
+   "pw": 497664,
+   "dw": 94080,
+   "tc": 860160,
+   "other": 67584
+  },
+  "3ch": {
+   "pw": 2506752,
+   "dw": 1042944,
+   "tc": 2752512,
+   "other": 185088
+  }
+ },
+ "simulasi_asumsi": [
+  {
+   "mcu": "ATmega328P",
+   "model": "1ch",
+   "format": "fp32",
+   "sumber": "asumsi",
+   "latensi_ms": 20528.57425,
+   "energi_mj": 1539.64306875,
+   "daya_mw": 75,
+   "muat_ram": false,
+   "ram_kb": 2.0
+  },
+  {
+   "mcu": "STM32F103",
+   "model": "1ch",
+   "format": "fp32",
+   "sumber": "asumsi",
+   "latensi_ms": 1159.505388888889,
+   "energi_mj": 137.7492402,
+   "daya_mw": 118.8,
+   "muat_ram": false,
+   "ram_kb": 20.0
+  },
+  {
+   "mcu": "ESP32",
+   "model": "1ch",
+   "format": "fp32",
+   "sumber": "asumsi",
+   "latensi_ms": 63.89321666666667,
+   "energi_mj": 16.8678092,
+   "daya_mw": 264.0,
+   "muat_ram": true,
+   "ram_kb": 520.0
+  },
+  {
+   "mcu": "ESP32-S3",
+   "model": "1ch",
+   "format": "fp32",
+   "sumber": "asumsi",
+   "latensi_ms": 63.89321666666667,
+   "energi_mj": 16.8678092,
+   "daya_mw": 264.0,
+   "muat_ram": true,
+   "ram_kb": 512.0
+  },
+  {
+   "mcu": "RP2040",
+   "model": "1ch",
+   "format": "fp32",
+   "sumber": "asumsi",
+   "latensi_ms": 509.99028571428573,
+   "energi_mj": 42.074198571428575,
+   "daya_mw": 82.5,
+   "muat_ram": true,
+   "ram_kb": 264.0
+  },
+  {
+   "mcu": "ATmega328P",
+   "model": "3ch",
+   "format": "fp32",
+   "sumber": "asumsi",
+   "latensi_ms": 82936.66225,
+   "energi_mj": 6220.249668749999,
+   "daya_mw": 75,
+   "muat_ram": false,
+   "ram_kb": 2.0
+  },
+  {
+   "mcu": "STM32F103",
+   "model": "3ch",
+   "format": "fp32",
+   "sumber": "asumsi",
+   "latensi_ms": 4678.369388888889,
+   "energi_mj": 555.7902834,
+   "daya_mw": 118.8,
+   "muat_ram": false,
+   "ram_kb": 20.0
+  },
+  {
+   "mcu": "ESP32",
+   "model": "3ch",
+   "format": "fp32",
+   "sumber": "asumsi",
+   "latensi_ms": 250.18601666666666,
+   "energi_mj": 66.0491084,
+   "daya_mw": 264.0,
+   "muat_ram": true,
+   "ram_kb": 520.0
+  },
+  {
+   "mcu": "ESP32-S3",
+   "model": "3ch",
+   "format": "fp32",
+   "sumber": "asumsi",
+   "latensi_ms": 250.18601666666666,
+   "energi_mj": 66.0491084,
+   "daya_mw": 264.0,
+   "muat_ram": true,
+   "ram_kb": 512.0
+  },
+  {
+   "mcu": "RP2040",
+   "model": "3ch",
+   "format": "fp32",
+   "sumber": "asumsi",
+   "latensi_ms": 2041.419819548872,
+   "energi_mj": 168.41713511278195,
+   "daya_mw": 82.5,
+   "muat_ram": false,
+   "ram_kb": 264.0
+  }
+ ],
+ "simulasi_asumsi_standar": [
+  {
+   "mcu": "ATmega328P",
+   "model": "1ch",
+   "konv": "standar",
+   "format": "fp32",
+   "sumber": "asumsi",
+   "latensi_ms": 36481.54225,
+   "energi_mj": 2736.1156687499997,
+   "daya_mw": 75,
+   "muat_ram": false,
+   "ram_kb": 2.0,
+   "mac": 2721792
+  },
+  {
+   "mcu": "STM32F103",
+   "model": "1ch",
+   "konv": "standar",
+   "format": "fp32",
+   "sumber": "asumsi",
+   "latensi_ms": 2059.009388888889,
+   "energi_mj": 244.61031540000002,
+   "daya_mw": 118.8,
+   "muat_ram": false,
+   "ram_kb": 20.0,
+   "mac": 2721792
+  },
+  {
+   "mcu": "ESP32",
+   "model": "1ch",
+   "konv": "standar",
+   "format": "fp32",
+   "sumber": "asumsi",
+   "latensi_ms": 111.51401666666666,
+   "energi_mj": 29.4397004,
+   "daya_mw": 264.0,
+   "muat_ram": true,
+   "ram_kb": 520.0,
+   "mac": 2721792
+  },
+  {
+   "mcu": "ESP32-S3",
+   "model": "1ch",
+   "konv": "standar",
+   "format": "fp32",
+   "sumber": "asumsi",
+   "latensi_ms": 111.51401666666666,
+   "energi_mj": 29.4397004,
+   "daya_mw": 264.0,
+   "muat_ram": true,
+   "ram_kb": 512.0,
+   "mac": 2721792
+  },
+  {
+   "mcu": "RP2040",
+   "model": "1ch",
+   "konv": "standar",
+   "format": "fp32",
+   "sumber": "asumsi",
+   "latensi_ms": 901.4595187969925,
+   "energi_mj": 74.37041030075189,
+   "daya_mw": 82.5,
+   "muat_ram": true,
+   "ram_kb": 264.0,
+   "mac": 2721792
+  },
+  {
+   "mcu": "ATmega328P",
+   "model": "3ch",
+   "konv": "standar",
+   "format": "fp32",
+   "sumber": "asumsi",
+   "latensi_ms": 253223.86225,
+   "energi_mj": 18991.78966875,
+   "daya_mw": 75,
+   "muat_ram": false,
+   "ram_kb": 2.0,
+   "mac": 19857408
+  },
+  {
+   "mcu": "STM32F103",
+   "model": "3ch",
+   "konv": "standar",
+   "format": "fp32",
+   "sumber": "asumsi",
+   "latensi_ms": 14279.969388888889,
+   "energi_mj": 1696.4603634,
+   "daya_mw": 118.8,
+   "muat_ram": false,
+   "ram_kb": 20.0,
+   "mac": 19857408
+  },
+  {
+   "mcu": "ESP32",
+   "model": "3ch",
+   "konv": "standar",
+   "format": "fp32",
+   "sumber": "asumsi",
+   "latensi_ms": 758.5060166666667,
+   "energi_mj": 200.2455884,
+   "daya_mw": 264.0,
+   "muat_ram": true,
+   "ram_kb": 520.0,
+   "mac": 19857408
+  },
+  {
+   "mcu": "ESP32-S3",
+   "model": "3ch",
+   "konv": "standar",
+   "format": "fp32",
+   "sumber": "asumsi",
+   "latensi_ms": 758.5060166666667,
+   "energi_mj": 200.2455884,
+   "daya_mw": 264.0,
+   "muat_ram": true,
+   "ram_kb": 512.0,
+   "mac": 19857408
+  },
+  {
+   "mcu": "RP2040",
+   "model": "3ch",
+   "konv": "standar",
+   "format": "fp32",
+   "sumber": "asumsi",
+   "latensi_ms": 6220.090496240602,
+   "energi_mj": 513.1574659398497,
+   "daya_mw": 82.5,
+   "muat_ram": false,
+   "ram_kb": 264.0,
+   "mac": 19857408
+  }
+ ],
+ "simulasi_esp32s3_terkalibrasi": [
+  {
+   "mcu": "ESP32-S3",
+   "sumber": "terkalibrasi (laju keluarga lain)",
+   "model": "3ch",
+   "format": "fp32",
+   "latensi_ms": 898.9175511231363,
+   "energi_mj": 400.97921227030497,
+   "daya_mw": 446.0689545657538,
+   "ukur_ms": 838.1622,
+   "ukur_mj": 373.8781363105323
+  },
+  {
+   "mcu": "ESP32-S3",
+   "sumber": "terkalibrasi (laju keluarga lain)",
+   "model": "3ch",
+   "format": "16x8",
+   "latensi_ms": 2924.4509945586824,
+   "energi_mj": 1304.5067978215704,
+   "daya_mw": 446.0689545657538,
+   "ukur_ms": 2439.986,
+   "ukur_mj": 1088.4020041750753
+  },
+  {
+   "mcu": "ESP32-S3",
+   "sumber": "terkalibrasi (laju keluarga lain)",
+   "model": "3ch",
+   "format": "int8",
+   "latensi_ms": 744.1232775180374,
+   "energi_mj": 331.9302924705133,
+   "daya_mw": 446.0689545657538,
+   "ukur_ms": 442.95059999999995,
+   "ukur_mj": 197.58651106627337
+  },
+  {
+   "mcu": "ESP32-S3",
+   "sumber": "terkalibrasi (laju keluarga lain)",
+   "model": "1ch",
+   "format": "fp32",
+   "latensi_ms": 187.71333588272722,
+   "energi_mj": 83.73309149525834,
+   "daya_mw": 446.0689545657538,
+   "ukur_ms": 191.60200000000003,
+   "ukur_mj": 85.46770383270757
+  },
+  {
+   "mcu": "ESP32-S3",
+   "sumber": "terkalibrasi (laju keluarga lain)",
+   "model": "1ch",
+   "format": "16x8",
+   "latensi_ms": 439.8500142317643,
+   "energi_mj": 196.20343601409502,
+   "daya_mw": 446.0689545657538,
+   "ukur_ms": 554.4184,
+   "ukur_mj": 247.30883608001793
+  },
+  {
+   "mcu": "ESP32-S3",
+   "sumber": "terkalibrasi (laju keluarga lain)",
+   "model": "1ch",
+   "format": "int8",
+   "latensi_ms": 105.65247711285791,
+   "energi_mj": 47.12829001301476,
+   "daya_mw": 446.0689545657538,
+   "ukur_ms": 207.74999999999997,
+   "ukur_mj": 92.67082531103534
+  }
+ ],
+ "uji_mundur_asumsi": {
+  "1ch": {
+   "sim_ms": 63.89321666666667,
+   "ukur_ms": 168.78333333333333,
+   "galat_lat_pct": -62.14483065073566,
+   "sim_mj": 16.8678092,
+   "ukur_mj": 76.17333333333333,
+   "galat_en_pct": -77.85601802905654
+  },
+  "3ch": {
+   "sim_ms": 250.18601666666666,
+   "ukur_ms": 834.51,
+   "galat_lat_pct": -70.02000974623832,
+   "sim_mj": 66.0491084,
+   "ukur_mj": 378.31333333333333,
+   "galat_en_pct": -82.54116295134546
+  }
+ },
+ "laju_ns": [
+  {
+   "model": "1ch",
+   "format": "fp32",
+   "pw": 124.98533146862141,
+   "dw": 259.69281462585036,
+   "tc": 68.77278645833334,
+   "other": 677.8793797348487
+  },
+  {
+   "model": "1ch",
+   "format": "16x8",
+   "pw": 641.0519949202675,
+   "dw": 820.5676020408165,
+   "tc": 71.7134021577381,
+   "other": 1427.9400449810605
+  },
+  {
+   "model": "1ch",
+   "format": "int8",
+   "pw": 82.97405478395062,
+   "dw": 65.37627551020408,
+   "tc": 72.88388206845238,
+   "other": 1444.3418560606056
+  },
+  {
+   "model": "3ch",
+   "format": "fp32",
+   "pw": 120.56589562908499,
+   "dw": 186.61538874570448,
+   "tc": 99.85929216657367,
+   "other": 358.96492479253067
+  },
+  {
+   "model": "3ch",
+   "format": "16x8",
+   "pw": 622.8129467933006,
+   "dw": 635.9978100454098,
+   "tc": 59.36588105701265,
+   "other": 281.12573478561495
+  },
+  {
+   "model": "3ch",
+   "format": "int8",
+   "pw": 78.60263001685048,
+   "dw": 52.23166344501719,
+   "tc": 57.15451921735491,
+   "other": 184.34528440525577
+  }
+ ],
+ "uji_mundur_kalibrasi": [
+  {
+   "kalibrasi": "1ch",
+   "prediksi": "3ch",
+   "format": "fp32",
+   "sim_ms": 898.9175511231363,
+   "ukur_ms": 838.1622,
+   "galat_pct": 7.248638881965362
+  },
+  {
+   "kalibrasi": "1ch",
+   "prediksi": "3ch",
+   "format": "16x8",
+   "sim_ms": 2924.4509945586824,
+   "ukur_ms": 2439.986,
+   "galat_pct": 19.85523665130384
+  },
+  {
+   "kalibrasi": "1ch",
+   "prediksi": "3ch",
+   "format": "int8",
+   "sim_ms": 744.1232775180374,
+   "ukur_ms": 442.95059999999995,
+   "galat_pct": 67.99238504655767
+  },
+  {
+   "kalibrasi": "3ch",
+   "prediksi": "1ch",
+   "format": "fp32",
+   "sim_ms": 187.71333588272722,
+   "ukur_ms": 191.60200000000003,
+   "galat_pct": -2.0295529886289336
+  },
+  {
+   "kalibrasi": "3ch",
+   "prediksi": "1ch",
+   "format": "16x8",
+   "sim_ms": 439.8500142317643,
+   "ukur_ms": 554.4184,
+   "galat_pct": -20.6646074098976
+  },
+  {
+   "kalibrasi": "3ch",
+   "prediksi": "1ch",
+   "format": "int8",
+   "sim_ms": 105.65247711285791,
+   "ukur_ms": 207.74999999999997,
+   "galat_pct": -49.14441534880485
+  }
+ ],
+ "daya_papan_esp32s3_mw": 446.0689545657538
+}

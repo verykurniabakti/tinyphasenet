@@ -1,0 +1,272 @@
+{
+ "1ch_fp32": {
+  "ref": {
+   "invoke_ms": 405.097,
+   "hash": "23267650",
+   "tc_layers": [
+    202.1725,
+    14.354899999999999,
+    16.2666,
+    40.094699999999996
+   ],
+   "tc_ms": 272.88870000000003,
+   "total_ms": 404.9488999999999
+  },
+  "cepat": {
+   "invoke_ms": 191.735,
+   "hash": "23267650",
+   "tc_layers": [
+    25.9964,
+    7.1549,
+    7.6274,
+    18.376900000000003
+   ],
+   "tc_ms": 59.15560000000001,
+   "total_ms": 191.60200000000003
+  },
+  "lama": {
+   "latency_ms": 402.84,
+   "arena_kb": 203.2,
+   "energy_mj": 177.98,
+   "decisions_diff": 0,
+   "decisions_n": 100,
+   "f1_100": 0.9495
+  },
+  "baru": {
+   "latency_ms": 193.62,
+   "arena_kb": 203.2,
+   "energy_mj": 88.48,
+   "decisions_diff": 0,
+   "decisions_n": 100,
+   "f1_100": 0.9495
+  }
+ },
+ "1ch_16x8": {
+  "ref": {
+   "invoke_ms": 1095.263,
+   "hash": "ebaebee8",
+   "tc_layers": [
+    112.0841,
+    114.9436,
+    121.0861,
+    256.3616
+   ],
+   "tc_ms": 604.4754,
+   "total_ms": 1095.1689000000001
+  },
+  "cepat": {
+   "invoke_ms": 554.506,
+   "hash": "ebaebee8",
+   "tc_layers": [
+    8.2348,
+    9.3815,
+    11.700899999999999,
+    32.3678
+   ],
+   "tc_ms": 61.685,
+   "total_ms": 554.4184000000001
+  },
+  "lama": {
+   "latency_ms": 1095.272,
+   "arena_kb": 265.512,
+   "energy_mj": 487.874,
+   "decisions_diff": 0,
+   "decisions_n": 200,
+   "f1_100": 0.9495
+  },
+  "baru": {
+   "latency_ms": 555.788,
+   "arena_kb": 109.496,
+   "energy_mj": 246.758,
+   "decisions_diff": 0,
+   "decisions_n": 200,
+   "f1_100": 0.9495
+  }
+ },
+ "1ch_int8": {
+  "ref": {
+   "invoke_ms": 767.177,
+   "hash": "791174e8",
+   "tc_layers": [
+    115.5838,
+    118.56689999999999,
+    124.18310000000001,
+    261.118
+   ],
+   "tc_ms": 619.4518,
+   "total_ms": 767.0819
+  },
+  "cepat": {
+   "invoke_ms": 207.855,
+   "hash": "791174e8",
+   "tc_layers": [
+    8.187100000000001,
+    11.4176,
+    11.514100000000001,
+    31.573
+   ],
+   "tc_ms": 62.6918,
+   "total_ms": 207.75
+  },
+  "lama": {
+   "latency_ms": 767.072,
+   "arena_kb": 137.355,
+   "energy_mj": 338.58,
+   "decisions_diff": 2,
+   "decisions_n": 200,
+   "f1_100": 0.8829
+  },
+  "baru": {
+   "latency_ms": 209.422,
+   "arena_kb": 59.465,
+   "energy_mj": 94.138,
+   "decisions_diff": 2,
+   "decisions_n": 200,
+   "f1_100": 0.8829
+  }
+ },
+ "3ch_fp32": {
+  "ref": {
+   "invoke_ms": 2317.445,
+   "hash": "6276dbab",
+   "tc_layers": [
+    801.7962,
+    833.1761,
+    57.899300000000004,
+    67.7998
+   ],
+   "tc_ms": 1760.6714,
+   "total_ms": 2317.3005000000003
+  },
+  "cepat": {
+   "invoke_ms": 838.299,
+   "hash": "6276dbab",
+   "tc_layers": [
+    109.6998,
+    106.2914,
+    28.179299999999998,
+    30.6934
+   ],
+   "tc_ms": 274.8639,
+   "total_ms": 838.1622000000002
+  },
+  "lama": {
+   "latency_ms": 2304.88,
+   "arena_kb": 399.73,
+   "energy_mj": 1011.22,
+   "decisions_diff": 0,
+   "decisions_n": 100,
+   "f1_100": 0.9608
+  },
+  "baru": {
+   "latency_ms": 834.54,
+   "arena_kb": 399.73,
+   "energy_mj": 379.8,
+   "decisions_diff": 0,
+   "decisions_n": 100,
+   "f1_100": 0.9608
+  }
+ },
+ "3ch_16x8": {
+  "ref": {
+   "invoke_ms": 4733.71,
+   "hash": "487924da",
+   "tc_layers": [
+    1031.7014,
+    456.3488,
+    471.6259,
+    499.1133
+   ],
+   "tc_ms": 2458.7893999999997,
+   "total_ms": 4733.563699999998
+  },
+  "cepat": {
+   "invoke_ms": 2440.134,
+   "hash": "487924da",
+   "tc_layers": [
+    43.1893,
+    33.2616,
+    39.855199999999996,
+    47.099199999999996
+   ],
+   "tc_ms": 163.4053,
+   "total_ms": 2439.9860000000012
+  },
+  "lama": {
+   "latency_ms": 4719.63,
+   "arena_kb": 330.11,
+   "energy_mj": 2121.14,
+   "decisions_diff": 0,
+   "decisions_n": 100,
+   "f1_100": 0.9608
+  },
+  "baru": {
+   "latency_ms": 2435.23,
+   "arena_kb": 210.09,
+   "energy_mj": 1084.16,
+   "decisions_diff": 0,
+   "decisions_n": 100,
+   "f1_100": 0.9608
+  }
+ },
+ "3ch_int8": {
+  "ref": {
+   "invoke_ms": 2768.101,
+   "hash": "3c8265b7",
+   "tc_layers": [
+    1021.7805,
+    472.3202,
+    483.71259999999995,
+    506.437
+   ],
+   "tc_ms": 2484.2502999999997,
+   "total_ms": 2767.9662999999996
+  },
+  "cepat": {
+   "invoke_ms": 443.091,
+   "hash": "3c8265b7",
+   "tc_layers": [
+    40.6609,
+    33.043699999999994,
+    37.2746,
+    46.3393
+   ],
+   "tc_ms": 157.3185,
+   "total_ms": 442.95060000000007
+  },
+  "lama": {
+   "latency_ms": 2758.07,
+   "arena_kb": 208.23,
+   "energy_mj": 1219.98,
+   "decisions_diff": 3,
+   "decisions_n": 100,
+   "f1_100": 0.94
+  },
+  "baru": {
+   "latency_ms": 441.36,
+   "arena_kb": 208.21,
+   "energy_mj": 198.22,
+   "decisions_diff": 3,
+   "decisions_n": 100,
+   "f1_100": 0.94
+  }
+ },
+ "float32": {
+  "1ch": {
+   "latency_ms": 168.78333333333333,
+   "arena_kb": 203.2,
+   "energy_mj": 76.17333333333333,
+   "decisions_diff": 0,
+   "decisions_n": 100,
+   "f1_100": 0.9495
+  },
+  "3ch": {
+   "latency_ms": 834.51,
+   "arena_kb": 399.73,
+   "energy_mj": 378.31333333333333,
+   "decisions_diff": 0,
+   "decisions_n": 100,
+   "f1_100": 0.9608
+  }
+ }
+}

@@ -1,0 +1,104 @@
+{
+ "1ch_standar": {
+  "params": 76195,
+  "macs_tflite": 2721792,
+  "flops": 5443584,
+  "por_operator": {
+   "CONV_2D": 1861632,
+   "TRANSPOSE_CONV": 860160
+  },
+  "operasi_lain": {
+   "RESHAPE": 11,
+   "MUL": 9,
+   "ADD": 9,
+   "CONCATENATION": 3,
+   "SOFTMAX": 1
+  },
+  "macs_keras_analitik": 2721792,
+  "rincian_keras": {
+   "conv": 1861632,
+   "depthwise": 0,
+   "pointwise": 0,
+   "transpose": 860160
+  },
+  "macs_profiler_lama": 2721792.0
+ },
+ "1ch_separable": {
+  "params": 31250,
+  "macs_tflite": 1451904,
+  "flops": 2903808,
+  "por_operator": {
+   "DEPTHWISE_CONV_2D": 94080,
+   "CONV_2D": 497664,
+   "TRANSPOSE_CONV": 860160
+  },
+  "operasi_lain": {
+   "RESHAPE": 11,
+   "MUL": 9,
+   "ADD": 9,
+   "CONCATENATION": 3,
+   "SOFTMAX": 1
+  },
+  "macs_keras_analitik": 1451904,
+  "rincian_keras": {
+   "conv": 73728,
+   "depthwise": 94080,
+   "pointwise": 423936,
+   "transpose": 860160
+  },
+  "macs_profiler_lama": 1451904.0
+ },
+ "3ch_standar": {
+  "params": 269675,
+  "macs_tflite": 19857408,
+  "flops": 39714816,
+  "por_operator": {
+   "CONV_2D": 17104896,
+   "TRANSPOSE_CONV": 2752512
+  },
+  "operasi_lain": {
+   "RESHAPE": 14,
+   "CONCATENATION": 4,
+   "SOFTMAX": 1
+  },
+  "macs_keras_analitik": 19857408,
+  "rincian_keras": {
+   "conv": 17104896,
+   "depthwise": 0,
+   "pointwise": 0,
+   "transpose": 2752512
+  },
+  "macs_profiler_lama": 19857408.0
+ },
+ "3ch_separable": {
+  "params": 109384,
+  "macs_tflite": 6302208,
+  "flops": 12604416,
+  "por_operator": {
+   "DEPTHWISE_CONV_2D": 1042944,
+   "CONV_2D": 2506752,
+   "TRANSPOSE_CONV": 2752512
+  },
+  "operasi_lain": {
+   "RESHAPE": 14,
+   "CONCATENATION": 4,
+   "SOFTMAX": 1
+  },
+  "macs_keras_analitik": 6302208,
+  "rincian_keras": {
+   "conv": 73728,
+   "depthwise": 1042944,
+   "pointwise": 2433024,
+   "transpose": 2752512
+  },
+  "macs_profiler_lama": 6302208.0
+ },
+ "1ch_rasio": {
+  "params": 2.43824,
+  "macs": 1.8746363395927004
+ },
+ "3ch_rasio": {
+  "params": 2.46539713303591,
+  "macs": 3.1508652205703145
+ }
+}

@@ -1,0 +1,67 @@
+{
+ "hash": {
+  "1ch_int8": {
+   "jendela": 100,
+   "sama": 100,
+   "unik": 88
+  },
+  "1ch_16x8": {
+   "jendela": 100,
+   "sama": 100,
+   "unik": 100
+  },
+  "3ch_int8": {
+   "jendela": 100,
+   "sama": 100,
+   "unik": 68
+  },
+  "3ch_16x8": {
+   "jendela": 100,
+   "sama": 100,
+   "unik": 96
+  },
+  "1ch_fp32": {
+   "jendela": 100,
+   "sama": 100,
+   "unik": 100
+  },
+  "3ch_fp32": {
+   "jendela": 100,
+   "sama": 100,
+   "unik": 100
+  }
+ },
+ "sram_1ch": {
+  "lokasi": "Internal SRAM",
+  "arena_kb": 203.2,
+  "lat_ms": 168.76,
+  "energi_mj": 76.27,
+  "keputusan": "Kesesuaian Keputusan         | 100 / 100",
+  "f1": 0.9495
+ },
+ "sram_3ch_fp32": {
+  "diminta_kb": 384.0,
+  "tersedia_kb": 240.375,
+  "gagal": true
+ },
+ "sram_3ch_16x8": {
+  "lokasi": "Internal SRAM",
+  "lat_ms": 2400.05,
+  "energi_mj": 1054.98,
+  "keputusan": "Kesesuaian Keputusan         | 100 / 100"
+ },
+ "sram_3ch_int8": {
+  "lokasi": "Internal SRAM",
+  "lat_ms": 416.62,
+  "energi_mj": 183.65,
+  "keputusan": "Kesesuaian Keputusan         | 97 / 100"
+ },
+ "psram_1ch_seed42": {
+  "latency_ms": 193.62,
+  "arena_kb": 203.2,
+  "energy_mj": 88.48,
+  "decisions_diff": 0,
+  "decisions_n": 100,
+  "f1_100": 0.9495
+ }
+}

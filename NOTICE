@@ -1,0 +1,10 @@
+Code and data for "Kernel-Aware Evaluation of Quantized Seismic Phase Picking on a Low-Power Microcontroller"
+Copyright 2026 the authors of the manuscript (see README.md).
+
+This product includes software developed at The TensorFlow Authors (https://www.tensorflow.org):
+  firmware/src/transpose_conv_act_fix.cc is a modified copy of the TensorFlow Lite Micro TRANSPOSE_CONV kernel
+  (as packaged in esp-tflite-micro 1.3.4), licensed under the Apache License, Version 2.0. The original copyright
+  header is kept in that file. The modifications are described in the comments at the top of the file and in the manuscript.
+
+The firmware is built against esp-tflite-micro and ESP-NN (Espressif Systems), both licensed under the Apache License, Version 2.0.
+These libraries are downloaded by PlatformIO at build time and are not redistributed in this folder.

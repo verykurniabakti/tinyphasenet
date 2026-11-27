@@ -1,0 +1,52 @@
+%[0;32mI (380) cpu_start: Project name:     phasenet_z_profiling_v2[0m
+[0;32mI (387) cpu_start: App version:      1[0m
+[0;32mI (391) cpu_start: Compile time:     Nov 27 2026 06:39:17[0m
+[0;32mI (397) cpu_start: ELF file SHA256:  81468c7b63e71f2c...[0m
+[0;32mI (403) cpu_start: ESP-IDF:          4.4.7[0m
+[0;32mI (408) cpu_start: Min chip rev:     v0.0[0m
+[0;32mI (413) cpu_start: Max chip rev:     v0.99 [0m
+[0;32mI (417) cpu_start: Chip rev:         v0.2[0m
+[0;32mI (422) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (429) heap_init: At 3FC99928 len 0004FDE8 (319 KiB): D/IRAM[0m
+[0;32mI (436) heap_init: At 3FCE9710 len 00005724 (21 KiB): STACK/DIRAM[0m
+[0;32mI (443) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (449) heap_init: At 600FE000 len 00002000 (8 KiB): RTCRAM[0m
+[0;32mI (455) spi_flash: detected chip: generic[0m
+[0;32mI (460) spi_flash: flash io: qio[0m
+[0;33mW (464) spi_flash: Detected size(16384k) larger than the size in the binary image header(8192k). Using the size in the binary image header.[0m
+[0;32mI (477) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (484) sleep: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (491) cpu_start: Starting scheduler on PRO CPU.[0m
+[0;32mI (0) cpu_start: Starting sch
+[INFO] Inisialisasi Profiling PhaseNet-Z v2...
+[INFO] Input scale/zp: 0.182129 / -29, output scale/zp: 0.003906 / -128
+[DIAG] jendela 0: skor 0.910156 (Python 0.910156) | rata-rata P 0.008236 S 0.006377 N 0.981789 | jumlah softmax [0.9961, 1.0000]
+[DIAG] output t=0..3 (raw): -128 -128 127 | -128 -128 127 | -128 -128 127 | -128 -128 127
+[INFO] 50 / 200 repetisi selesai...
+[INFO] 100 / 200 repetisi selesai...
+[INFO] 150 / 200 repetisi selesai...
+[INFO] 200 / 200 repetisi selesai...
+
+=======================================================
+ LAPORAN PROFILING PHASENET-Z v2 (N = 200, 100 jendela uji STEAD)
+ Varian                         | INT8 penuh
+-------------------------------------------------------
+ CPU freq (MHz)                 | 240
+ Ukuran model (byte)            | 110784
+ Tensor arena terpakai (KB)     | 77.652 (dialokasikan 288.0)
+ Latensi Invoke (ms)            | 256.894 +- 0.071 [min 256.689, max 256.996]
+ Latensi prapemrosesan total (ms)| 8.741 +- 0.467 (filter dari awal trace + z-score + kuantisasi)
+ Latensi bandpass 3072 sampel (ms)| 1.738 +- 0.003
+ Daya idle (mW)                 | 306.969  (n = 3000 sampel)
+ Daya selama Invoke (mW)        | 443.875  (n = 51340 sampel)
+ Energi per inferensi (mJ)      | 114.029
+ Energi di atas idle (mJ)       | 35.171
+-------------------------------------------------------
+ VALIDASI PORT (vs TFLite Python)
+   Selisih skor maksimum        : 0.207031
+   Keputusan berbeda            : 0 / 200
+ AKURASI DI PERANGKAT (100 jendela STEAD, ambang 0.4297)
+   TP 50  TN 49  FP 1  FN 0
+   Precision 0.9804  Recall 1.0000  F1 0.9901  FPR 0.0200
+=======================================================
+[INFO] Profiling selesai. Reset board untuk mengulang.

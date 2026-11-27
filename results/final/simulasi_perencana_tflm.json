@@ -1,0 +1,38 @@
+{
+ "1ch_depthwise": {
+  "operator": 54,
+  "buffer": 55,
+  "batas_bawah_kb": 192.0,
+  "kepala_simulasi_kb": 192.0,
+  "kepala_seri_naik_kb": 192.0,
+  "arena_terukur_kb": 203.2,
+  "selisih_kb": 11.199999999999989
+ },
+ "1ch_standar": {
+  "operator": 46,
+  "buffer": 47,
+  "batas_bawah_kb": 192.0,
+  "kepala_simulasi_kb": 192.0,
+  "kepala_seri_naik_kb": 192.0,
+  "arena_terukur_kb": 200.15,
+  "selisih_kb": 8.150000000000006
+ },
+ "3ch_depthwise": {
+  "operator": 52,
+  "buffer": 53,
+  "batas_bawah_kb": 384.0,
+  "kepala_simulasi_kb": 384.0,
+  "kepala_seri_naik_kb": 384.0,
+  "arena_terukur_kb": 399.73,
+  "selisih_kb": 15.730000000000018
+ },
+ "3ch_standar": {
+  "operator": 38,
+  "buffer": 39,
+  "batas_bawah_kb": 384.0,
+  "kepala_simulasi_kb": 480.0,
+  "kepala_seri_naik_kb": 384.0,
+  "arena_terukur_kb": 489.79,
+  "selisih_kb": 9.79000000000002
+ }
+}

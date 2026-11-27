@@ -1,0 +1,182 @@
+{
+ "1ch_16x8": {
+  "42": {
+   "latency_ms": 1158.9,
+   "arena_kb": 106.434,
+   "energy_mj": 508.225,
+   "decisions_diff": 0,
+   "decisions_n": 200,
+   "f1_100": 1.0
+  },
+  "43": {
+   "latency_ms": 1158.71,
+   "arena_kb": 106.434,
+   "energy_mj": 479.38,
+   "decisions_diff": 0,
+   "decisions_n": 200,
+   "f1_100": 1.0
+  },
+  "44": {
+   "latency_ms": 1158.787,
+   "arena_kb": 106.434,
+   "energy_mj": 480.038,
+   "decisions_diff": 0,
+   "decisions_n": 200,
+   "f1_100": 1.0
+  },
+  "rerata": {
+   "latency_ms": 1158.799,
+   "energy_mj": 489.21433333333334,
+   "arena_kb": 106.434,
+   "f1_100": 1.0,
+   "decisions_diff": 0
+  },
+  "sd": {
+   "latency_ms": 0.09556673061272701,
+   "energy_mj": 16.46700720633029,
+   "arena_kb": 0.0,
+   "f1_100": 0.0,
+   "decisions_diff": 0.0
+  },
+  "razao_standar_separable": {
+   "latency_ms": 2.0865952167446347,
+   "energy_mj": 2.00138685663557,
+   "arena_kb": 0.9720355081464164
+  }
+ },
+ "1ch_int8": {
+  "42": {
+   "latency_ms": 256.894,
+   "arena_kb": 77.652,
+   "energy_mj": 114.029,
+   "decisions_diff": 0,
+   "decisions_n": 200,
+   "f1_100": 0.9901
+  },
+  "43": {
+   "latency_ms": 256.71,
+   "arena_kb": 77.652,
+   "energy_mj": 107.209,
+   "decisions_diff": 0,
+   "decisions_n": 200,
+   "f1_100": 1.0
+  },
+  "44": {
+   "latency_ms": 256.789,
+   "arena_kb": 77.652,
+   "energy_mj": 106.242,
+   "decisions_diff": 0,
+   "decisions_n": 200,
+   "f1_100": 0.9901
+  },
+  "rerata": {
+   "latency_ms": 256.79766666666666,
+   "energy_mj": 109.16,
+   "arena_kb": 77.652,
+   "f1_100": 0.9934,
+   "decisions_diff": 0
+  },
+  "sd": {
+   "latency_ms": 0.09230565168685916,
+   "energy_mj": 4.24430712837796,
+   "arena_kb": 0.0,
+   "f1_100": 0.005715767664977307,
+   "decisions_diff": 0.0
+  },
+  "razao_standar_separable": {
+   "latency_ms": 1.2285069136034776,
+   "energy_mj": 1.1780915549959527,
+   "arena_kb": 1.3058437736483646
+  }
+ },
+ "3ch_16x8": {
+  "42": {
+   "latency_ms": 9193.84,
+   "arena_kb": 252.15,
+   "energy_mj": 3818.66,
+   "decisions_diff": 0,
+   "decisions_n": 100,
+   "f1_100": 1.0
+  },
+  "43": {
+   "latency_ms": 9195.04,
+   "arena_kb": 252.15,
+   "energy_mj": 3747.8,
+   "decisions_diff": 0,
+   "decisions_n": 100,
+   "f1_100": 1.0
+  },
+  "44": {
+   "latency_ms": 9193.78,
+   "arena_kb": 204.15,
+   "energy_mj": 3801.25,
+   "decisions_diff": 0,
+   "decisions_n": 100,
+   "f1_100": 1.0
+  },
+  "rerata": {
+   "latency_ms": 9194.220000000001,
+   "energy_mj": 3789.2366666666667,
+   "arena_kb": 236.15,
+   "f1_100": 1.0,
+   "decisions_diff": 0
+  },
+  "sd": {
+   "latency_ms": 0.7107742257569365,
+   "energy_mj": 36.92593984360211,
+   "arena_kb": 27.712812921102035,
+   "f1_100": 0.0,
+   "decisions_diff": 0.0
+  },
+  "razao_standar_separable": {
+   "latency_ms": 3.7758448630601107,
+   "energy_mj": 3.5270805279585975,
+   "arena_kb": 1.1240420772050075
+  }
+ },
+ "3ch_int8": {
+  "42": {
+   "latency_ms": 1016.54,
+   "arena_kb": 179.95,
+   "energy_mj": 448.41,
+   "decisions_diff": 0,
+   "decisions_n": 100,
+   "f1_100": 1.0
+  },
+  "43": {
+   "latency_ms": 1011.22,
+   "arena_kb": 179.95,
+   "energy_mj": 420.99,
+   "decisions_diff": 0,
+   "decisions_n": 100,
+   "f1_100": 1.0
+  },
+  "44": {
+   "latency_ms": 1017.62,
+   "arena_kb": 179.95,
+   "energy_mj": 423.17,
+   "decisions_diff": 0,
+   "decisions_n": 100,
+   "f1_100": 1.0
+  },
+  "rerata": {
+   "latency_ms": 1015.1266666666667,
+   "energy_mj": 430.8566666666667,
+   "arena_kb": 179.95,
+   "f1_100": 1.0,
+   "decisions_diff": 0
+  },
+  "sd": {
+   "latency_ms": 3.4260959317177893,
+   "energy_mj": 15.240660528117985,
+   "arena_kb": 0.0,
+   "f1_100": 0.0,
+   "decisions_diff": 0.0
+  },
+  "razao_standar_separable": {
+   "latency_ms": 2.3008136837890314,
+   "energy_mj": 2.196156721489738,
+   "arena_kb": 0.8642716488160991
+  }
+ }
+}

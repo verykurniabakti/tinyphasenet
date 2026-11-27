@@ -1,0 +1,53 @@
+{
+ "42": {
+  "thr": 0.07421875,
+  "thr_langkah": 19.0,
+  "selisih_maks": 0.35546875,
+  "selisih_median": 0.01953125,
+  "selisih_rerata": 0.042734375,
+  "skor_sama_persis": 24,
+  "keputusan_beda": 1,
+  "dekat_ambang": 0,
+  "beda_dan_dekat": 0,
+  "f1_papan": 0.8828828828828829,
+  "f1_python": 0.8909090909090909,
+  "skor_python_nol": 14,
+  "skor_papan_nol": 13,
+  "p_nonnol_gempa": 49,
+  "p_nonnol_derau": 37
+ },
+ "43": {
+  "thr": 0.00390625,
+  "thr_langkah": 1.0,
+  "selisih_maks": 0.15234375,
+  "selisih_median": 0.0,
+  "selisih_rerata": 0.00875,
+  "skor_sama_persis": 58,
+  "keputusan_beda": 14,
+  "dekat_ambang": 85,
+  "beda_dan_dekat": 12,
+  "f1_papan": 0.7311827956989247,
+  "f1_python": 0.7878787878787878,
+  "skor_python_nol": 51,
+  "skor_papan_nol": 57,
+  "p_nonnol_gempa": 39,
+  "p_nonnol_derau": 10
+ },
+ "44": {
+  "thr": 0.94140625,
+  "thr_langkah": 241.0,
+  "selisih_maks": 0.60546875,
+  "selisih_median": 0.01171875,
+  "selisih_rerata": 0.0573046875,
+  "skor_sama_persis": 19,
+  "keputusan_beda": 5,
+  "dekat_ambang": 1,
+  "beda_dan_dekat": 1,
+  "f1_papan": 0.8411214953271028,
+  "f1_python": 0.8490566037735849,
+  "skor_python_nol": 1,
+  "skor_papan_nol": 0,
+  "p_nonnol_gempa": 50,
+  "p_nonnol_derau": 49
+ }
+}

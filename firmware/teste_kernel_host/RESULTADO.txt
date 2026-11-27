@@ -1,0 +1,15 @@
+Equivalence test of the replacement TRANSPOSE_CONV kernel against the reference kernel (10 Nov 2026)
+Machine: Apple M3 Pro (arm64), Apple clang version 21.0.0 (clang-2100.4.1.1)
+Reference: reference_ops::TransposeConv (Float32) and reference_integer_ops::TransposeConv (INT8, 16x8) from esp-tflite-micro (managed_components).
+Replacement: TransposeConvFast / TransposeConvFastF32 from src/transpose_conv_act_fix.cc (included directly with #include).
+Cases per format: 25,600 = 20,000 random shapes (input channels 1-256, output channels 1-64, filter 1-9, stride 1-8, padding 0 to filter width - 1, input length 1-40,
+output length about input length x stride +- filter width) + 5,000 model-like shapes (stride 4, filter 7, padding 1-3, input length 1-48) + 600 extreme cases
+(256 input channels, all values at the limits: INT8 input 127/-128, 16x8 32767/-32768, weights +-127).
+INT8: random input and output offsets, random per-channel multiplier and shift, random activation limits. 16x8: 64-bit accumulator, 64-bit bias.
+
+1) -O2 -ffp-contract=off (jalankan.sh):  Float32 0 of 25,600 differ (maximum absolute difference 0); INT8 0 of 25,600; 16x8 0 of 25,600.
+2) -O1 -fsanitize=address,undefined: same result as (1), no sanitizer report.
+3) -O2 with the compiler's default floating-point contraction (FMA allowed): Float32 20,180 of 25,600 differ (maximum absolute difference 9.16e-05); INT8 0; 16x8 0.
+   Integer addition is exact, so INT8 and 16x8 are bit-identical. In Float32 the order of summation is the same, but the compiler may fuse multiply-add
+   differently in the two functions, so bit-identity depends on the compiler and its options.
+4) Sensitivity test (-DMUTASI, replacement padding shifted by one): Float32 25,590, INT8 18,054, 16x8 10,313 of 25,600 differ, so this test is able to detect errors.

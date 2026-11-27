@@ -1,0 +1,278 @@
+{
+ "kandidat": [
+  {
+   "fam": "1ch",
+   "key": "standard",
+   "nama": "Satu kanal standar Float32",
+   "f1_stead": 99.3566504745323,
+   "sd_stead": 0.012169029505938633,
+   "f1_mean4": 97.83249616625093,
+   "f1_lintas": 97.32444473015714,
+   "flash_kb": 319.0859375,
+   "aktivasi_lb_kb": 192.0,
+   "pareto_A": true
+  },
+  {
+   "fam": "1ch",
+   "key": "fp32",
+   "nama": "Satu kanal Float32",
+   "f1_stead": 96.35818022081868,
+   "sd_stead": 0.3335004408211841,
+   "f1_mean4": 94.61741875202055,
+   "f1_lintas": 94.03716492908784,
+   "flash_kb": 146.19921875,
+   "aktivasi_lb_kb": 192.0,
+   "dev_lat_ms": 168.78333333333333,
+   "dev_energi_mJ": 76.17333333333333,
+   "dev_arena_kb": 203.2,
+   "pareto_A": false,
+   "pareto_B": true
+  },
+  {
+   "fam": "1ch",
+   "key": "q16x8",
+   "nama": "Satu kanal 16x8",
+   "f1_stead": 96.32313296842192,
+   "sd_stead": 0.31221305304564695,
+   "f1_mean4": 94.82100808488845,
+   "f1_lintas": 94.32029979037729,
+   "flash_kb": 81.6328125,
+   "aktivasi_lb_kb": 96.0,
+   "dev_lat_ms": 555.354,
+   "dev_energi_mJ": 244.43766666666667,
+   "dev_arena_kb": 109.496,
+   "pareto_A": true,
+   "pareto_B": true
+  },
+  {
+   "fam": "1ch",
+   "key": "int8",
+   "nama": "Satu kanal INT8",
+   "f1_stead": 81.23483487962376,
+   "sd_stead": 3.4280807937057185,
+   "f1_mean4": 78.52889588915232,
+   "f1_lintas": 77.62691622566184,
+   "flash_kb": 73.359375,
+   "aktivasi_lb_kb": 48.0,
+   "dev_lat_ms": 209.03233333333333,
+   "dev_energi_mJ": 92.65833333333333,
+   "dev_arena_kb": 59.465,
+   "pareto_A": true,
+   "pareto_B": false
+  },
+  {
+   "fam": "1ch",
+   "key": "w4a8",
+   "nama": "Satu kanal 4/8 (4-bit)",
+   "f1_stead": 78.49591202868874,
+   "sd_stead": 10.31489713634311,
+   "f1_mean4": 76.57575232870822,
+   "f1_lintas": 75.93569909538138,
+   "flash_kb": 58.734375,
+   "aktivasi_lb_kb": 48.0,
+   "pareto_A": true
+  },
+  {
+   "fam": "3ch",
+   "key": "pn",
+   "nama": "Tiga kanal PhaseNet (dilatih ulang)",
+   "f1_stead": 99.82337563181521,
+   "sd_stead": 0.016151101683410937,
+   "f1_mean4": 98.24025679270576,
+   "f1_lintas": 97.71255051300261,
+   "flash_kb": 1066.625,
+   "aktivasi_lb_kb": 384.0,
+   "pareto_A": true
+  },
+  {
+   "fam": "3ch",
+   "key": "fp32",
+   "nama": "Tiga kanal Float32",
+   "f1_stead": 98.08945441931176,
+   "sd_stead": 0.32425031467492604,
+   "f1_mean4": 96.12121538447857,
+   "f1_lintas": 95.46513570620085,
+   "flash_kb": 447.89453125,
+   "aktivasi_lb_kb": 384.0,
+   "dev_lat_ms": 834.51,
+   "dev_energi_mJ": 378.31333333333333,
+   "dev_arena_kb": 399.73,
+   "pareto_A": false,
+   "pareto_B": true
+  },
+  {
+   "fam": "3ch",
+   "key": "q16x8",
+   "nama": "Tiga kanal 16x8",
+   "f1_stead": 98.0504247050658,
+   "sd_stead": 0.3172766133790697,
+   "f1_mean4": 96.19852552827999,
+   "f1_lintas": 95.58122580268471,
+   "flash_kb": 176.359375,
+   "aktivasi_lb_kb": 192.0,
+   "dev_lat_ms": 2435.01,
+   "dev_energi_mJ": 1074.3266666666666,
+   "dev_arena_kb": 210.09,
+   "pareto_A": true,
+   "pareto_B": true
+  },
+  {
+   "fam": "3ch",
+   "key": "int8",
+   "nama": "Tiga kanal INT8",
+   "f1_stead": 97.0885401974148,
+   "sd_stead": 0.45060337437064124,
+   "f1_mean4": 94.0088172434394,
+   "f1_lintas": 92.9822429254476,
+   "flash_kb": 164.796875,
+   "aktivasi_lb_kb": 96.0,
+   "dev_lat_ms": 441.2033333333333,
+   "dev_energi_mJ": 196.18666666666667,
+   "dev_arena_kb": 208.21,
+   "pareto_A": false,
+   "pareto_B": false
+  },
+  {
+   "fam": "3ch",
+   "key": "w4a8",
+   "nama": "Tiga kanal 4/8 (4-bit)",
+   "f1_stead": 94.50544334447585,
+   "sd_stead": 3.466277424066829,
+   "f1_mean4": 91.24730818624258,
+   "f1_lintas": 90.16126313349815,
+   "flash_kb": 112.59375,
+   "aktivasi_lb_kb": 96.0,
+   "pareto_A": false
+  }
+ ],
+ "pareto_A": [
+  "Satu kanal standar Float32",
+  "Satu kanal 16x8",
+  "Satu kanal INT8",
+  "Satu kanal 4/8 (4-bit)",
+  "Tiga kanal PhaseNet (dilatih ulang)",
+  "Tiga kanal 16x8"
+ ],
+ "pareto_B": [
+  "Satu kanal Float32",
+  "Satu kanal 16x8",
+  "Tiga kanal Float32",
+  "Tiga kanal 16x8"
+ ],
+ "R1": {
+  "90": "Satu kanal Float32",
+  "95": "Satu kanal Float32",
+  "97": "Tiga kanal INT8",
+  "98": "Tiga kanal Float32"
+ },
+ "R2_titik_tekuk": "Tiga kanal Float32",
+ "R2_jarak": [
+  0.0,
+  0.028,
+  0.458,
+  0.0
+ ],
+ "R3": [
+  [
+   0.0,
+   "Satu kanal Float32"
+  ],
+  [
+   0.05,
+   "Satu kanal Float32"
+  ],
+  [
+   0.1,
+   "Satu kanal Float32"
+  ],
+  [
+   0.15,
+   "Satu kanal Float32"
+  ],
+  [
+   0.2,
+   "Satu kanal Float32"
+  ],
+  [
+   0.25,
+   "Satu kanal Float32"
+  ],
+  [
+   0.3,
+   "Satu kanal Float32"
+  ],
+  [
+   0.35,
+   "Satu kanal Float32"
+  ],
+  [
+   0.4,
+   "Satu kanal Float32"
+  ],
+  [
+   0.45,
+   "Satu kanal Float32"
+  ],
+  [
+   0.5,
+   "Satu kanal Float32"
+  ],
+  [
+   0.55,
+   "Satu kanal Float32"
+  ],
+  [
+   0.6,
+   "Satu kanal Float32"
+  ],
+  [
+   0.65,
+   "Satu kanal Float32"
+  ],
+  [
+   0.7,
+   "Satu kanal Float32"
+  ],
+  [
+   0.75,
+   "Satu kanal Float32"
+  ],
+  [
+   0.8,
+   "Tiga kanal Float32"
+  ],
+  [
+   0.85,
+   "Tiga kanal Float32"
+  ],
+  [
+   0.9,
+   "Tiga kanal Float32"
+  ],
+  [
+   0.95,
+   "Tiga kanal Float32"
+  ],
+  [
+   1.0,
+   "Tiga kanal 16x8"
+  ]
+ ],
+ "R3_interval": [
+  [
+   0.0,
+   0.75,
+   "Satu kanal Float32"
+  ],
+  [
+   0.8,
+   0.95,
+   "Tiga kanal Float32"
+  ],
+  [
+   1.0,
+   1.0,
+   "Tiga kanal 16x8"
+  ]
+ ]
+}

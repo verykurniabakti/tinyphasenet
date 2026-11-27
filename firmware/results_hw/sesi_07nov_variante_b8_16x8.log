@@ -1,0 +1,120 @@
+[0;32mI (722) spiram: SPI SRAM memory test OK[0m
+[0;32mI (731) cpu_start: Pro cpu start user code[0m
+[0;32mI (731) cpu_start: cpu freq: 240000000[0m
+[0;32mI (731) cpu_start: Application information:[0m
+[0;32mI (733) cpu_start: Project name:     phasenet_z_profiling_v2[0m
+[0;32mI (740) cpu_start: App version:      v1-hasil-lama-sebelum-10seed-67[0m
+[0;32mI (747) cpu_start: Compile time:     Nov  7 2026 13:35:52[0m
+[0;32mI (753) cpu_start: ELF file SHA256:  0a66a3a727ce9244...[0m
+[0;32mI (759) cpu_start: ESP-IDF:          4.4.7[0m
+[0;32mI (764) cpu_start: Min chip rev:     v0.0[0m
+[0;32mI (768) cpu_start: Max chip rev:     v0.99 [0m
+[0;32mI (773) cpu_start: Chip rev:         v0.2[0m
+[0;32mI (778) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (785) heap_init: At 3FC97C78 len 00051A98 (326 KiB): D/IRAM[0m
+[0;32mI (792) heap_init: At 3FCE9710 len 00005724 (21 KiB): STACK/DIRAM[0m
+[0;32mI (798) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (805) heap_init: At 600FE000 len 00002000 (8 KiB): RTCRAM[0m
+[0;32mI (811) spiram: Adding pool of 8192K of external SPI memory to heap allocator[0m
+[0;32mI (819) spi_flash: detected chip: generic[0m
+[0;32mI (823) spi_flash: flash io: qio[0m
+[0;33mW (827) spi_flash: Detected size(16384k) larger than the size in the binary image header(8192k). Using the size in the binary image header.[0m
+[0;32mI (841) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (847) sleep: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (854) cpu_start: Starting scheduler on PRO CPU.[0m
+[0;32mI (0) cpu_start: Starting scheduler on APP CPU.[0m
+[0;32mI (870) spiram: Reserving pool of 32K of internal memory for DMA/int[0;31mE (7386) task_wdt: Task watchdog got triggered. The following tasks did not reset the watchdog in time:[0m
+[0;31mE (7386) task_wdt:  - IDLE0 (CPU 0)[0m
+[0;31mE (7386) task_wdt: Tasks currently running:[0m
+[0;31mE (7386) task_wdt: CPU 0: main[0m
+[0;31mE (7386) task_wdt: CPU 1: IDLE1[0m
+[0;31mE (7386) task_wdt: Print CPU 0 (current core) backtrace[0m
+
+
+Backtrace: 0x42021202:0x3FC93500 0x40376A25:0x3FC93530 0x4200E709:0x3FCF36F0 0x4201592A:0x3FCF3BF0 0x42005856:0x3FCF3C20 0x420026D6:0x3FCF3C40 0x42002A0E:0x3FCF3CA0 0x4203EB57:0x3FCF3CC0
+
+[0;31mE (7386) task_wdt: Print CPU 1 backtrace[0m
+
+
+Backtrace: 0x403760C5:0x3FC93B10 0x40376A25:0x3FC93B30 0x400559DD:0x3FCF4AE0 0x4037DC5A:0x3FCF4AF0 0x42021507:0x3FCF4B10 0x42021513:0x3FCF4B30 0x42021BA6:0x3FCF4B50 0x4037C0F3:0x3FCF4B70
+
+OPPROF_HASH 8c8c755d bytes=18432
+[0;31mE (12386) task_wdt: Task watchdog got triggered. The following tasks did not reset the watchdog in time:[0m
+[0;31mE (12386) task_wdt:  - IDLE0 (CPU 0)[0m
+[0;31mE (12386) task_wdt: Tasks currently running:[0m
+[0;31mE (12386) task_wdt: CPU 0: main[0m
+[0;31mE (12386) task_wdt: CPU 1: IDLE1[0m
+[0;31mE (12386) task_wdt: Print CPU 0 (current core) backtrace[0m
+
+
+Backtrace: 0x42021202:0x3FC93500 0x40376A25:0x3FC93530 0x4200E6DB:0x3FCF36F0 0x4201592A:0x3FCF3BF0 0x42005856:0x3FCF3C20 0x42002757:0x3FCF3C40 0x42002A0E:0x3FCF3CA0 0x4203EB57:0x3FCF3CC0
+
+[0;31mE (12386) task_wdt: Print CPU 1 backtrace[0m
+
+
+Backtrace: 0x403760C5:0x3FC93B10 0x40376A25:0x3FC93B30 0x400559DD:0x3FCF4AE0 0x4037DC5A:0x3FCF4AF0 0x42021507:0x3FCF4B10 0x42021513:0x3FCF4B30 0x42021BA6:0x3FCF4B50 0x4037C0F3:0x3FCF4B70
+
+[0;31mE (17386) task_wdt: Task watchdog got triggered. The following tasks did not reset the watchdog in time:[0m
+[0;31mE (17386) task_wdt:  - IDLE0 (CPU 0)[0m
+[0;31mE (17386) task_wdt: Tasks currently running:[0m
+[0;31mE (17386) task_wdt: CPU 0: main[0m
+[0;31mE (17386) task_wdt: CPU 1: IDLE1[0m
+[0;31mE (17386) task_wdt: Print CPU 0 (current core) backtrace[0m
+
+
+Backtrace: 0x42021202:0x3FC93500 0x40376A25:0x3FC93530 0x4200E77E:0x3FCF36F0 0x4201592A:0x3FCF3BF0 0x42005856:0x3FCF3C20 0x42002757:0x3FCF3C40 0x42002A0E:0x3FCF3CA0 0x4203EB57:0x3FCF3CC0
+
+[0;31mE (17386) task_wdt: Print CPU 1 backtrace[0m
+
+
+Backtrace: 0x403760C5:0x3FC93B10 0x40376A25:0x3FC93B30 0x400559DD:0x3FCF4AE0 0x4037DC5A:0x3FCF4AF0 0x42021507:0x3FCF4B10 0x42021513:0x3FCF4B30 0x42021BA6:0x3FCF4B50 0x4037C0F3:0x3FCF4B70
+
+[0;31mE (22386) task_wdt: Task watchdog got triggered. The following tasks did not reset the watchdog in time:[0m
+[0;31mE (22386) task_wdt:  - IDLE0 (CPU 0)[0m
+[0;31mE (22386) task_wdt: Tasks currently running:[0m
+[0;31mE (22386) task_wdt: CPU 0: main[0m
+[0;31mE (22386) task_wdt: CPU 1: IDLE1[0m
+[0;31mE (22386) task_wdt: Print CPU 0 (current core) backtrace[0m
+
+
+Backtrace: 0x42021202:0x3FC93500 0x40376A25:0x3FC93530 0x4200E6F0:0x3FCF36F0 0x4201592A:0x3FCF3BF0 0x42005856:0x3FCF3C20 0x42002757:0x3FCF3C40 0x42002A0E:0x3FCF3CA0 0x4203EB57:0x3FCF3CC0
+
+[0;31mE (22386) task_wdt: Print CPU 1 backtrace[0m
+
+
+Backtrace: 0x403760C5:0x3FC93B10 0x40376A25:0x3FC93B30 0x400559DD:0x3FCF4AE0 0x4037DC5A:0x3FCF4AF0 0x42021507:0x3FCF4B10 0x42021513:0x3FCF4B30 0x42021BA6:0x3FCF4B50 0x4037C0F3:0x3FCF4B70
+
+OPPROF_BEGIN b8_16x8 n_ops=32 n_rep=5 invoke_ms_mean=3091.016
+OPPROF 0 RESHAPE 63.0
+OPPROF 1 CONV_2D 92729.8
+OPPROF 2 MUL 7274.8
+OPPROF 3 RESHAPE 1097.0
+OPPROF 4 CONV_2D 365432.2
+OPPROF 5 MUL 3561.8
+OPPROF 6 RESHAPE 264.4
+OPPROF 7 CONV_2D 359588.2
+OPPROF 8 CONV_2D 682493.2
+OPPROF 9 MUL 1774.8
+OPPROF 10 TRANSPOSE_CONV 32928.4
+OPPROF 11 RELU 2543.0
+OPPROF 12 MUL 3390.6
+OPPROF 13 RESHAPE 48.8
+OPPROF 14 QUANTIZE 2363.6
+OPPROF 15 CONCATENATION 1127.6
+OPPROF 16 RESHAPE 1093.8
+OPPROF 17 CONV_2D 600111.0
+OPPROF 18 TRANSPOSE_CONV 37328.8
+OPPROF 19 RELU 5213.0
+OPPROF 20 MUL 7306.2
+OPPROF 21 RESHAPE 1110.2
+OPPROF 22 QUANTIZE 5044.4
+OPPROF 23 CONCATENATION 2280.8
+OPPROF 24 RESHAPE 2214.0
+OPPROF 25 CONV_2D 627460.2
+OPPROF 26 TRANSPOSE_CONV 91271.0
+OPPROF 27 RELU 21276.0
+OPPROF 28 MUL 28686.8
+OPPROF 29 CONV_2D 94397.8
+OPPROF 30 RESHAPE 700.4
+OPPROF 31 SOFTMAX 8747.0
+OPPROF_END
