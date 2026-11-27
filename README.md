@@ -88,9 +88,10 @@ The PhaseNet counterparts (standard convolutions) were also measured in 16x8 and
 
 - Source code (`scripts/`, firmware sources, `reproduce.py`): Apache License 2.0 (`LICENSE`, `NOTICE`). The replacement kernel is a modified copy of the TensorFlow Lite Micro `TRANSPOSE_CONV` kernel, which is also Apache 2.0; its original copyright header is kept.
 - Trained models, result files, device logs and documentation: CC BY 4.0 (`LICENSE-DATA.md`). The models are trained on STEAD, which is itself distributed under CC BY 4.0 (checked on 10 Nov 2026 in the LICENSE file of its official repository); keep the attribution to Mousavi et al. 2019.
-- The license choice was confirmed by the first author on 10 Nov 2026; confirm it with the co-authors and the institution's policy before the public release.
+- The license choice was confirmed by the first author on 10 Nov 2026 and approved by the co-authors afterwards, so that other researchers can reuse the code, models and data freely. The institution's policy has not been checked separately.
 
 ## Open items
 
 - Deposit a snapshot (for example on Zenodo) and cite its DOI in the manuscripts.
-- Confirm the license choice with the co-authors and the institution's policy (see "License"); no license for the data of TXED and ETHZ was found, and no waveform of them is redistributed here.
+- No license for the data of TXED and ETHZ was found; none of their waveforms is redistributed here.
+- Citation metadata: `CITATION.cff` and `.zenodo.json` (the Zenodo archive takes its metadata from the latter).

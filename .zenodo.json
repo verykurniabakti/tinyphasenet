@@ -1,0 +1,16 @@
+{
+  "title": "TinyPhaseNet: code, trained models and device measurements for a depthwise separable seismic phase picker compressed for TinyML",
+  "upload_type": "software",
+  "description": "<p>Code, trained models (seeds 42, 43 and 44, Keras and TensorFlow Lite), ESP32-S3 firmware with a replacement transposed-convolution kernel, raw device measurement logs, result files, and the scripts that regenerate the tables and figures of two manuscripts on post-training quantization and depthwise separable convolution of a seismic phase picker (TinyPhaseNet) and its standard-convolution counterpart (PhaseNet). No waveform is redistributed: STEAD, INSTANCE, ETHZ and TXED must be obtained from their original sources (see data/README.md).</p><p>Licenses: source code under the Apache License 2.0 (LICENSE); trained models, result files, device logs and documentation under CC BY 4.0 (LICENSE-DATA.md).</p>",
+  "version": "1.0.0",
+  "language": "eng",
+  "access_right": "open",
+  "license": "Apache-2.0",
+  "creators": [
+    {"name": "Bakti, Very Kurnia", "affiliation": "Universitas Harkat Negeri, Tegal, Indonesia", "orcid": "0000-0003-1116-6172"},
+    {"name": "Setyanto, Arief", "affiliation": "Universitas Amikom Yogyakarta, Indonesia", "orcid": "0000-0003-2704-7346"},
+    {"name": "Muhammad, Alva Hendi", "affiliation": "Universitas Amikom Yogyakarta, Indonesia", "orcid": "0000-0003-1970-3139"},
+    {"name": "Wibowo, Ferry Wahyu", "affiliation": "Universitas Amikom Yogyakarta, Indonesia", "orcid": "0000-0003-1913-436X"}
+  ],
+  "keywords": ["seismic phase picking", "TinyML", "post-training quantization", "depthwise separable convolution", "ESP32-S3"]
+}

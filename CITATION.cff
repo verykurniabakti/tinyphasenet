@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+message: "If you use this software, models or data, please cite them as below (and the associated manuscripts when published)."
+title: "TinyPhaseNet: code, trained models and device measurements for a depthwise separable seismic phase picker compressed for TinyML"
+type: software
+version: "1.0.0"
+date-released: "2026-11-28"
+abstract: >-
+  Code, trained models (seeds 42, 43 and 44), ESP32-S3 firmware with a replacement transposed-convolution kernel, raw device measurement logs,
+  result files, and the scripts that regenerate the tables and figures of two manuscripts on post-training quantization and depthwise separable
+  convolution of a seismic phase picker (TinyPhaseNet) and its standard-convolution counterpart (PhaseNet). No waveform is redistributed.
+authors:
+  - family-names: Bakti
+    given-names: Very Kurnia
+    orcid: "https://orcid.org/0000-0003-1116-6172"
+    affiliation: "Department of Computer Engineering, Universitas Harkat Negeri, Tegal, Indonesia"
+  - family-names: Setyanto
+    given-names: Arief
+    orcid: "https://orcid.org/0000-0003-2704-7346"
+    affiliation: "Department of Informatics, Universitas Amikom Yogyakarta, Indonesia"
+  - family-names: Muhammad
+    given-names: Alva Hendi
+    orcid: "https://orcid.org/0000-0003-1970-3139"
+    affiliation: "Department of Informatics, Universitas Amikom Yogyakarta, Indonesia"
+  - family-names: Wibowo
+    given-names: Ferry Wahyu
+    orcid: "https://orcid.org/0000-0003-1913-436X"
+    affiliation: "Department of Informatics, Universitas Amikom Yogyakarta, Indonesia"
+repository-code: "https://github.com/verykurniabakti/tinyphasenet"
+license:
+  - Apache-2.0
+  - CC-BY-4.0
+keywords:
+  - seismic phase picking
+  - TinyML
+  - post-training quantization
+  - depthwise separable convolution
+  - ESP32-S3
