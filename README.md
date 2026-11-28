@@ -1,6 +1,6 @@
 # Code and data for "Post-Training Quantization of a Depthwise Separable Seismic Phase Picker for TinyML Deployment: Accuracy, Latency and Energy"
 
-Code, trained models, device logs and result files for the Data and Code Availability statements of the manuscripts on TinyPhaseNet (a depthwise separable seismic phase picker compressed for microcontrollers). **Status: public.** Archived on Zenodo: [10.5281/zenodo.24610715](https://doi.org/10.5281/zenodo.24610715) (concept DOI, always resolves to the latest version; the release v1.0.5 is 10.5281/zenodo.24615740).
+Code, trained models, device logs and result files for the Data and Code Availability statements of the manuscripts on TinyPhaseNet (a depthwise separable seismic phase picker compressed for microcontrollers). **Status: public.** Archived on Zenodo: [10.5281/zenodo.24610715](https://doi.org/10.5281/zenodo.24610715) (concept DOI, always resolves to the latest version; the release v1.0.6 is 10.5281/zenodo.24615772).
 
 How to cite: see `CITATION.cff` (GitHub shows a "Cite this repository" button) and cite the DOI above together with the associated manuscripts when published.
 
