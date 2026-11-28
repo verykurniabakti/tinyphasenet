@@ -1,6 +1,6 @@
 # Code and data for "Post-Training Quantization of a Depthwise Separable Seismic Phase Picker for TinyML Deployment: Accuracy, Latency and Energy"
 
-Code, trained models, device logs and result files for the Data and Code Availability statements of the manuscripts on TinyPhaseNet (a depthwise separable seismic phase picker compressed for microcontrollers). **Status: public.** Archived on Zenodo: [10.5281/zenodo.24610715](https://doi.org/10.5281/zenodo.24610715) (concept DOI, always resolves to the latest version; the release v1.0.3 is 10.5281/zenodo.24611589).
+Code, trained models and result files for the Data and Code Availability statements of the manuscripts on TinyPhaseNet (a depthwise separable seismic phase picker compressed for microcontrollers). **Status: public.** Archived on Zenodo: [10.5281/zenodo.24610715](https://doi.org/10.5281/zenodo.24610715) (concept DOI, always resolves to the latest version; the release v1.0.3 is 10.5281/zenodo.24611589).
 
 How to cite: see `CITATION.cff` (GitHub shows a "Cite this repository" button) and cite the DOI above together with the associated manuscripts when published.
 
@@ -10,8 +10,8 @@ How to cite: see `CITATION.cff` (GitHub shows a "Cite this repository" button) a
 |---|---|
 | `scripts/core/` | modules imported by every script (`config.py`, `data.py`, `data3ch.py`, `model.py`, `phasenet_keras.py`) |
 | `scripts/pipeline/` | training, post-training quantization (16x8, INT8, W4A8 emulation), firmware input generation |
-| `scripts/analysis/` | scripts that derive the reported results from the device logs, trained models and evaluation results (per-seed summaries of the device measurements, Pareto analysis, statistics, MACs and FLOPs, memory-planner simulation); they write the JSON files in `results/final/` |
-| `firmware/` | ESP32-S3 firmware (PlatformIO, ESP-IDF 4.4.7, esp-tflite-micro 1.3.4, ESP-NN 1.2.9), including the replacement transposed-convolution kernel (`src/transpose_conv_act_fix.cc`), the operator profiler and the hash test; `results_hw/` holds the raw device logs |
+| `scripts/analysis/` | scripts that derive the reported results from the stored measurement summaries, trained models and evaluation results (per-seed summaries of the device measurements, Pareto analysis, statistics, MACs and FLOPs, memory-planner simulation); they write the JSON files in `results/final/` |
+| `firmware/` | ESP32-S3 firmware (PlatformIO, ESP-IDF 4.4.7, esp-tflite-micro 1.3.4, ESP-NN 1.2.9), including the replacement transposed-convolution kernel (`src/transpose_conv_act_fix.cc`), the operator profiler and the hash test |
 | `results/` | final result files read by the paper scripts |
 | `models/` | trained models for seeds 42, 43 and 44 (Keras and TFLite) |
 | `data/` | what is and is not redistributed (see `data/README.md`) |
@@ -19,11 +19,11 @@ How to cite: see `CITATION.cff` (GitHub shows a "Cite this repository" button) a
 
 `CHECKSUMS.sha256` lists SHA-256 of every file and `PROVENANCE.tsv` the origin of every file in the authors' working repository (last commit and its date, number of commits, SHA-256).
 
-Names: the model of the manuscript is called TinyPhaseNet throughout; internal working names of the authors' repository were replaced by `tinyphasenet` in file names (for example `include/tinyphasenet_16x8_model.h`, `models/tinyphasenet_16x8.tflite`) and in the text of the scripts. Code comments, docstrings and console messages are in English; the serial output of the firmware (for example the end-of-session markers `Profiling selesai` and `Benchmark selesai`, which the measurement scripts wait for) and the Indonesian-language labels written by the `*_id` outputs of the table scripts are kept as they are, because the device logs and the Indonesian manuscript depend on them. The raw device logs in `firmware/results_hw/` are kept as recorded and still show the firmware project name `phasenet_z_profiling_v2` in the boot line.
+Names: the model of the manuscript is called TinyPhaseNet throughout; internal working names of the authors' repository were replaced by `tinyphasenet` in file names (for example `include/tinyphasenet_16x8_model.h`, `models/tinyphasenet_16x8.tflite`) and in the text of the scripts. Code comments, docstrings and console messages are in English; the serial output of the firmware (for example the end-of-session markers `Profiling selesai` and `Benchmark selesai`, which the measurement scripts wait for) and the Indonesian-language labels written by the `*_id` outputs of the table scripts are kept as they are, because the firmware and the Indonesian manuscript depend on them.
 
 ## What is, and is not, in this archive
 
-Only what is needed to replicate the two manuscripts is included: the code that produces the results (training, quantization, evaluation, device analysis), the result files, the trained and quantized models of the reported configurations (seeds 42, 43 and 44), the firmware sources, and the raw device logs that the analysis scripts read. Not included: the LaTeX fragments, tables, number macros and figures made for writing the manuscripts, experiments that are not reported in the manuscripts (architecture-variation cost model, three-channel E,N,Z ablation, seeds 45-51, 4-bit variants other than the ones reported), earlier operator-profile logs, firmware model headers (generated from the models), and every waveform.
+Only what is needed to replicate the two manuscripts is included: the code that produces the results (training, quantization, evaluation, device analysis), the result files, the trained and quantized models of the reported configurations (seeds 42, 43 and 44), the firmware sources. The raw serial logs of the device sessions are not archived. Not included: the LaTeX fragments, tables, number macros and figures made for writing the manuscripts, experiments that are not reported in the manuscripts (architecture-variation cost model, three-channel E,N,Z ablation, seeds 45-51, 4-bit variants other than the ones reported), every raw device log, firmware model headers (generated from the models), and every waveform.
 
 ## Re-deriving the reported results
 
@@ -31,7 +31,9 @@ Only what is needed to replicate the two manuscripts is included: the code that 
 python3 reproduce.py --python /path/to/python
 ```
 
-The Python needs numpy, matplotlib, scipy and tensorflow (TensorFlow is only used to read the Keras models for the parameter counts). The script copies `results/` into `_work/`, links `models/` and `firmware/`, runs the analysis scripts in order, and compares every result file that a script rewrote (`results/final/*.json`) with the stored one. On the last check all 15 rewritten result files were identical to the stored ones. Some scripts also write LaTeX fragments and figures into sibling folders of `_work/`; these are by-products used while writing the manuscripts and are not part of the release.
+The Python needs numpy, matplotlib, scipy and tensorflow (TensorFlow is only used to read the Keras models for the parameter counts). The script copies `results/` into `_work/`, links `models/`, runs the analysis scripts that work from the stored result files and models, and compares every result file that a script rewrote (`results/final/*.json`) with the stored one; it exits with status 0 only if all are identical.
+
+The raw serial logs of the ESP32-S3 sessions are **not archived**. The result files derived from them (`results/final/hw_tiga_seed.json`, `hw_padrao_tiga_seed.json`, `hw_padrao_kuant_tiga_seed.json`, `kernel_transpos_esp32.json`, `hash_kernel_100jendela.json`, `diagnosis_int8_1ch.json`, `ketidakpastian_statistik.json`, `simulasi_perencana_tflm.json`) are the record of the measurements. The scripts that parse the logs (`scripts/analysis/164_`, `169_`, `175_`, `176_`, `177_`, `190_`, `192_`, `195_`, `231_`) are kept as documentation of how those files were derived; they cannot be re-run without the logs and `reproduce.py` does not run them. Some scripts also write LaTeX fragments and figures into sibling folders of `_work/`; these are by-products used while writing the manuscripts and are not part of the release.
 
 ## Companion study (compression, no device)
 
@@ -46,9 +48,9 @@ A second manuscript uses the same models and results to study the two compressio
 1. Install PlatformIO and a toolchain for ESP-IDF 4.4.7 (ESP32-S3).
 2. Regenerate the window headers (`hw_eval_stead.h`, `hw_eval_instance.h`, `hw_eval_ethz.h`) with `scripts/pipeline/10_make_hw_eval_inputs.py` (needs the dataset caches, see `data/README.md`); the model headers for the other environments (`3ch_int8`, `fp32_*`) come from `163_make_fw_int8_final.py`, `165_make_fw_3ch_int8.py` and `170_make_fw_float32.py`. Run the scripts from a tree laid out like `reproduce.py` builds it (scripts flat, `results/`, `models/`, `data/`, `firmware/tinyphasenet_profiling/`).
 3. `pio run -e <env> -t upload`, where `<env>` is one of the environments in `firmware/platformio.ini` (`int8`, `16x8`, `3ch_*`, `fp32_*`, `prof_*` for the operator profile, `*_hash*` for the kernel equivalence test, `*_sram` for the arena location).
-4. Read the serial output with `firmware/read_serial.py`. The board is an ESP32-S3-DevKitC-1 with 8 MB octal PSRAM and an INA219 current sensor on the board supply; the logs in `firmware/results_hw/` are the sessions used in the manuscript.
+4. Read the serial output with `firmware/read_serial.py`. The board is an ESP32-S3-DevKitC-1 with 8 MB octal PSRAM and an INA219 current sensor on the board supply.
 
-Tested on 28 Nov 2026: `reproduce.py` re-derives 15 result files from the logs and evaluation results, all identical to the stored ones. Earlier test, on 10 Nov 2026: starting from this folder, the window headers were regenerated (identical to the originals except the per-seed 16x8 threshold and Python scores; the generated 3-channel INT8 headers are byte-identical to those generated from the original working folder), and eight environments build successfully for the ESP32-S3: `int8`, `prof_1ch_16x8`, `3ch_int8`, `fp32_1ch`, `fp32_3ch`, `int8_hash`, `prof_var` and `3ch_16x8_sram` (at least one per group; PlatformIO downloads the toolchain and the esp-tflite-micro and ESP-NN components). The remaining environments were not built from this folder. Only the `int8` and `prof_1ch_16x8` builds were made without any file from outside this folder; the 3-channel environments also needed `hw_eval_3ch_100.h` (see "Known gaps").
+Tested on 28 Nov 2026: `reproduce.py` re-derives the result files that do not need the raw logs, all identical to the stored ones. Earlier test, on 10 Nov 2026: starting from this folder, the window headers were regenerated (identical to the originals except the per-seed 16x8 threshold and Python scores; the generated 3-channel INT8 headers are byte-identical to those generated from the original working folder), and eight environments build successfully for the ESP32-S3: `int8`, `prof_1ch_16x8`, `3ch_int8`, `fp32_1ch`, `fp32_3ch`, `int8_hash`, `prof_var` and `3ch_16x8_sram` (at least one per group; PlatformIO downloads the toolchain and the esp-tflite-micro and ESP-NN components). The remaining environments were not built from this folder. Only the `int8` and `prof_1ch_16x8` builds were made without any file from outside this folder; the 3-channel environments also needed `hw_eval_3ch_100.h` (see "Known gaps").
 
 ### Models with standard convolutions (Float32)
 
@@ -60,7 +62,7 @@ The PhaseNet counterparts (standard convolutions) were also measured in 16x8 and
 
 - `scripts/pipeline/230_make_fw_standar.py <include folder of a copy of the firmware> <1ch|3ch> [seed]` writes the model headers (same file and symbol names as the TinyPhaseNet variants, so the environments `int8`, `16x8`, `3ch_int8` and `3ch_16x8` of `firmware/platformio.ini` are used unchanged) and the 100-window inputs from `models/quant_padrao/*.tflite` and the thresholds in `results/final/ptq_padrao_3seed.json`.
 - `firmware/skrip_ukur_standar/` holds the measurement scripts (`jalan.sh` for one session, `semua.sh` for the twelve sessions, `ukur.py` to read the serial port without resetting the board) and `main_3ch_16x8_wdt.cpp`, the three-channel 16x8 firmware with the idle-task watchdog of the second core disabled (one invocation of that model takes 9.2 s). Set `PORT` and `WORK` as described in `jalan.sh`.
-- The raw logs are `firmware/results_hw/sesi_27nov_padrao_seed*_*_stead.log`. `scripts/analysis/231_ringkas_hw_padrao_kuantisasi.py` reads them and writes `results/final/hw_padrao_kuant_tiga_seed.json` (per seed, mean and sample standard deviation, ratio to the separable counterpart); `232_pareto_dua_belas.py` builds the Pareto analysis of the twelve configurations (`results/final/pareto_dua_belas.json`, 3^12 = 531,441 seed combinations).
+- The raw logs of these sessions (`sesi_27nov_padrao_seed*_*_stead.log`) are not archived. `scripts/analysis/231_ringkas_hw_padrao_kuantisasi.py` reads them and writes `results/final/hw_padrao_kuant_tiga_seed.json` (per seed, mean and sample standard deviation, ratio to the separable counterpart); `232_pareto_dua_belas.py` builds the Pareto analysis of the twelve configurations (`results/final/pareto_dua_belas.json`, 3^12 = 531,441 seed combinations).
 - 4-bit formats are not measured on the device (emulation only).
 
 ### Companion study: simulation against measurement
@@ -73,7 +75,7 @@ The simulated latency and energy of the ESP32-S3 (static count and analytical mo
 
 The F1-score per dataset of every model and format and the parameter counts are produced by `scripts/analysis/187_tabel_depthwise.py` (`results/final/parametros_modelos.json`).
 
-`scripts/analysis/195_simulasi_perencana_tflm.py` simulates the greedy memory planner of TensorFlow Lite Micro on the four Float32 graphs; it reproduces the planned arena layout of the three-channel standard model exactly (39 of 39 offsets of the plan printed by the board, `firmware/results_hw/sesi_10nov_rencana_memori_3ch_standar_seed44.log`) and explains why its arena is larger than that of its depthwise separable counterpart.
+`scripts/analysis/195_simulasi_perencana_tflm.py` simulates the greedy memory planner of TensorFlow Lite Micro on the four Float32 graphs; it reproduces the planned arena layout of the three-channel standard model exactly (39 of 39 offsets of the plan printed by the board in the (unarchived) session log `sesi_10nov_rencana_memori_3ch_standar_seed44.log`) and explains why its arena is larger than that of its depthwise separable counterpart.
 
 ### Kernel equivalence test on a computer
 
@@ -87,13 +89,13 @@ The F1-score per dataset of every model and format and the parameter counts are 
 
 - `hw_eval_3ch_100.h` (the 100 three-channel STEAD windows, 5.3 MB) has no generating script anywhere in the working repository or its git history; it is not included (it contains STEAD data). The environments `3ch_16x8` and `3ch_int8` need it, so they cannot be rebuilt from scratch from this folder. `165_make_fw_3ch_int8.py` also reads it for a consistency check, which prints a deviation of 0.82 against the old stored scores; the same value is printed when the script runs from the original folder (the old header predates the final model).
 - The model headers (`include/*_model.h`) are not included: they are generated from the models in `models/` by the `make_fw` scripts, one seed at a time (see "Rebuilding the firmware").
-- Most of the device logs and trained models are not tracked by git in the working repository; their history starts in this folder.
+- Most of the trained models are not tracked by git in the working repository; their history starts in this folder.
 - Training and quantization were checked for presence and imports only; they were not re-run to confirm bit-identical weights.
 
 ## License
 
 - Source code (`scripts/`, firmware sources, `reproduce.py`): Apache License 2.0 (`LICENSE`, `NOTICE`). The replacement kernel is a modified copy of the TensorFlow Lite Micro `TRANSPOSE_CONV` kernel, which is also Apache 2.0; its original copyright header is kept.
-- Trained models, result files, device logs and documentation: CC BY 4.0 (`LICENSE-DATA.md`). The models are trained on STEAD, which is itself distributed under CC BY 4.0 (checked on 10 Nov 2026 in the LICENSE file of its official repository); keep the attribution to Mousavi et al. 2019.
+- Trained models, result files and documentation: CC BY 4.0 (`LICENSE-DATA.md`). The models are trained on STEAD, which is itself distributed under CC BY 4.0 (checked on 10 Nov 2026 in the LICENSE file of its official repository); keep the attribution to Mousavi et al. 2019.
 - The license choice was confirmed by the first author on 10 Nov 2026 and approved by the co-authors afterwards, so that other researchers can reuse the code, models and data freely. The institution's policy has not been checked separately.
 
 ## Open items

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Re-derives the result files of the manuscripts from the device logs, trained models and evaluation results in this release folder
-and checks that they equal the stored ones.
+"""Re-derives result files of the manuscripts from the stored measurement summaries, trained models and evaluation results in this release folder
+and checks that they equal the stored ones. The raw device logs are not archived, so the scripts that parse them are not run (see README).
 
 The analysis scripts expect the original folder layout (results/, models/, firmware/tinyphasenet_profiling/results_hw/).
 This script builds that layout in _work/ (results copied, models and logs only linked), runs the analysis scripts in order, and compares every result
@@ -15,10 +15,8 @@ import argparse, json, os, shutil, subprocess, sys, time
 HERE = os.path.dirname(os.path.abspath(__file__))
 WORK = os.path.join(HERE, '_work')
 EXP = os.path.join(WORK, 'eksperimen_tinyphasenet_v2')
-ORDER = ['164_pareto_kandidat.py', '169_tabel_kernel_transpos.py', '175_ringkas_hw_tiga_seed.py', '176_diagnosis_int8_satu_kanal.py',
-         '177_hash_kernel_dan_sram.py', '190_ketidakpastian_statistik.py', '192_ringkas_hw_padrao_tiga_seed.py', '193_pareto_delapan.py',
-         '187_tabel_depthwise.py', '189_suplemen_per_seed.py', '202_mac_flops.py', '196_tabel_pendamping.py', '198_tabel_picking_formatos.py',
-         '201_tabel_tangga.py', '231_ringkas_hw_padrao_kuantisasi.py', '232_pareto_dua_belas.py']
+ORDER = ['193_pareto_delapan.py', '187_tabel_depthwise.py', '189_suplemen_per_seed.py', '202_mac_flops.py', '196_tabel_pendamping.py',
+         '198_tabel_picking_formatos.py', '201_tabel_tangga.py', '232_pareto_dua_belas.py']   # the scripts that parse the raw device logs (164, 169, 175-177, 190, 192, 195, 231) are not run: the logs are not archived
 
 
 def link(src, dst):
