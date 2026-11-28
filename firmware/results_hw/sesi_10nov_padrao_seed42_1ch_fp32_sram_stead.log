@@ -1,0 +1,38 @@
+[PROG] Repetisi 10/100: Latensi =  291.30 ms | Skor P = 0.94480 (Py = 0.94480, selisih = 0.000000)
+[PROG] Repetisi 20/100: Latensi =  291.30 ms | Skor P = 0.80428 (Py = 0.80428, selisih = 0.000000)
+[PROG] Repetisi 30/100: Latensi =  291.29 ms | Skor P = 0.74507 (Py = 0.74508, selisih = 0.000001)
+[PROG] Repetisi 40/100: Latensi =  291.28 ms | Skor P = 0.00007 (Py = 0.00007, selisih = 0.000000)
+[PROG] Repetisi 50/100: Latensi =  291.30 ms | Skor P = 0.00004 (Py = 0.00004, selisih = 0.000000)
+[PROG] Repetisi 60/100: Latensi =  291.30 ms | Skor P = 0.92302 (Py = 0.92302, selisih = 0.000000)
+[PROG] Repetisi 70/100: Latensi =  291.30 ms | Skor P = 0.93447 (Py = 0.93447, selisih = 0.000000)
+[PROG] Repetisi 80/100: Latensi =  291.29 ms | Skor P = 0.00006 (Py = 0.00006, selisih = 0.000000)
+[PROG] Repetisi 90/100: Latensi =  291.30 ms | Skor P = 0.27009 (Py = 0.27010, selisih = 0.000001)
+[PROG] Repetisi 100/100: Latensi =  291.29 ms | Skor P = 0.00019 (Py = 0.00019, selisih = 0.000000)
+
+=======================================================
+ HASIL PENGUKURAN EMPIRIS PHASENET 3-KANAL (Float32 satu kanal)
+ Model                          | Float32 (seed 42)
+ Input Tensor                   | [1, 3072, 1] (float32)
+ Output Tensor                  | [1, 3072, 1] (float32)
+-------------------------------------------------------
+ CPU Frequency                  | 240 MHz
+ Ukuran Bobot Model (Flash)     | 326744 byte (319.09 KB)
+ Lokasi Tensor Arena            | Internal SRAM
+ Tensor Arena Digunakan         | 200.15 KB (dari alokasi 256.00 KB)
+-------------------------------------------------------
+ Latensi Invoke (Mean +- Std)   | 291.31 +- 0.05 ms
+ Latensi Invoke (Median)        | 291.29 ms
+ Latensi Invoke (Min - Max)     | 291.26 - 291.47 ms
+ Daya Idle                      | 298.31 mW
+ Daya Aktif (saat Invoke)       | 453.83 mW
+ Energi per Inferensi           | 132.20 mJ
+ Energi Bersih di atas Idle     | 45.30 mJ
+-------------------------------------------------------
+ VALIDASI PORT vs TFLITE PYTHON (N = 100 jendela):
+   Selisih Skor Maksimum        | 0.000001
+   Kesesuaian Keputusan         | 100 / 100 (100.0%)
+ AKURASI DETEKSI (100 jendela STEAD, ambang 0.2786):
+   TP: 50 | TN: 50 | FP: 0 | FN: 0
+   Precision: 1.0000 | Recall: 1.0000 | F1-Score: 1.0000
+=======================================================
+[INFO] Benchmark selesai. Sistem siap.

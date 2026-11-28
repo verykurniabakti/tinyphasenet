@@ -1,0 +1,27 @@
+[INFO] 100 / 200 repetisi selesai...
+[INFO] 150 / 200 repetisi selesai...
+[INFO] 200 / 200 repetisi selesai...
+
+=======================================================
+ LAPORAN PROFILING PHASENET-Z v2 (N = 200, 100 jendela uji STEAD)
+ Varian                         | INT8 penuh
+-------------------------------------------------------
+ CPU freq (MHz)                 | 240
+ Ukuran model (byte)            | 75120
+ Tensor arena terpakai (KB)     | 137.355 (dialokasikan 288.0)
+ Latensi Invoke (ms)            | 767.072 +- 0.059 [min 766.917, max 767.224]
+ Latensi prapemrosesan total (ms)| 8.745 +- 0.467 (filter dari awal trace + z-score + kuantisasi)
+ Latensi bandpass 3072 sampel (ms)| 1.739 +- 0.003
+ Daya idle (mW)                 | 299.629  (n = 3000 sampel)
+ Daya selama Invoke (mW)        | 441.393  (n = 153360 sampel)
+ Energi per inferensi (mJ)      | 338.580
+ Energi di atas idle (mJ)       | 108.743
+-------------------------------------------------------
+ VALIDASI PORT (vs TFLite Python)
+   Selisih skor maksimum        : 0.355469
+   Keputusan berbeda            : 2 / 200
+ AKURASI DI PERANGKAT (100 jendela STEAD, ambang 0.0742)
+   TP 49  TN 38  FP 12  FN 1
+   Precision 0.8033  Recall 0.9800  F1 0.8829  FPR 0.2400
+=======================================================
+[INFO] Profiling selesai. Reset board untuk mengulang.

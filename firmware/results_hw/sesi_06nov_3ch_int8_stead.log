@@ -1,0 +1,35 @@
+[PROG] Repetisi 40/100: Latensi = 2758.07 ms | Skor P = 0.00000 (Py = 0.00000, selisih = 0.000000)
+[PROG] Repetisi 50/100: Latensi = 2758.15 ms | Skor P = 0.00000 (Py = 0.00000, selisih = 0.000000)
+[PROG] Repetisi 60/100: Latensi = 2758.14 ms | Skor P = 0.86328 (Py = 0.86328, selisih = 0.000000)
+[PROG] Repetisi 70/100: Latensi = 2757.98 ms | Skor P = 0.79297 (Py = 0.87500, selisih = 0.082031)
+[PROG] Repetisi 80/100: Latensi = 2758.10 ms | Skor P = 0.00000 (Py = 0.00000, selisih = 0.000000)
+[PROG] Repetisi 90/100: Latensi = 2758.10 ms | Skor P = 0.00000 (Py = 0.00000, selisih = 0.000000)
+[PROG] Repetisi 100/100: Latensi = 2758.13 ms | Skor P = 0.01172 (Py = 0.00391, selisih = 0.007812)
+
+=======================================================
+ HASIL PENGUKURAN EMPIRIS PHASENET 3-KANAL (INT8 penuh)
+ Model                          | PhaseNet-pndw 16x8 (seed 42)
+ Input Tensor                   | [1, 3072, 3] (int8)
+ Output Tensor                  | [1, 3072, 3] (int8)
+-------------------------------------------------------
+ CPU Frequency                  | 240 MHz
+ Ukuran Bobot Model (Flash)     | 168752 byte (164.80 KB)
+ Lokasi Tensor Arena            | SPIRAM (PSRAM 8MB, Octal-SPI @ 80MHz)
+ Tensor Arena Digunakan         | 208.23 KB (dari alokasi 1024.00 KB)
+-------------------------------------------------------
+ Latensi Invoke (Mean +- Std)   | 2758.07 +- 0.07 ms
+ Latensi Invoke (Median)        | 2758.07 ms
+ Latensi Invoke (Min - Max)     | 2757.92 - 2758.20 ms
+ Daya Idle                      | 295.34 mW
+ Daya Aktif (saat Invoke)       | 442.33 mW
+ Energi per Inferensi           | 1219.98 mJ
+ Energi Bersih di atas Idle     | 405.40 mJ
+-------------------------------------------------------
+ VALIDASI PORT vs TFLITE PYTHON (N = 100 jendela):
+   Selisih Skor Maksimum        | 0.160156
+   Kesesuaian Keputusan         | 97 / 100 (97.0%)
+ AKURASI DETEKSI (100 jendela STEAD, ambang 0.1484):
+   TP: 47 | TN: 47 | FP: 3 | FN: 3
+   Precision: 0.9400 | Recall: 0.9400 | F1-Score: 0.9400
+=======================================================
+[INFO] Benchmark selesai. Sistem siap.

@@ -1,0 +1,49 @@
+;32mI (481) cpu_start: Starting scheduler on PRO CPU.[0m
+[0;32mI (0) cpu_start: Starting sch
+[INFO] Inisialisasi Profiling PhaseNet-Z v2...
+[INFO] Input scale/zp: 0.000866 / 0, output scale/zp: 0.000031 / 0
+[DIAG] jendela 0: skor 0.844727 (Python 0.844727) | rata-rata P 0.008338 S 0.007059 N 0.984600 | jumlah softmax [1.0000, 1.0001]
+[DIAG] output t=0..3 (raw): 2 10 32755 | 2 9 32756 | 2 2 32764 | 2 2 32764
+[0;31mE (9670) task_wdt: Task watchdog got triggered. The following tasks did not reset the watchdog in time:[0m
+[0;31mE (9670) task_wdt:  - IDLE1 (CPU 1)[0m
+[0;31mE (9670) task_wdt: Tasks currently running:[0m
+[0;31mE (9670) task_wdt: CPU 0: IDLE0[0m
+[0;31mE (9670) task_wdt: CPU 1: Profiling[0m
+[0;31mE (9670) task_wdt: Print CPU 0 (current core) backtrace[0m
+
+
+Backtrace: 0x42023982:0x3FC93590 0x40376C31:0x3FC935C0 0x42043A43:0x3FCF4400 0x42024332:0x3FCF4420 0x4037C5BB:0x3FCF4440
+
+[0;31mE (9670) task_wdt: Print CPU 1 backtrace[0m
+
+
+Backtrace: 0x403762D1:0x3FC93BA0 0x40376C31:0x3FC93BC0 0x4200553D:0x3FCE5B00 0x4201781A:0x3FCE5E90 0x420071DA:0x3FCE5EC0 0x4200270E:0x3FCE5EE0
+
+[INFO] 50 / 200 repetisi selesai...
+[INFO] 100 / 200 repetisi selesai...
+[INFO] 150 / 200 repetisi selesai...
+[INFO] 200 / 200 repetisi selesai...
+
+=======================================================
+ LAPORAN PROFILING PHASENET-Z v2 (N = 200, 100 jendela uji STEAD)
+ Varian                         | 16x8 (aktivasi int16, bobot int8)
+-------------------------------------------------------
+ CPU freq (MHz)                 | 240
+ Ukuran model (byte)            | 83592
+ Tensor arena terpakai (KB)     | 265.512 (dialokasikan 288.0)
+ Latensi Invoke (ms)            | 1095.272 +- 0.910 [min 1095.133, max 1108.096]
+ Latensi prapemrosesan total (ms)| 8.845 +- 0.446 (filter dari awal trace + z-score + kuantisasi)
+ Latensi bandpass 3072 sampel (ms)| 1.738 +- 0.003
+ Daya idle (mW)                 | 303.416  (n = 3000 sampel)
+ Daya selama Invoke (mW)        | 445.437  (n = 218937 sampel)
+ Energi per inferensi (mJ)      | 487.874
+ Energi di atas idle (mJ)       | 155.551
+-------------------------------------------------------
+ VALIDASI PORT (vs TFLite Python)
+   Selisih skor maksimum        : 0.001099
+   Keputusan berbeda            : 0 / 200
+ AKURASI DI PERANGKAT (100 jendela STEAD, ambang 0.2353)
+   TP 47  TN 48  FP 2  FN 3
+   Precision 0.9592  Recall 0.9400  F1 0.9495  FPR 0.0400
+=======================================================
+[INFO] Profiling selesai. Reset board untuk mengulang.

@@ -1,0 +1,158 @@
+[0;32mI (843) spiram: SPI SRAM memory test OK[0m
+[0;32mI (852) cpu_start: Pro cpu start user code[0m
+[0;32mI (852) cpu_start: cpu freq: 240000000[0m
+[0;32mI (852) cpu_start: Application information:[0m
+[0;32mI (855) cpu_start: Project name:     phasenet_z_profiling_v2[0m
+[0;32mI (861) cpu_start: App version:      1[0m
+[0;32mI (865) cpu_start: Compile time:     Nov  7 2026 09:01:16[0m
+[0;32mI (871) cpu_start: ELF file SHA256:  432f1d2785459b14...[0m
+[0;32mI (877) cpu_start: ESP-IDF:          4.4.7[0m
+[0;32mI (882) cpu_start: Min chip rev:     v0.0[0m
+[0;32mI (887) cpu_start: Max chip rev:     v0.99 [0m
+[0;32mI (892) cpu_start: Chip rev:         v0.2[0m
+[0;32mI (897) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (904) heap_init: At 3FC9ABB0 len 0004EB60 (314 KiB): D/IRAM[0m
+[0;32mI (910) heap_init: At 3FCE9710 len 00005724 (21 KiB): STACK/DIRAM[0m
+[0;32mI (917) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (923) heap_init: At 600FE000 len 00002000 (8 KiB): RTCRAM[0m
+[0;32mI (929) spiram: Adding pool of 8192K of external SPI memory to heap allocator[0m
+[0;32mI (938) spi_flash: detected chip: generic[0m
+[0;32mI (942) spi_flash: flash io: qio[0m
+[0;33mW (946) spi_flash: Detected size(16384k) larger than the size in the binary image header(8192k). Using the size in the binary image header.[0m
+[0;32mI (959) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (966) sleep: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (973) cpu_start: Starting scheduler on PRO CPU.[0m
+[0;32mI (0) cpu_start: Starting scheduler on APP CPU.[0m
+[0;32mI (988) spiram: Reserving pool of 32K of internal memory for DMA/int
+[INFO] Inisialisasi Profiling PhaseNet-Z v2...
+[INFO] Input scale/zp: 0.182129 / -29, output scale/zp: 0.003906 / -128
+[DIAG] jendela 0: skor 0.003906 (Python 0.003906) | rata-rata P 0.000005 S 0.000000 N 0.996094 | jumlah softmax [0.9961, 1.0000]
+[DIAG] output t=0..3 (raw): -128 -128 127 | -128 -128 127 | -128 -128 127 | -128 -128 127
+SKOR 5 0.000000 0.000000 0
+SKOR 6 0.000000 0.000000 0
+SKOR 7 0.609375 0.457031 1
+SKOR 8 0.000000 0.000000 0
+SKOR 9 0.000000 0.000000 0
+SKOR 10 0.003906 0.003906 0
+SKOR 11 0.000000 0.000000 0
+SKOR 12 0.156250 0.050781 1
+SKOR 13 0.000000 0.000000 0
+SKOR 14 0.003906 0.007812 1
+SKOR 15 0.000000 0.000000 0
+SKOR 16 0.007812 0.003906 1
+SKOR 17 0.035156 0.015625 1
+SKOR 18 0.003906 0.003906 0
+SKOR 19 0.000000 0.000000 0
+SKOR 20 0.003906 0.011719 1
+SKOR 21 0.000000 0.000000 1
+SKOR 22 0.000000 0.000000 0
+SKOR 23 0.000000 0.000000 0
+SKOR 24 0.007812 0.003906 1
+SKOR 25 0.457031 0.414062 0
+SKOR 26 0.000000 0.000000 0
+SKOR 27 0.015625 0.007812 1
+SKOR 28 0.000000 0.000000 0
+SKOR 29 0.070312 0.125000 1
+SKOR 30 0.000000 0.000000 0
+SKOR 31 0.000000 0.000000 0
+SKOR 32 0.000000 0.000000 1
+SKOR 33 0.000000 0.003906 0
+SKOR 34 0.000000 0.007812 1
+SKOR 35 0.000000 0.000000 0
+SKOR 36 0.003906 0.000000 1
+SKOR 37 0.031250 0.015625 1
+SKOR 38 0.000000 0.000000 0
+SKOR 39 0.000000 0.000000 0
+SKOR 40 0.000000 0.000000 0
+SKOR 41 0.000000 0.000000 0
+SKOR 42 0.000000 0.000000 0
+SKOR 43 0.082031 0.105469 1
+SKOR 44 0.003906 0.000000 0
+SKOR 45 0.000000 0.000000 0
+SKOR 46 0.000000 0.015625 1
+SKOR 47 0.000000 0.000000 0
+SKOR 48 0.011719 0.042969 1
+SKOR 49 0.000000 0.000000 0
+SKOR 50 0.000000 0.000000 0
+SKOR 51 0.000000 0.000000 0
+SKOR 52 0.000000 0.000000 0
+SKOR 53 0.000000 0.003906 0
+SKOR 54 0.000000 0.000000 0
+[INFO] 50 / 200 repetisi selesai...
+SKOR 55 0.000000 0.000000 1
+SKOR 56 0.000000 0.000000 0
+SKOR 57 0.003906 0.015625 1
+SKOR 58 0.007812 0.003906 0
+SKOR 59 0.003906 0.003906 1
+SKOR 60 0.000000 0.000000 1
+SKOR 61 0.000000 0.003906 1
+SKOR 62 0.007812 0.011719 1
+SKOR 63 0.000000 0.000000 0
+SKOR 64 0.007812 0.007812 1
+SKOR 65 0.000000 0.007812 1
+SKOR 66 0.003906 0.003906 0
+SKOR 67 0.003906 0.007812 1
+SKOR 68 0.003906 0.007812 1
+SKOR 69 0.308594 0.273438 1
+SKOR 70 0.000000 0.000000 1
+SKOR 71 0.000000 0.000000 0
+SKOR 72 0.003906 0.000000 1
+SKOR 73 0.000000 0.000000 0
+SKOR 74 0.011719 0.097656 1
+SKOR 75 0.011719 0.007812 1
+SKOR 76 0.000000 0.003906 1
+SKOR 77 0.000000 0.000000 0
+SKOR 78 0.003906 0.003906 1
+SKOR 79 0.003906 0.011719 1
+SKOR 80 0.003906 0.003906 1
+SKOR 81 0.000000 0.000000 1
+SKOR 82 0.179688 0.210938 0
+SKOR 83 0.000000 0.000000 0
+SKOR 84 0.000000 0.000000 0
+SKOR 85 0.007812 0.007812 1
+SKOR 86 0.003906 0.003906 0
+SKOR 87 0.000000 0.000000 0
+SKOR 88 0.000000 0.003906 0
+SKOR 89 0.015625 0.003906 1
+SKOR 90 0.000000 0.007812 1
+SKOR 91 0.027344 0.082031 1
+SKOR 92 0.000000 0.015625 1
+SKOR 93 0.042969 0.007812 1
+SKOR 94 0.000000 0.000000 0
+SKOR 95 0.000000 0.000000 1
+SKOR 96 0.000000 0.000000 1
+SKOR 97 0.007812 0.000000 0
+SKOR 98 0.000000 0.000000 1
+SKOR 99 0.011719 0.003906 1
+SKOR 0 0.003906 0.003906 1
+SKOR 1 0.003906 0.003906 1
+SKOR 2 0.011719 0.003906 1
+SKOR 3 0.000000 0.000000 0
+SKOR 4 0.000000 0.000000 0
+[INFO] 100 / 200 repetisi selesai...
+[INFO] 150 / 200 repetisi selesai...
+[INFO] 200 / 200 repetisi selesai...
+
+=======================================================
+ LAPORAN PROFILING PHASENET-Z v2 (N = 200, 100 jendela uji STEAD)
+ Varian                         | INT8 penuh
+-------------------------------------------------------
+ CPU freq (MHz)                 | 240
+ Ukuran model (byte)            | 75120
+ Tensor arena terpakai (KB)     | 59.465 (dialokasikan 256.0)
+ Latensi Invoke (ms)            | 209.161 +- 0.038 [min 209.036, max 209.244]
+ Latensi prapemrosesan total (ms)| 8.733 +- 0.465 (filter dari awal trace + z-score + kuantisasi)
+ Latensi bandpass 3072 sampel (ms)| 1.729 +- 0.003
+ Daya idle (mW)                 | 297.158  (n = 2999 sampel)
+ Daya selama Invoke (mW)        | 442.942  (n = 41766 sampel)
+ Energi per inferensi (mJ)      | 92.646
+ Energi di atas idle (mJ)       | 30.492
+-------------------------------------------------------
+ VALIDASI PORT (vs TFLite Python)
+   Selisih skor maksimum        : 0.152344
+   Keputusan berbeda            : 28 / 200
+ AKURASI DI PERANGKAT (100 jendela STEAD, ambang 0.0039)
+   TP 34  TN 41  FP 9  FN 16
+   Precision 0.7907  Recall 0.6800  F1 0.7312  FPR 0.1800
+=======================================================
+[INFO] Profiling selesai. Reset board untuk mengulang.

@@ -1,0 +1,111 @@
+[0;32mI (461) esp_image: segment 1: paddr=00232e10 vaddr=3fc93c20 size=02664h (  9828) load[0m
+[0;32mI (463) esp_image: segment 2: paddr=0023547c vaddr=40374000 size=0ab9ch ( 43932) load[0m
+[0;32mI (475) esp_image: segment 3: paddr=00240020 vaddr=42000020 size=45edch (286428) map[0m
+[0;32mI (519) esp_image: segment 4: paddr=00285f04 vaddr=4037eb9c size=05078h ( 20600) load[0m
+[0;32mI (529) boot: Loaded app from partition at offset 0x10000[0m
+[0;32mI (530) boot: Set actual ota_seq=1 in otadata[0][0m
+[0;32mI (530) boot: Disabling RNG early entropy source...[0m
+[0;32mI (546) cpu_start: Multicore app[0m
+[0;32mI (546) opi psram: vendor id : 0x0d (AP)[0m
+[0;32mI (547) opi psram: dev id    : 0x02 (generation 3)[0m
+[0;32mI (549) opi psram: density   : 0x03 (64 Mbit)[0m
+[0;32mI (554) opi psram: good-die  : 0x01 (Pass)[0m
+[0;32mI (559) opi psram: Latency   : 0x01 (Fixed)[0m
+[0;32mI (563) opi psram: VCC       : 0x01 (3V)[0m
+[0;32mI (568) opi psram: SRF       : 0x01 (Fast Refresh)[0m
+[0;32mI (573) opi psram: BurstType : 0x01 (Hybrid Wrap)[0m
+[0;32mI (579) opi psram: BurstLen  : 0x01 (32 Byte)[0m
+[0;32mI (584) opi psram: Readlatency  : 0x02 (10 cycles@Fixed)[0m
+[0;32mI (590) opi psram: DriveStrength: 0x00 (1/1)[0m
+[0;32mI (595) MSPI Timing: PSRAM timing tuning index: 5[0m
+[0;32mI (600) spiram: Found 64MBit SPI RAM device[0m
+[0;32mI (605) spiram: SPI RAM mode: sram 80m[0m
+[0;32mI (610) spiram: PSRAM initialized, cache is in normal (1-core) mode.[0m
+[0;32mI (617) cpu_start: Pro cpu up.[0m
+[0;32mI (620) cpu_start: Starting app cpu, entry point is 0x40375d2c[0m
+[0;32mI (0) cpu_start: App cpu up.[0m
+[0;32mI (1040) spiram: SPI SRAM memory test OK[0m
+[0;32mI (1049) cpu_start: Pro cpu start user code[0m
+[0;32mI (1049) cpu_start: cpu freq: 240000000[0m
+[0;32mI (1049) cpu_start: Application information:[0m
+[0;32mI (1052) cpu_start: Project name:     phasenet_z_profiling_v2[0m
+[0;32mI (1058) cpu_start: App version:      1[0m
+[0;32mI (1063) cpu_start: Compile time:     Nov 27 2026 06:43:16[0m
+[0;32mI (1069) cpu_start: ELF file SHA256:  f2c0c42d346cbd0b...[0m
+[0;32mI (1075) cpu_start: ESP-IDF:          4.4.7[0m
+[0;32mI (1080) cpu_start: Min chip rev:     v0.0[0m
+[0;32mI (1084) cpu_start: Max chip rev:     v0.99 [0m
+[0;32mI (1089) cpu_start: Chip rev:         v0.2[0m
+[0;32mI (1094) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (1102) heap_init: At 3FC97408 len 00052308 (328 KiB): D/IRAM[0m
+[0;32mI (1108) heap_init: At 3FCE9710 len 00005724 (21 KiB): STACK/DIRAM[0m
+[0;32mI (1115) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (1121) heap_init: At 600FE000 len 00002000 (8 KiB): RTCRAM[0m
+[0;32mI (1127) spiram: Adding pool of 8192K of external SPI memory to heap allocator[0m
+[0;32mI (1136) spi_flash: detected chip: generic[0m
+[0;32mI (1140) spi_flash: flash io: qio[0m
+[0;33mW (1144) spi_flash: Detected size(16384k) larger than the size in the binary image header(8192k). Using the size in the binary image header.[0m
+[0;32mI (1158) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (1164) sleep: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (1172) cpu_start: Starting scheduler on PRO CPU.[0m
+[0;32mI (0) cpu_start: Starting scheduler on APP CPU.[0m
+[0;32mI (1187) spiram: Reserving pool of 32K of internal memory for DMA/int
+
+=======================================================
+   BENCHMARK PHASENET 3-KANAL 16x8 PADA ESP32-S3
+=======================================================
+[INFO] Sensor INA219 terdeteksi di I2C (17/18). Telemetri daya AKTIF.
+[INFO] Skema TFLite valid.
+[MEM] Blok terbesar Internal SRAM : 294912 byte (288.00 KB)
+[MEM] Blok terbesar SPIRAM (PSRAM): 8257536 byte (8064.00 KB)
+[MEM] Mengalokasikan 1024 KB Tensor Arena di SPIRAM (PSRAM).
+[INFO] Memanggil interpreter->AllocateTensors()...
+[MEM] AllocateTensors() SUKSES! Tensor arena terpakai: 209052 byte (204.15 KB)
+[TENSOR] Input: shape [1, 3072, 3], type 7, scale 0.000866, zp 0
+[TENSOR] Output: shape [1, 3072, 3], type 7, scale 0.000031, zp 0
+[TASK] Memulai rangkaian profiling PhaseNet 3-Kanal 16x8...
+[INFO] Menjalankan pemanasan & iterasi pengukuran...
+[WARM] Warmup 1: Latensi = 9193.87 ms | Skor P = 0.93762 (Py = 0.93762)
+[WARM] Warmup 2: Latensi = 9193.34 ms | Skor P = 0.79388 (Py = 0.79388)
+[WARM] Warmup 3: Latensi = 9193.61 ms | Skor P = 0.96893 (Py = 0.96893)
+[WARM] Warmup 4: Latensi = 9193.79 ms | Skor P = 0.00006 (Py = 0.00006)
+[WARM] Warmup 5: Latensi = 9193.82 ms | Skor P = 0.00015 (Py = 0.00015)
+[PROG] Repetisi  1/100: Latensi = 9194.04 ms | Skor P = 0.00006 (Py = 0.00006, selisih = 0.000000)
+[PROG] Repetisi 10/100: Latensi = 9194.25 ms | Skor P = 0.90933 (Py = 0.90933, selisih = 0.000000)
+[PROG] Repetisi 20/100: Latensi = 9193.66 ms | Skor P = 0.78473 (Py = 0.78473, selisih = 0.000000)
+[PROG] Repetisi 30/100: Latensi = 9193.63 ms | Skor P = 0.70807 (Py = 0.70807, selisih = 0.000000)
+[PROG] Repetisi 40/100: Latensi = 9194.37 ms | Skor P = 0.00006 (Py = 0.00006, selisih = 0.000000)
+[PROG] Repetisi 50/100: Latensi = 9194.00 ms | Skor P = 0.00009 (Py = 0.00009, selisih = 0.000000)
+[PROG] Repetisi 60/100: Latensi = 9193.96 ms | Skor P = 0.95505 (Py = 0.95505, selisih = 0.000000)
+[PROG] Repetisi 70/100: Latensi = 9193.86 ms | Skor P = 0.97299 (Py = 0.97299, selisih = 0.000000)
+[PROG] Repetisi 80/100: Latensi = 9194.34 ms | Skor P = 0.00006 (Py = 0.00006, selisih = 0.000000)
+[PROG] Repetisi 90/100: Latensi = 9193.68 ms | Skor P = 0.00006 (Py = 0.00006, selisih = 0.000000)
+[PROG] Repetisi 100/100: Latensi = 9193.99 ms | Skor P = 0.00015 (Py = 0.00015, selisih = 0.000000)
+
+=======================================================
+ HASIL PENGUKURAN EMPIRIS PHASENET 3-KANAL (16x8)
+ Model                          | PhaseNet-pndw 16x8 (seed 42)
+ Input Tensor                   | [1, 3072, 3] (int16)
+ Output Tensor                  | [1, 3072, 3] (int16)
+-------------------------------------------------------
+ CPU Frequency                  | 240 MHz
+ Ukuran Bobot Model (Flash)     | 317792 byte (310.34 KB)
+ Lokasi Tensor Arena            | SPIRAM (PSRAM 8MB, Octal-SPI @ 80MHz)
+ Tensor Arena Digunakan         | 204.15 KB (dari alokasi 1024.00 KB)
+-------------------------------------------------------
+ Latensi Invoke (Mean +- Std)   | 9193.79 +- 0.26 ms
+ Latensi Invoke (Median)        | 9193.78 ms
+ Latensi Invoke (Min - Max)     | 9193.09 - 9194.37 ms
+ Daya Idle                      | 290.93 mW
+ Daya Aktif (saat Invoke)       | 413.46 mW
+ Energi per Inferensi           | 3801.25 mJ
+ Energi Bersih di atas Idle     | 1126.53 mJ
+-------------------------------------------------------
+ VALIDASI PORT vs TFLITE PYTHON (N = 100 jendela):
+   Selisih Skor Maksimum        | 0.000000
+   Kesesuaian Keputusan         | 100 / 100 (100.0%)
+ AKURASI DETEKSI (100 jendela STEAD, ambang 0.1862):
+   TP: 50 | TN: 50 | FP: 0 | FN: 0
+   Precision: 1.0000 | Recall: 1.0000 | F1-Score: 1.0000
+=======================================================
+[INFO] Benchmark selesai. Sistem siap.

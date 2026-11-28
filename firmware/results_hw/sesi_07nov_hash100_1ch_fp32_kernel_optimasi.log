@@ -1,0 +1,182 @@
+�&�+
+B¢�J��}�х��� Project name:     phasenet_z_profiling_v2[0m
+[0;32mI (851) cpu_start: App version:      1[0m
+[0;32mI (855) cpu_start: Compile time:     Nov  7 2026 10:19:07[0m
+[0;32mI (861) cpu_start: ELF file SHA256:  5ccb2fb710267329...[0m
+[0;32mI (867) cpu_start: ESP-IDF:          4.4.7[0m
+[0;32mI (872) cpu_start: Min chip rev:     v0.0[0m
+[0;32mI (877) cpu_start: Max chip rev:     v0.99 [0m
+[0;32mI (882) cpu_start: Chip rev:         v0.2[0m
+[0;32mI (886) heap_init: Initializing. RAM available for dynamic allocation:[0m
+[0;32mI (894) heap_init: At 3FC97408 len 00052308 (328 KiB): D/IRAM[0m
+[0;32mI (900) heap_init: At 3FCE9710 len 00005724 (21 KiB): STACK/DIRAM[0m
+[0;32mI (907) heap_init: At 3FCF0000 len 00008000 (32 KiB): DRAM[0m
+[0;32mI (913) heap_init: At 600FE000 len 00002000 (8 KiB): RTCRAM[0m
+[0;32mI (919) spiram: Adding pool of 8192K of external SPI memory to heap allocator[0m
+[0;32mI (928) spi_flash: detected chip: generic[0m
+[0;32mI (932) spi_flash: flash io: qio[0m
+[0;33mW (936) spi_flash: Detected size(16384k) larger than the size in the binary image header(8192k). Using the size in the binary image header.[0m
+[0;32mI (949) sleep: Configure to isolate all GPIO pins in sleep state[0m
+[0;32mI (956) sleep: Enable automatic switching of GPIO sleep configuration[0m
+[0;32mI (963) cpu_start: Starting scheduler on PRO CPU.[0m
+[0;32mI (0) cpu_start: Starting scheduler on APP CPU.[0m
+[0;32mI (978) spiram: Reserving pool of 32K of internal memory for DMA/int
+
+=======================================================
+   BENCHMARK PHASENET 3-KANAL 16x8 PADA ESP32-S3
+=======================================================
+[INFO] Sensor INA219 terdeteksi di I2C (17/18). Telemetri daya AKTIF.
+[INFO] Skema TFLite valid.
+[MEM] Blok terbesar Internal SRAM : 294912 byte (288.00 KB)
+[MEM] Blok terbesar SPIRAM (PSRAM): 8257536 byte (8064.00 KB)
+[MEM] Mengalokasikan 4096 KB Tensor Arena di SPIRAM (PSRAM).
+[INFO] Memanggil interpreter->AllocateTensors()...
+[MEM] AllocateTensors() SUKSES! Tensor arena terpakai: 208072 byte (203.20 KB)
+[TENSOR] Input: shape [1, 3072, 1], type 1, scale 0.000000, zp 0
+[TENSOR] Output: shape [1, 3072, 3], type 1, scale 0.000000, zp 0
+[TASK] Memulai rangkaian profiling PhaseNet 3-Kanal 16x8...
+[INFO] Menjalankan pemanasan & iterasi pengukuran...
+[WARM] Warmup 1: Latensi =  194.13 ms | Skor P = 0.83522 (Py = 0.83522)
+[WARM] Warmup 2: Latensi =  193.92 ms | Skor P = 0.73359 (Py = 0.73359)
+[WARM] Warmup 3: Latensi =  193.86 ms | Skor P = 0.90157 (Py = 0.90157)
+[WARM] Warmup 4: Latensi =  193.85 ms | Skor P = 0.00101 (Py = 0.00101)
+[WARM] Warmup 5: Latensi =  193.90 ms | Skor P = 0.00049 (Py = 0.00049)
+HASH 5 67a6fab5
+[PROG] Repetisi  1/100: Latensi =  194.03 ms | Skor P = 0.00078 (Py = 0.00078, selisih = 0.000000)
+HASH 6 79a4ad1b
+HASH 7 773323c4
+HASH 8 b4428d14
+HASH 9 d6b37b03
+HASH 10 84b0db30
+HASH 11 67545d6b
+HASH 12 80f33f6f
+HASH 13 72186edb
+HASH 14 efef0d84
+[PROG] Repetisi 10/100: Latensi =  193.88 ms | Skor P = 0.01888 (Py = 0.01888, selisih = 0.000000)
+HASH 15 ef1085b6
+HASH 16 5da44d12
+HASH 17 ba7cdd91
+HASH 18 cbf2af6d
+HASH 19 ee4700cb
+HASH 20 dd442e46
+HASH 21 b95318f5
+HASH 22 f9c1114f
+HASH 23 86014410
+HASH 24 25c3399c
+[PROG] Repetisi 20/100: Latensi =  193.92 ms | Skor P = 0.66020 (Py = 0.66020, selisih = 0.000000)
+HASH 25 ecf6b5d3
+HASH 26 0cc0ba0c
+HASH 27 df50a86e
+HASH 28 cc761f97
+HASH 29 2e676152
+HASH 30 96516fc8
+HASH 31 f719c48a
+HASH 32 58c74c16
+HASH 33 93f06cec
+HASH 34 69ff65d0
+[PROG] Repetisi 30/100: Latensi =  193.85 ms | Skor P = 0.75669 (Py = 0.75669, selisih = 0.000000)
+HASH 35 cf644954
+HASH 36 5882b4fb
+HASH 37 eef19b3b
+HASH 38 dd4f2e3e
+HASH 39 5d8eb53f
+HASH 40 de75fd16
+HASH 41 ff89c444
+HASH 42 cead674a
+HASH 43 80c84181
+HASH 44 badb5789
+[PROG] Repetisi 40/100: Latensi =  193.89 ms | Skor P = 0.00383 (Py = 0.00383, selisih = 0.000000)
+HASH 45 ce5f9edb
+HASH 46 9b01c94b
+HASH 47 9b9afe45
+HASH 48 6143e877
+HASH 49 ef421fcc
+HASH 50 ffc0dd71
+HASH 51 7d2a7ee0
+HASH 52 9f36496f
+HASH 53 5f09323f
+HASH 54 080bba72
+[PROG] Repetisi 50/100: Latensi =  193.88 ms | Skor P = 0.00456 (Py = 0.00456, selisih = 0.000000)
+HASH 55 39971ca0
+HASH 56 884f49a3
+HASH 57 425bf348
+HASH 58 5dc1f0c9
+HASH 59 ae1a18af
+HASH 60 1f6bf817
+HASH 61 3ba2041f
+HASH 62 022f7a33
+HASH 63 b00d1eb3
+HASH 64 bfb409bb
+[PROG] Repetisi 60/100: Latensi =  193.90 ms | Skor P = 0.87160 (Py = 0.87160, selisih = 0.000000)
+HASH 65 60deb5a4
+HASH 66 a834a3df
+HASH 67 7b24b2c0
+HASH 68 21c4a24a
+HASH 69 2c1255c7
+HASH 70 198aea34
+HASH 71 281d7695
+HASH 72 d65e3a70
+HASH 73 71333f01
+HASH 74 049ab2ae
+[PROG] Repetisi 70/100: Latensi =  193.84 ms | Skor P = 0.84437 (Py = 0.84437, selisih = 0.000000)
+HASH 75 9f1298e0
+HASH 76 c357871a
+HASH 77 0e77eb0e
+HASH 78 c876b2f8
+HASH 79 b415f669
+HASH 80 d0ede0af
+HASH 81 f1eadf00
+HASH 82 b0180388
+HASH 83 57991621
+HASH 84 ed18bfe8
+[PROG] Repetisi 80/100: Latensi =  193.93 ms | Skor P = 0.00152 (Py = 0.00152, selisih = 0.000000)
+HASH 85 86b6da99
+HASH 86 a0ee795c
+HASH 87 82639c5c
+HASH 88 fd7a5cf2
+HASH 89 6ed91dc4
+HASH 90 986a146f
+HASH 91 7e328a36
+HASH 92 674269d1
+HASH 93 4580a51e
+HASH 94 bdca0f50
+[PROG] Repetisi 90/100: Latensi =  193.87 ms | Skor P = 0.00498 (Py = 0.00498, selisih = 0.000000)
+HASH 95 8d541f93
+HASH 96 aa5d35d8
+HASH 97 524f3045
+HASH 98 9f16609f
+HASH 99 d1918f33
+HASH 0 6b078fc4
+HASH 1 8ecb2ecd
+HASH 2 1a25bec6
+HASH 3 d689673e
+HASH 4 c2e22df8
+[PROG] Repetisi 100/100: Latensi =  193.89 ms | Skor P = 0.00049 (Py = 0.00049, selisih = 0.000000)
+
+=======================================================
+ HASIL PENGUKURAN EMPIRIS PHASENET 3-KANAL (Float32 satu kanal)
+ Model                          | Float32 (seed 42)
+ Input Tensor                   | [1, 3072, 1] (float32)
+ Output Tensor                  | [1, 3072, 1] (float32)
+-------------------------------------------------------
+ CPU Frequency                  | 240 MHz
+ Ukuran Bobot Model (Flash)     | 149708 byte (146.20 KB)
+ Lokasi Tensor Arena            | SPIRAM (PSRAM 8MB, Octal-SPI @ 80MHz)
+ Tensor Arena Digunakan         | 203.20 KB (dari alokasi 4096.00 KB)
+-------------------------------------------------------
+ Latensi Invoke (Mean +- Std)   | 193.90 +- 0.05 ms
+ Latensi Invoke (Median)        | 193.89 ms
+ Latensi Invoke (Min - Max)     | 193.82 - 194.04 ms
+ Daya Idle                      | 298.42 mW
+ Daya Aktif (saat Invoke)       | 457.39 mW
+ Energi per Inferensi           | 88.69 mJ
+ Energi Bersih di atas Idle     | 30.83 mJ
+-------------------------------------------------------
+ VALIDASI PORT vs TFLITE PYTHON (N = 100 jendela):
+   Selisih Skor Maksimum        | 0.000001
+   Kesesuaian Keputusan         | 100 / 100 (100.0%)
+ AKURASI DETEKSI (100 jendela STEAD, ambang 0.2002):
+   TP: 47 | TN: 48 | FP: 2 | FN: 3
+   Precision: 0.9592 | Recall: 0.9400 | F1-Score: 0.9495
+=======================================================
+[INFO] Benchmark selesai. Sistem siap.
