@@ -7,7 +7,7 @@ This script builds that layout in _work/ (results copied, models and logs only l
 file that a script rewrote (results/final/*.json) with the stored file in this folder. Some scripts also write LaTeX fragments and figures into
 sibling folders of _work/; these are by-products and are not part of the release.
 Usage:  python3 reproduce.py [--python /path/to/python]
-Needs:  Python with numpy, matplotlib, scipy, tensorflow (tensorflow only for 187_tabel_depthwise.py).
+Needs:  the Python environment of requirements.txt / environment.yml (tensorflow is only used by 187_tabel_depthwise.py).
 Exit status: 0 if every script ran and every rewritten result file is identical to the stored one.
 """
 import argparse, json, os, shutil, subprocess, sys, time

@@ -1,0 +1,16 @@
+# Python environment of the analysis and evaluation scripts (Python 3.11.15; versions as used for the reported results)
+numpy==1.26.4
+scipy==1.17.1
+pandas==3.0.3
+scikit-learn==1.8.0
+matplotlib==3.10.8
+h5py==3.14.0
+flatbuffers==25.12.19
+# TensorFlow / Keras 2.15 (training, TFLite conversion and evaluation); the Apple-silicon build has another package name
+tensorflow==2.15.0 ; sys_platform != "darwin" or platform_machine != "arm64"
+tensorflow-macos==2.15.0 ; sys_platform == "darwin" and platform_machine == "arm64"
+keras==2.15.0
+protobuf==4.25.8
+ml-dtypes==0.2.0
+# serial reading of the device (firmware/read_serial.py, firmware/skrip_ukur_standar/ukur.py)
+pyserial==3.5

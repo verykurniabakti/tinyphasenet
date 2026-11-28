@@ -25,6 +25,11 @@ Names: the model of the manuscript is called TinyPhaseNet throughout; internal w
 
 Only what is needed to replicate the two manuscripts is included: the code that produces the results (training, quantization, evaluation, device analysis), the result files, the trained and quantized models of the reported configurations (seeds 42, 43 and 44), the firmware sources. The raw serial logs of the device sessions are not archived. Not included: the LaTeX fragments, tables, number macros and figures made for writing the manuscripts, experiments that are not reported in the manuscripts (architecture-variation cost model, three-channel E,N,Z ablation, seeds 45-51, 4-bit variants other than the ones reported), every raw device log, firmware model headers (generated from the models), and every waveform.
 
+## Environment
+
+- **Python** (training, quantization, evaluation, analysis): `requirements.txt` pins the versions used for the reported results (Python 3.11, TensorFlow/Keras 2.15.0, NumPy 1.26.4, SciPy 1.17.1, pandas 3.0.3, scikit-learn 1.8.0, Matplotlib 3.10.8, h5py 3.14.0). Create the environment with `conda env create -f environment.yml` (or `python3.11 -m venv` and `pip install -r requirements.txt`). On Apple silicon the file selects `tensorflow-macos`. The dependency resolution was checked on 28 Nov 2026 (`pip install --dry-run`).
+- **Firmware** (ESP32-S3-DevKitC-1): PlatformIO Core 6.2.0 with `framework-espidf` 3.40407.240606 (ESP-IDF 4.4.7) and `toolchain-xtensa-esp32s3`; the managed components are pinned in `firmware/dependencies.lock` (esp-tflite-micro 1.3.4, ESP-NN 1.2.9). `firmware/platformio.ini` does not pin the PlatformIO platform version (`platform = espressif32`), and the exact platform release used for the measurements was not recorded: use a release of the espressif32 platform that ships `framework-espidf` ~3.40407, since newer releases ship ESP-IDF 5.x or 6.x, which this firmware was not tested with.
+
 ## Re-deriving the reported results
 
 ```
